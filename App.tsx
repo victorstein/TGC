@@ -3,24 +3,18 @@ import { NavigationContainer } from '@react-navigation/native'
 import { SplashScreen } from './src/screens/splash'
 import { Main } from './src/screens/main'
 import { useMain } from './src/screens/main/hooks/useMain'
-import { useEffect, useState } from 'react'
 import {
   SafeAreaProvider,
   initialWindowMetrics
 } from 'react-native-safe-area-context'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { splashStore } from './src/screens/splash/store/store'
 
 const App = (): JSX.Element => {
   useMain()
-  const [loadingApp, setLoading] = useState(true)
   const client = useApolloCachedClient()
+  const splashLoading = splashStore.use.loading()
   const MainStack = createNativeStackNavigator()
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000)
-  }, [])
 
   return (
     <SafeAreaProvider
@@ -31,7 +25,7 @@ const App = (): JSX.Element => {
         <MainStack.Navigator
           screenOptions={{ headerShown: false, animation: 'fade' }}
         >
-          {client === null || loadingApp ? (
+          {client === null || splashLoading ? (
             <MainStack.Screen
               name='Splash'
               component={SplashScreen}

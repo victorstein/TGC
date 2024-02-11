@@ -3,7 +3,7 @@ import { HomeScreen } from '../home'
 import { SearchScreen } from '../search'
 import { PlayScreen } from '../play'
 import { ApolloProvider } from '@apollo/client'
-import { apolloStore } from '../../integrations/apollo'
+import { apolloStore } from '../../integrations/store/store'
 
 const Tab = createBottomTabNavigator()
 
