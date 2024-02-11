@@ -5,7 +5,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#FF6363'
+        primary: {
+          dark: '#d73636',
+          DEFAULT: '#d73636'
+        },
+        background: {
+          dark: '#23343b',
+          DEFAULT: '#ffffff'
+        },
+        text: {
+          dark: '#000000',
+          DEFAULT: '#ffffff'
+        },
+        accent: {
+          dark: '#1e2c34',
+          DEFAULT: '#f5f5f7'
+        }
       }
     }
   },
