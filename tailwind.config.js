@@ -6,16 +6,16 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          dark: '#d73636',
-          DEFAULT: '#d73636'
+          dark: '#D83636',
+          DEFAULT: '#D83636'
         },
         background: {
           dark: '#23343b',
           DEFAULT: '#ffffff'
         },
         text: {
-          dark: '#000000',
-          DEFAULT: '#ffffff'
+          dark: '#ffffff',
+          DEFAULT: '#212121'
         },
         accent: {
           dark: '#1e2c34',
