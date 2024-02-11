@@ -5,7 +5,9 @@ module.exports = {
       extends: 'standard-with-typescript',
       rules: {
         '@typescript-eslint/triple-slash-reference': 0,
-        '@typescript-eslint/indent': 0
+        '@typescript-eslint/indent': 0,
+        '@typescript-eslint/no-confusing-void-expression': 0,
+        'multiline-ternary': 0
       }
     }
   ]

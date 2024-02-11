@@ -1,13 +1,9 @@
-import { Text } from 'react-native'
-import Animated, { FadeInDown } from 'react-native-reanimated'
+import { Text, View } from 'react-native'
 
 export const PlayScreen = (): JSX.Element => {
   return (
-    <Animated.View
-      entering={FadeInDown}
-      className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
-    >
+    <View className='flex-1 items-center justify-center bg-background dark:bg-background-dark'>
       <Text>PLAY screen</Text>
-    </Animated.View>
+    </View>
   )
 }
