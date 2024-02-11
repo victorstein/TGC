@@ -1,16 +1,12 @@
 import LottieView from 'lottie-react-native'
 import { useColorScheme } from 'nativewind'
-import { Pressable } from 'react-native'
-import Animated, { FadeInDown } from 'react-native-reanimated'
+import { Pressable, View } from 'react-native'
 
 export const HomeScreen = (): JSX.Element => {
   const { toggleColorScheme } = useColorScheme()
 
   return (
-    <Animated.View
-      entering={FadeInDown}
-      className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
-    >
+    <View className='flex-1 items-center justify-center bg-background dark:bg-background-dark'>
       <Pressable onPress={toggleColorScheme}>
         <LottieView
           autoPlay
@@ -21,6 +17,6 @@ export const HomeScreen = (): JSX.Element => {
           source={require('../../assets/animation.json')}
         />
       </Pressable>
-    </Animated.View>
+    </View>
   )
 }
