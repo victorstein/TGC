@@ -2,7 +2,7 @@ import { useApolloCachedClient } from './src/integrations/apollo'
 import { ApolloProvider } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { SplashScreen } from './src/screens/splash'
-import { BottomTabNavigator } from './src/navigation/bottom.navigation'
+import { Main } from './src/screens/main'
 
 const App = (): JSX.Element => {
   const client = useApolloCachedClient()
@@ -14,7 +14,7 @@ const App = (): JSX.Element => {
   return (
     <NavigationContainer>
       <ApolloProvider client={client}>
-        <BottomTabNavigator />
+        <Main />
       </ApolloProvider>
     </NavigationContainer>
   )

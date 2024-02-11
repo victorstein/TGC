@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeScreen } from '../screens/home'
-import { SearchScreen } from '../screens/search'
-import { PlayScreen } from '../screens/play'
+import { HomeScreen } from '../home'
+import { SearchScreen } from '../search'
+import { PlayScreen } from '../play'
 
 const Tab = createBottomTabNavigator()
 
-export const BottomTabNavigator = (): JSX.Element => {
+export const Main = (): JSX.Element => {
   return (
     <Tab.Navigator
       screenOptions={{
