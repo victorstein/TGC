@@ -1,6 +1,6 @@
 import LottieView from 'lottie-react-native'
 import { useColorScheme } from 'nativewind'
-import { Pressable, View, Text } from 'react-native'
+import { Pressable, View } from 'react-native'
 
 export const HomeScreen = (): JSX.Element => {
   const { toggleColorScheme } = useColorScheme()
@@ -16,7 +16,6 @@ export const HomeScreen = (): JSX.Element => {
           }}
           source={require('../../assets/animation.json')}
         />
-        <Text>perra</Text>
       </Pressable>
     </View>
   )

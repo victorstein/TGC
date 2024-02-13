@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { TesScreen } from '../testView'
 import { HomeScreen } from '../home'
 import { SearchScreen } from '../search'
 import { PlayScreen } from '../play'
@@ -21,6 +22,7 @@ export const Main = (): JSX.Element => {
         <Tab.Screen name='Home' component={HomeScreen} />
         <Tab.Screen name='Search' component={SearchScreen} />
         <Tab.Screen name='Play' component={PlayScreen} />
+        <Tab.Screen name='TesScreen' component={TesScreen} />
       </Tab.Navigator>
     </ApolloProvider>
   )
