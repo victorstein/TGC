@@ -37,7 +37,7 @@ export const SplashScreen = (): JSX.Element => {
     'lato-extra-bold': require('@assets/fonts/lato-extra-bold.ttf'),
     'lato-medium': require('@assets/fonts/lato-medium.ttf'),
     'lato-regular': require('@assets/fonts/lato-regular.ttf'),
-    'lato-semibold': require('@assets/fonts/lato-semibold.ttf')
+    'lato-semibold': require('@assets/fonts/lato-semi-bold.ttf')
   })
 
   useEffect(() => {
