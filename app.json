@@ -28,7 +28,13 @@
       [
         "expo-font",
         {
-          "fonts": ["src/assets/sc-pro.ttf"]
+          "fonts": [
+            "src/assets/fonts/lato-bold.ttf",
+            "src/assets/fonts/lato-extra-bold.ttf",
+            "src/assets/fonts/lato-medium.ttf",
+            "src/assets/fonts/lato-regular.ttf",
+            "src/assets/fonts/lato-semi-bold.ttf"
+          ]
         }
       ]
     ]
