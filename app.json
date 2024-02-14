@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -25,6 +23,20 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "src/assets/fonts/lato-bold.ttf",
+            "src/assets/fonts/lato-extra-bold.ttf",
+            "src/assets/fonts/lato-medium.ttf",
+            "src/assets/fonts/lato-regular.ttf",
+            "src/assets/fonts/lato-semi-bold.ttf"
+          ]
+        }
+      ]
+    ]
   }
 }
