@@ -2,6 +2,8 @@ import { Text, View, Image } from 'react-native'
 import type { FC } from 'react'
 import logoTGC from '@assets/img/logo.png'
 import Constants from 'expo-constants'
+import { Avatar, Badge } from 'react-native-paper'
+import NotificationIcon from '../notificationIcon'
 
 const Header: FC = () => {
   return (
@@ -19,9 +21,7 @@ const Header: FC = () => {
             Tech, code y Gaming.
           </Text>
         </View>
-        <View className='pr-3'>
-          <Text>Icon</Text>
-        </View>
+        <NotificationIcon />
       </View>
     </View>
   )
