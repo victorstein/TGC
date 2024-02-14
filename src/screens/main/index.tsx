@@ -4,7 +4,6 @@ import { SearchScreen } from '@screens/search'
 import { PlayScreen } from '@screens/play'
 import { ApolloProvider } from '@apollo/client'
 import { apolloStore } from '@integrations/store/store'
-import { TesScreen } from '@screens/testView'
 
 const Tab = createBottomTabNavigator()
 
@@ -22,7 +21,6 @@ export const Main = (): JSX.Element => {
         <Tab.Screen name='Home' component={HomeScreen} />
         <Tab.Screen name='Search' component={SearchScreen} />
         <Tab.Screen name='Play' component={PlayScreen} />
-        <Tab.Screen name='TesScreen' component={TesScreen} />
       </Tab.Navigator>
     </ApolloProvider>
   )
