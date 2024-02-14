@@ -9,6 +9,8 @@ import {
 } from 'react-native-safe-area-context'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { splashStore } from './src/screens/splash/store/store'
+import { PaperProvider } from 'react-native-paper'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const App = (): JSX.Element => {
   useMain()
@@ -21,21 +23,27 @@ const App = (): JSX.Element => {
       initialMetrics={initialWindowMetrics}
       className='flex flex-1 bg-background dark:bg-background-dark'
     >
-      <NavigationContainer>
-        <MainStack.Navigator
-          screenOptions={{ headerShown: false, animation: 'fade' }}
-        >
-          {client === null || splashLoading ? (
-            <MainStack.Screen
-              name='Splash'
-              component={SplashScreen}
-              options={{ animationTypeForReplace: 'pop' }}
-            />
-          ) : (
-            <MainStack.Screen name='Main' component={Main} />
-          )}
-        </MainStack.Navigator>
-      </NavigationContainer>
+      <PaperProvider
+        settings={{
+          icon: (props) => <Ionicons {...props} />
+        }}
+      >
+        <NavigationContainer>
+          <MainStack.Navigator
+            screenOptions={{ headerShown: false, animation: 'fade' }}
+          >
+            {client === null || splashLoading ? (
+              <MainStack.Screen
+                name='Splash'
+                component={SplashScreen}
+                options={{ animationTypeForReplace: 'pop' }}
+              />
+            ) : (
+              <MainStack.Screen name='Main' component={Main} />
+            )}
+          </MainStack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
     </SafeAreaProvider>
   )
 }
