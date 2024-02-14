@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react'
+
 export interface layoutProps {
-    children: JSX.Element
+  children: ReactElement | JSX.Element
 }
