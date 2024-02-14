@@ -21,6 +21,13 @@ module.exports = {
           dark: '#1e2c34',
           DEFAULT: '#f5f5f7'
         }
+      },
+      fontFamily: {
+        'lato-regular': ['lato-regular'],
+        'lato-bold': ['lato-bold'],
+        'lato-extra-bold': ['lato-extra-bold'],
+        'lato-medium': ['lato-medium'],
+        'lato-semibold': ['lato-semibold']
       }
     }
   },

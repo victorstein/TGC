@@ -14,7 +14,7 @@ export const HomeScreen = (): JSX.Element => {
             width: 200,
             height: 200
           }}
-          source={require('../../assets/animation.json')}
+          source={require('@assets/animations/animation.json')}
         />
       </Pressable>
     </View>
