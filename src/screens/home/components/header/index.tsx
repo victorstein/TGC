@@ -1,11 +1,11 @@
 import { Text, View, Image } from 'react-native'
 import type { FC } from 'react'
-import logoTGC from '@assets/img/logo.png'
 import Constants from 'expo-constants'
-import { Avatar, Badge } from 'react-native-paper'
 import NotificationIcon from '../notificationIcon'
 
 const Header: FC = () => {
+  const logoTGC = require('@assets/images/logoTGC.png')
+
   return (
     <View
       style={{
