@@ -1,9 +1,10 @@
 import LottieView from 'lottie-react-native'
-import { useEffect, useRef, useState } from 'react'
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import Animated, { FadeOut } from 'react-native-reanimated'
 import { splashStore } from './store/store'
 import { useFonts } from 'expo-font'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
+import * as NativeSplashScreen from 'expo-splash-screen'
 
 export const SplashScreen = (): JSX.Element => {
   const setLoadingAnimation = splashStore.use.setLoadingAnimation()
@@ -46,11 +47,15 @@ export const SplashScreen = (): JSX.Element => {
     }
   }, [fontsLoaded, fontError])
 
+  const onLayoutRootView = useCallback(() => {
+    NativeSplashScreen.hideAsync().catch(() => {})
+  }, [])
+
   return (
     <Animated.View
-      entering={FadeIn}
       exiting={FadeOut}
       className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
+      onLayout={onLayoutRootView}
     >
       {colorScheme === ColorScheme.Light ? (
         <LottieView

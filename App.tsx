@@ -11,6 +11,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { splashStore } from './src/screens/splash/store/store'
 import { PaperProvider } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import * as NativeSplashScreen from 'expo-splash-screen'
+
+NativeSplashScreen.preventAutoHideAsync().catch(() => {})
 
 const App = (): JSX.Element => {
   useMain()
