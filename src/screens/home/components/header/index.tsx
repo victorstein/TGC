@@ -4,7 +4,7 @@ import Constants from 'expo-constants'
 import NotificationIcon from '../notificationIcon'
 
 const Header: FC = () => {
-  const logoTGC = require('@assets/images/logoTGC.png')
+  const logoTGC = require('@assets/img/logo.png')
 
   return (
     <View
