@@ -1,22 +1,46 @@
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import type { FC } from 'react'
-import { View } from 'react-native'
-import { Avatar, Badge } from 'react-native-paper'
+import { View, StyleSheet } from 'react-native'
+// rneui
+import { Avatar, Badge } from '@rneui/themed'
+
+const styles = StyleSheet.create({
+  bodyStylesAvatar: {
+    backgroundColor: 'transparent',
+    padding: 0,
+    margin: 0,
+    zIndex: 0
+  },
+  badgeStyles: {
+    backgroundColor: 'red',
+    borderWidth: 1,
+    position: 'absolute',
+    top: -32,
+    left: 24,
+    zIndex: 10
+  }
+})
 
 const NotificationIcon: FC = () => {
   const coloScheme = mainStore.use.colorScheme()
 
   return (
     <View className='pr-3 relative'>
-      <Avatar.Icon
-        className='bg-transparent p-0 m-0 z-0'
-        color={coloScheme === ColorScheme.Dark ? '#FFFFFF' : '#212121'}
-        size={40}
-        icon='notifications-outline'
+      <Avatar
+        size={45}
+        rounded
+        icon={{
+          name: 'notifications-outline',
+          type: 'ionicon',
+          color: coloScheme === ColorScheme.Dark ? '#FFFFFF' : '#212121'
+        }}
+        containerStyle={styles.bodyStylesAvatar}
       />
       <Badge
-        className='border border-background dark:border-background-dark absolute top-[10px] left-[22px] z-10'
-        size={9}
+        badgeStyle={{
+          ...styles.badgeStyles,
+          borderColor: coloScheme === ColorScheme.Dark ? '#212121' : '#FFFFFF'
+        }}
       />
     </View>
   )
