@@ -1,5 +1,5 @@
 import { type BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { View, TouchableHighlight } from 'react-native'
+import { View, TouchableHighlight, Text } from 'react-native'
 import Animated, {
   ReduceMotion,
   useAnimatedStyle,
@@ -29,6 +29,7 @@ export const CustomTabBar = ({
         const { options } = descriptors[route.key]
         const label = (options.title ?? route.name) as TabName
         const buttonWidth = useSharedValue(25)
+
         const buttonAnimatedStyle = useAnimatedStyle(() => {
           return {
             width: `${buttonWidth.value}%`
@@ -45,7 +46,7 @@ export const CustomTabBar = ({
 
         useEffect(() => {
           buttonWidth.value = withSpring(isFocused ? 50 : 25, {
-            duration: 200,
+            duration: 500,
             dampingRatio: 0.4,
             stiffness: 182,
             overshootClamping: false,
@@ -94,7 +95,7 @@ export const CustomTabBar = ({
                   }
                 ]}
               >
-                <Animated.View className='flex max-h-6 mr-2'>
+                <View className='flex max-h-6 mr-2'>
                   {label === TabName.HOME ? (
                     <HomeIcon
                       size={24}
@@ -119,12 +120,15 @@ export const CustomTabBar = ({
                       inactiveTintColor={tabBarInactiveTintColor}
                     />
                   ) : null}
-                </Animated.View>
+                </View>
                 {isFocused && (
                   <View>
-                    <Animated.Text className='text-primary font-lato-bold'>
+                    <Text
+                      numberOfLines={1}
+                      className='text-primary font-lato-bold'
+                    >
                       {label}
-                    </Animated.Text>
+                    </Text>
                   </View>
                 )}
               </View>
