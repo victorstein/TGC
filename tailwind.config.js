@@ -20,6 +20,10 @@ module.exports = {
         accent: {
           dark: '#1e2c34',
           DEFAULT: '#f5f5f7'
+        },
+        separator: {
+          dark: '#145169',
+          DEFAULT: '#D9D9D9'
         }
       },
       fontFamily: {
