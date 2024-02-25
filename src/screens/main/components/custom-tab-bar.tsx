@@ -1,6 +1,7 @@
 import { type BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { View, TouchableHighlight, Text } from 'react-native'
 import Animated, {
+  FadeInDown,
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
@@ -122,14 +123,14 @@ export const CustomTabBar = ({
                   ) : null}
                 </View>
                 {isFocused && (
-                  <View>
+                  <Animated.View entering={FadeInDown.duration(100)}>
                     <Text
                       numberOfLines={1}
                       className='text-primary font-lato-bold'
                     >
                       {label}
                     </Text>
-                  </View>
+                  </Animated.View>
                 )}
               </View>
             </View>
