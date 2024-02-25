@@ -5,6 +5,9 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --check \"**/*.{ts,tsx}\"",
+    "verify": "yarn lint && yarn format",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
