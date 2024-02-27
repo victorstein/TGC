@@ -2,7 +2,6 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import type { FC } from 'react'
 import { type IComponentProps } from './notification-card.types'
 import { useNavigation } from '@react-navigation/native'
-import { TabName } from '@screens/main/home.types'
 
 const NotificationCard: FC<IComponentProps> = ({
   photoURL,
@@ -14,12 +13,14 @@ const NotificationCard: FC<IComponentProps> = ({
   const navigation = useNavigation()
 
   const redirectHandler = (): void => {
-    navigation.navigate(TabName.SEARCH)
+    navigation.navigate(redirect)
   }
 
   return (
     <TouchableHighlight onPress={redirectHandler}>
-      <View className={`w-[375px] p-[16px] border-[0px] border-l-[5px] ${isRead ? 'border-[#FFF] bg-[#FFF]' : 'border-[#D83636] bg-[#EDEDED]'}`}>
+      <View
+        className={`w-[375px] p-[16px] border-[0px] border-l-[5px] ${isRead ? 'border-[#FFF] bg-[#FFF]' : 'border-[#D83636] bg-[#EDEDED]'}`}
+      >
         <View className='flex flex-row items-center'>
           <View>
             <Image
