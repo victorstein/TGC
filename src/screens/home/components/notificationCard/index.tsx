@@ -30,10 +30,15 @@ const NotificationCard: FC<IComponentProps> = ({
             />
           </View>
           <View className='w-3/4'>
-            <Text numberOfLines={2} className='font-semibold text-sm leading-5 text-text mb-3 dark:text-text-dark'>
+            <Text
+              numberOfLines={2}
+              className='font-semibold text-sm leading-5 text-text mb-3 dark:text-text-dark'
+            >
               {title}
             </Text>
-            <Text className='font-normal text-text/50 dark:text-text-notification-dark'>{date}</Text>
+            <Text className='font-normal text-text/50 dark:text-text-notification-dark'>
+              {date}
+            </Text>
           </View>
         </View>
       </View>
