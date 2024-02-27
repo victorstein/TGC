@@ -1,10 +1,13 @@
 import Svg, { Path } from 'react-native-svg'
 import { type EnhancedSvgProps } from './svg.types'
 
-const PlayIcon = (props: EnhancedSvgProps): JSX.Element => (
+const PlayIcon = ({
+  focused = true,
+  ...props
+}: EnhancedSvgProps): JSX.Element => (
   <Svg fill='none' width={props.size} height={props.size} viewBox='0 0 24 24'>
     <Path
-      stroke={props.focused ? props.activeTintColor : props.inactiveTintColor}
+      stroke={focused ? props.activeTintColor : props.inactiveTintColor}
       strokeLinecap='round'
       strokeLinejoin='round'
       strokeWidth={1.5}
@@ -12,7 +15,7 @@ const PlayIcon = (props: EnhancedSvgProps): JSX.Element => (
       clipRule='evenodd'
     />
     <Path
-      stroke={props.focused ? props.activeTintColor : props.inactiveTintColor}
+      stroke={focused ? props.activeTintColor : props.inactiveTintColor}
       strokeLinecap='round'
       strokeLinejoin='round'
       strokeWidth={1.5}

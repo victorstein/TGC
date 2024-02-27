@@ -3,6 +3,7 @@ import type { FC } from 'react'
 import { View, StyleSheet } from 'react-native'
 // rneui
 import { Avatar, Badge } from '@rneui/themed'
+import { theme } from '@tailwind'
 
 const styles = StyleSheet.create({
   bodyStylesAvatar: {
@@ -21,6 +22,8 @@ const styles = StyleSheet.create({
   }
 })
 
+const { colors } = theme.extend
+
 const NotificationIcon: FC = () => {
   const coloScheme = mainStore.use.colorScheme()
 
@@ -32,14 +35,20 @@ const NotificationIcon: FC = () => {
         icon={{
           name: 'notifications-outline',
           type: 'ionicon',
-          color: coloScheme === ColorScheme.Dark ? '#FFFFFF' : '#212121'
+          color:
+            coloScheme === ColorScheme.Dark
+              ? colors.text.dark
+              : colors.text.DEFAULT
         }}
         containerStyle={styles.bodyStylesAvatar}
       />
       <Badge
         badgeStyle={{
           ...styles.badgeStyles,
-          borderColor: coloScheme === ColorScheme.Dark ? '#212121' : '#FFFFFF'
+          borderColor:
+            coloScheme === ColorScheme.Dark
+              ? colors.background.dark
+              : colors.background.DEFAULT
         }}
       />
     </View>

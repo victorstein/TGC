@@ -5,7 +5,9 @@
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@screens/*": ["./src/screens/*"],
-      "@integrations/*": ["./src/integrations/*"]
+      "@integrations/*": ["./src/integrations/*"],
+      "@tailwind": ["./tailwind.config.js"],
+      "@shared/*": ["./src/shared/*"]
     }
   }
 }
