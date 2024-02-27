@@ -17,23 +17,23 @@ const NotificationCard: FC<IComponentProps> = ({
   }
 
   return (
-    <TouchableHighlight onPress={redirectHandler}>
+    <TouchableHighlight onPress={redirectHandler} className='mx-2'>
       <View
-        className={`w-[375px] p-[16px] border-[0px] border-l-[5px] ${isRead ? 'border-[#FFF] bg-[#FFF]' : 'border-[#D83636] bg-[#EDEDED]'}`}
+        className={`w-full p-4 border-none border-l-[5px] ${isRead ? 'border-notification-bg-visited dark:border-notification-bg-visited-dark bg-notification-bg-visited dark:bg-notification-bg-visited-dark' : 'border-notification-border-new bg-notification-bg dark:bg-notification-bg-dark'}`}
       >
         <View className='flex flex-row items-center'>
-          <View>
+          <View className='w-1/4'>
             <Image
-              className='w-[70px] h-[70px] rounded-[16px]'
+              className='w-[70px] h-[70px] rounded-2xl'
               resizeMode='cover'
               source={{ uri: photoURL }}
             />
           </View>
-          <View className='w-[268px] pl-[28px]'>
-            <Text className='font-semibold text-[14px] leading-[18px] text-text mb-[10px]'>
+          <View className='w-3/4'>
+            <Text numberOfLines={2} className='font-semibold text-sm leading-5 text-text mb-3 dark:text-text-dark'>
               {title}
             </Text>
-            <Text className='font-normal text-text/50'>{date}</Text>
+            <Text className='font-normal text-text/50 dark:text-text-notification-dark'>{date}</Text>
           </View>
         </View>
       </View>

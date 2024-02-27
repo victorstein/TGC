@@ -15,7 +15,10 @@ module.exports = {
         },
         text: {
           dark: '#ffffff',
-          DEFAULT: '#212121'
+          DEFAULT: '#212121',
+          notification: {
+            dark: '#D9D9D9'
+          }
         },
         accent: {
           dark: '#1e2c34',
@@ -24,6 +27,21 @@ module.exports = {
         separator: {
           dark: '#145169',
           DEFAULT: '#D9D9D9'
+        },
+        notification: {
+          bg: {
+            DEFAULT: '#EDEDED',
+            dark: '#145169',
+            visited: {
+              DEFAULT: '#FFF',
+              dark: '#162C36'
+            }
+          },
+          border: {
+            new: {
+              DEFAULT: '#D83636'
+            }
+          }
         }
       },
       fontFamily: {
@@ -32,7 +50,7 @@ module.exports = {
         'lato-extra-bold': ['lato-extra-bold'],
         'lato-medium': ['lato-medium'],
         'lato-semibold': ['lato-semibold']
-      }
+      },
     }
   },
   plugins: []
