@@ -1,8 +1,11 @@
 import Svg, { Path } from 'react-native-svg'
 import { type EnhancedSvgProps } from './svg.types'
 
-const HomeIcon = (props: EnhancedSvgProps): JSX.Element => {
-  if (props.focused) {
+const HomeIcon = ({
+  focused = true,
+  ...props
+}: EnhancedSvgProps): JSX.Element => {
+  if (focused) {
     return (
       <Svg width={props.size} height={props.size} viewBox='0 0 24 24'>
         <Path

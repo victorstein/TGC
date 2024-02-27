@@ -11,7 +11,9 @@ module.exports = {
         },
         background: {
           dark: '#23343b',
-          DEFAULT: '#ffffff'
+          DEFAULT: '#ffffff',
+          search: '#F2F2F6',
+          'search-dark': '#21313C'
         },
         text: {
           dark: '#ffffff',
