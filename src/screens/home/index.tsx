@@ -6,6 +6,7 @@ import Header from './components/header'
 import NotificationCard from './components/notificationCard'
 import { TabName } from '@screens/main/home.types'
 import SearchBar from '../../shared/components/search-bar'
+import MainBanner from './components/mainBanner'
 
 export const HomeScreen = (): JSX.Element => {
   const { toggleColorScheme } = useColorScheme()
@@ -27,6 +28,16 @@ export const HomeScreen = (): JSX.Element => {
             source={require('@assets/animations/animation.json')}
           />
         </Pressable>
+      </View>
+      <View>
+        <MainBanner
+          title='The Pokemon company planea investigar a PalWorld'
+          description='La compañía detrás de Pocket Monsters investigará a Palworld por posible infracción de propiedad intelectual'
+          bgImageUrl='https://techraptor.net/sites/default/files/styles/hero/public/2024-01/palworld-and-detective-pikachu.jpg?itok=fUusvjUN'
+          duration={12}
+        />
+      </View>
+      <View>
         <NotificationCard
           redirect={TabName.SEARCH}
           date='12 de Feb 2023'

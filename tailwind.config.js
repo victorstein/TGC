@@ -44,6 +44,14 @@ module.exports = {
               DEFAULT: '#D83636'
             }
           }
+        },
+        banner: {
+          filter: {
+            DEFAULT: '#250000'
+          },
+          text: {
+            DEFAULT: '#FFF'
+          }
         }
       },
       fontFamily: {
@@ -52,7 +60,7 @@ module.exports = {
         'lato-extra-bold': ['lato-extra-bold'],
         'lato-medium': ['lato-medium'],
         'lato-semibold': ['lato-semibold']
-      },
+      }
     }
   },
   plugins: []
