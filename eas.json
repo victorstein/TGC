@@ -6,10 +6,11 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "autoIncrement": true
     },
     "preview": {
-      "distribution": "internal",
+      "distribution": "store",
       "autoIncrement": true
     },
     "production": {}
@@ -17,13 +18,15 @@
   "submit": {
     "production": {
       "android": {
-        "track": "internal",
+        "track": "production",
+        "releaseStatus": "completed",
         "serviceAccountKeyPath": "../tgc-service-account.json"
       }
     },
     "preview": {
       "android": {
-        "track": "internal",
+        "track": "alpha",
+        "releaseStatus": "draft",
         "serviceAccountKeyPath": "../tgc-service-account.json"
       }
     }
