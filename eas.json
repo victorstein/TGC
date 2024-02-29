@@ -1,0 +1,31 @@
+{
+  "cli": {
+    "version": ">= 7.3.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "autoIncrement": true
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "track": "internal",
+        "serviceAccountKeyPath": "../tgc-service-account.json"
+      }
+    },
+    "preview": {
+      "android": {
+        "track": "internal",
+        "serviceAccountKeyPath": "../tgc-service-account.json"
+      }
+    }
+  }
+}
