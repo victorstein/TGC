@@ -7,15 +7,17 @@ import Animated, {
   useSharedValue,
   withSpring
 } from 'react-native-reanimated'
-import HomeIcon from './home-icon'
-import SearchIcon from './search-icon'
-import PlayIcon from './play-icon'
+import HomeIcon from '@shared/components/icons/home-icon'
+import SearchIcon from '@shared/components/icons/search-icon'
+import PlayIcon from '@shared/components/icons/play-icon'
 import { TabName } from '../home.types'
 import { useEffect } from 'react'
 import { mainStore } from '../store/store'
+import { theme } from '@tailwind'
 
 const AnimatedTouchableHighlight =
   Animated.createAnimatedComponent(TouchableHighlight)
+const { colors } = theme.extend
 
 export const CustomTabBar = ({
   state,
@@ -43,7 +45,7 @@ export const CustomTabBar = ({
           tabBarInactiveTintColor: inactiveTintColor
         } = options
         const tabBarInactiveTintColor =
-          colorScheme === 'dark' ? '#FFFFFF' : inactiveTintColor
+          colorScheme === 'dark' ? colors.background.DEFAULT : inactiveTintColor
 
         useEffect(() => {
           buttonWidth.value = withSpring(isFocused ? 50 : 25, {
@@ -108,7 +110,6 @@ export const CustomTabBar = ({
                     <SearchIcon
                       size={24}
                       focused={isFocused}
-                      color={tabBarActiveTintColor}
                       activeTintColor={tabBarActiveTintColor}
                       inactiveTintColor={tabBarInactiveTintColor}
                     />
@@ -116,7 +117,6 @@ export const CustomTabBar = ({
                     <PlayIcon
                       size={24}
                       focused={isFocused}
-                      color={tabBarActiveTintColor}
                       activeTintColor={tabBarActiveTintColor}
                       inactiveTintColor={tabBarInactiveTintColor}
                     />
