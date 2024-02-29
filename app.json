@@ -2,7 +2,7 @@
   "expo": {
     "name": "tcg",
     "slug": "tcg",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.victorstein.tcg"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -37,6 +38,11 @@
           ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b548e184-af73-48d7-ae77-65ae83618db0"
+      }
+    }
   }
 }
