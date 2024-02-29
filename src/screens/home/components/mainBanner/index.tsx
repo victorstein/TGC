@@ -20,7 +20,11 @@ const MainBanner: FC<IComponentProps> = ({
   }
 
   return (
-    <TouchableHighlight onPress={navigateHandler}>
+    <TouchableHighlight
+      onPress={navigateHandler}
+      activeOpacity={0.4}
+      underlayColor='transparent'
+    >
       <ImageBackground
         source={{ uri: bgImageUrl }}
         borderRadius={16}
