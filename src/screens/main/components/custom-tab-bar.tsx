@@ -110,7 +110,6 @@ export const CustomTabBar = ({
                     <SearchIcon
                       size={24}
                       focused={isFocused}
-                      color={tabBarActiveTintColor}
                       activeTintColor={tabBarActiveTintColor}
                       inactiveTintColor={tabBarInactiveTintColor}
                     />
@@ -118,7 +117,6 @@ export const CustomTabBar = ({
                     <PlayIcon
                       size={24}
                       focused={isFocused}
-                      color={tabBarActiveTintColor}
                       activeTintColor={tabBarActiveTintColor}
                       inactiveTintColor={tabBarInactiveTintColor}
                     />
