@@ -54,13 +54,13 @@ export const CustomTabBar = ({
           colorScheme === 'dark' ? colors.background.DEFAULT : inactiveTintColor
 
         const onPress = (): void => {
-          const event = navigation.emit({
+          navigation.emit({
             type: 'tabPress',
             target: route.key,
             canPreventDefault: true
           })
 
-          if (!isFocused && !event.defaultPrevented) {
+          if (!isFocused) {
             navigation.navigate(route.name, route.params)
           }
         }
