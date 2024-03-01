@@ -1,6 +1,12 @@
 import { type BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { View, Text, Pressable } from 'react-native'
-import Animated, { FadeInDown } from 'react-native-reanimated'
+import Animated, {
+  Easing,
+  FadeInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming
+} from 'react-native-reanimated'
 import HomeIcon from '@shared/components/icons/home-icon'
 import SearchIcon from '@shared/components/icons/search-icon'
 import PlayIcon from '@shared/components/icons/play-icon'
@@ -9,6 +15,7 @@ import { mainStore } from '../store/store'
 import { theme } from '@tailwind'
 
 const { colors } = theme.extend
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
 export const CustomTabBar = ({
   state,
@@ -23,6 +30,23 @@ export const CustomTabBar = ({
         const { options } = descriptors[route.key]
         const label = (options.title ?? route.name) as TabName
         const isFocused = state.index === index
+        const menuWidth = useSharedValue(25)
+
+        if (isFocused) {
+          menuWidth.value = withTiming(50, {
+            duration: 200,
+            easing: Easing.inOut(Easing.ease)
+          })
+        } else {
+          menuWidth.value = withTiming(25, {
+            duration: 200,
+            easing: Easing.inOut(Easing.ease)
+          })
+        }
+
+        const menuAnimation = useAnimatedStyle(() => ({
+          width: `${menuWidth.value}%`
+        }))
 
         const {
           tabBarActiveTintColor,
@@ -51,12 +75,12 @@ export const CustomTabBar = ({
         }
 
         return (
-          <Pressable
+          <AnimatedPressable
             testID={options.tabBarTestID}
             key={`routes-${index}-${route.key}`}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[{ width: isFocused ? '50%' : '25%' }]}
+            style={[menuAnimation]}
           >
             <View className='flex items-center flex-row h-full justify-center'>
               <View
@@ -105,7 +129,7 @@ export const CustomTabBar = ({
                 )}
               </View>
             </View>
-          </Pressable>
+          </AnimatedPressable>
         )
       })}
     </Animated.View>
