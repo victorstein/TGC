@@ -1,22 +1,21 @@
 import { type BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { View, TouchableHighlight, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import Animated, {
+  Easing,
   FadeInDown,
-  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
-  withSpring
+  withTiming
 } from 'react-native-reanimated'
 import HomeIcon from '@shared/components/icons/home-icon'
 import SearchIcon from '@shared/components/icons/search-icon'
 import PlayIcon from '@shared/components/icons/play-icon'
 import { TabName } from '../home.types'
-import { useEffect } from 'react'
 import { mainStore } from '../store/store'
 import { theme } from '@tailwind'
+import { useCallback, useEffect } from 'react'
 
-const AnimatedTouchableHighlight =
-  Animated.createAnimatedComponent(TouchableHighlight)
+const AnimatedTouchableHighlight = Animated.createAnimatedComponent(Pressable)
 const { colors } = theme.extend
 
 export const CustomTabBar = ({
@@ -31,6 +30,7 @@ export const CustomTabBar = ({
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key]
         const label = (options.title ?? route.name) as TabName
+        const isFocused = state.index === index
         const buttonWidth = useSharedValue(25)
 
         const buttonAnimatedStyle = useAnimatedStyle(() => {
@@ -39,25 +39,23 @@ export const CustomTabBar = ({
           }
         })
 
-        const isFocused = state.index === index
+        const animateWidth = useCallback((newWidth: number) => {
+          buttonWidth.value = withTiming(newWidth, {
+            duration: 200,
+            easing: Easing.bezier(0.25, 0.1, 0.25, 1)
+          })
+        }, [])
+
+        useEffect(() => {
+          animateWidth(isFocused ? 50 : 25)
+        }, [isFocused])
+
         const {
           tabBarActiveTintColor,
           tabBarInactiveTintColor: inactiveTintColor
         } = options
         const tabBarInactiveTintColor =
           colorScheme === 'dark' ? colors.background.DEFAULT : inactiveTintColor
-
-        useEffect(() => {
-          buttonWidth.value = withSpring(isFocused ? 50 : 25, {
-            duration: 500,
-            dampingRatio: 0.4,
-            stiffness: 182,
-            overshootClamping: false,
-            restDisplacementThreshold: 0.01,
-            restSpeedThreshold: 34.21,
-            reduceMotion: ReduceMotion.System
-          })
-        }, [isFocused])
 
         const onPress = (): void => {
           const event = navigation.emit({
@@ -80,9 +78,8 @@ export const CustomTabBar = ({
 
         return (
           <AnimatedTouchableHighlight
-            underlayColor={'none'}
             testID={options.tabBarTestID}
-            key={route.key}
+            key={`routes-${index}-${route.key}`}
             onPress={onPress}
             onLongPress={onLongPress}
             style={[buttonAnimatedStyle]}
