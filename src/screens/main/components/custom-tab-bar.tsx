@@ -13,7 +13,7 @@ import PlayIcon from '@shared/components/icons/play-icon'
 import { TabName } from '../home.types'
 import { mainStore } from '../store/store'
 import { theme } from '@tailwind'
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 const { colors } = theme.extend
@@ -37,17 +37,13 @@ export const CustomTabBar = ({
           return {
             width: `${buttonWidth.value}%`
           }
-        }, [isFocused])
+        })
 
-        const animateWidth = useCallback((newWidth: number) => {
-          buttonWidth.value = withTiming(newWidth, {
+        useEffect(() => {
+          buttonWidth.value = withTiming(isFocused ? 50 : 25, {
             duration: 200,
             easing: Easing.bezier(0.25, 0.1, 0.25, 1)
           })
-        }, [])
-
-        useEffect(() => {
-          animateWidth(isFocused ? 50 : 25)
         }, [isFocused])
 
         const {
