@@ -1,21 +1,13 @@
 import { type BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { View, Text, Pressable } from 'react-native'
-import Animated, {
-  Easing,
-  FadeInDown,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming
-} from 'react-native-reanimated'
+import Animated, { FadeInDown } from 'react-native-reanimated'
 import HomeIcon from '@shared/components/icons/home-icon'
 import SearchIcon from '@shared/components/icons/search-icon'
 import PlayIcon from '@shared/components/icons/play-icon'
 import { TabName } from '../home.types'
 import { mainStore } from '../store/store'
 import { theme } from '@tailwind'
-import { useEffect } from 'react'
 
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 const { colors } = theme.extend
 
 export const CustomTabBar = ({
@@ -31,20 +23,6 @@ export const CustomTabBar = ({
         const { options } = descriptors[route.key]
         const label = (options.title ?? route.name) as TabName
         const isFocused = state.index === index
-        const buttonWidth = useSharedValue(25)
-
-        const buttonAnimatedStyle = useAnimatedStyle(() => {
-          return {
-            width: `${buttonWidth.value}%`
-          }
-        })
-
-        useEffect(() => {
-          buttonWidth.value = withTiming(isFocused ? 50 : 25, {
-            duration: 200,
-            easing: Easing.bezier(0.25, 0.1, 0.25, 1)
-          })
-        }, [isFocused])
 
         const {
           tabBarActiveTintColor,
@@ -54,13 +32,13 @@ export const CustomTabBar = ({
           colorScheme === 'dark' ? colors.background.DEFAULT : inactiveTintColor
 
         const onPress = (): void => {
-          navigation.emit({
+          const event = navigation.emit({
             type: 'tabPress',
             target: route.key,
             canPreventDefault: true
           })
 
-          if (!isFocused) {
+          if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name, route.params)
           }
         }
@@ -73,12 +51,12 @@ export const CustomTabBar = ({
         }
 
         return (
-          <AnimatedPressable
+          <Pressable
             testID={options.tabBarTestID}
             key={`routes-${index}-${route.key}`}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[buttonAnimatedStyle]}
+            style={[{ width: isFocused ? '50%' : '25%' }]}
           >
             <View className='flex items-center flex-row h-full justify-center'>
               <View
@@ -127,7 +105,7 @@ export const CustomTabBar = ({
                 )}
               </View>
             </View>
-          </AnimatedPressable>
+          </Pressable>
         )
       })}
     </Animated.View>
