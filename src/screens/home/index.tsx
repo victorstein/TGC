@@ -6,7 +6,7 @@ import Header from './components/header'
 import NotificationCard from './components/notificationCard'
 import { TabName } from '@screens/main/home.types'
 import SearchBar from '../../shared/components/search-bar'
-import MainBanner from './components/mainBanner'
+import HomeTabs from './components/homeTabs'
 
 export const HomeScreen = (): JSX.Element => {
   const { toggleColorScheme } = useColorScheme()
@@ -17,7 +17,8 @@ export const HomeScreen = (): JSX.Element => {
       <View className='px-4'>
         <SearchBar />
       </View>
-      <View className='flex-1 items-center justify-center'>
+      <HomeTabs />
+      <View className='items-center justify-center flex-1'>
         <Pressable onPress={toggleColorScheme}>
           <LottieView
             autoPlay
@@ -29,15 +30,7 @@ export const HomeScreen = (): JSX.Element => {
           />
         </Pressable>
       </View>
-      <View>
-        <MainBanner
-          title='The Pokemon company planea investigar a PalWorld'
-          description='La compañía detrás de Pocket Monsters investigará a Palworld por posible infracción de propiedad intelectual'
-          bgImageUrl='https://techraptor.net/sites/default/files/styles/hero/public/2024-01/palworld-and-detective-pikachu.jpg?itok=fUusvjUN'
-          duration={12}
-        />
-      </View>
-      <View>
+      <View className='flex-1 mt-2'>
         <NotificationCard
           redirect={TabName.SEARCH}
           date='12 de Feb 2023'

@@ -29,7 +29,6 @@ const MainBanner: FC<IComponentProps> = ({
         source={{ uri: bgImageUrl }}
         borderRadius={16}
         imageStyle={{ borderRadius: 16 }}
-        className='mx-2 my-4'
       >
         <View className='p-5 bg-banner-filter/75 rounded-2xl'>
           <Text className='text-base leading-4 font-bold text-banner-text mb-2'>
