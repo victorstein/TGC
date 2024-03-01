@@ -15,7 +15,7 @@ import { mainStore } from '../store/store'
 import { theme } from '@tailwind'
 import { useCallback, useEffect } from 'react'
 
-const AnimatedTouchableHighlight = Animated.createAnimatedComponent(Pressable)
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 const { colors } = theme.extend
 
 export const CustomTabBar = ({
@@ -77,7 +77,7 @@ export const CustomTabBar = ({
         }
 
         return (
-          <AnimatedTouchableHighlight
+          <AnimatedPressable
             testID={options.tabBarTestID}
             key={`routes-${index}-${route.key}`}
             onPress={onPress}
@@ -131,7 +131,7 @@ export const CustomTabBar = ({
                 )}
               </View>
             </View>
-          </AnimatedTouchableHighlight>
+          </AnimatedPressable>
         )
       })}
     </Animated.View>
