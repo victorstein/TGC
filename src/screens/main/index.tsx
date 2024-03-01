@@ -6,13 +6,12 @@ import { ApolloProvider } from '@apollo/client'
 import { apolloStore } from '@integrations/store/store'
 import { TabName } from './home.types'
 import { theme } from '@tailwind'
-import { Pressable, Text } from 'react-native'
+import { Pressable, Text, Dimensions } from 'react-native'
 import { MotiView, View } from 'moti'
 import HomeIcon from '@shared/components/icons/home-icon'
 import Animated, { FadeInDown } from 'react-native-reanimated'
 import SearchIcon from '@shared/components/icons/search-icon'
 import PlayIcon from '@shared/components/icons/play-icon'
-import { Dimensions } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
