@@ -51,12 +51,17 @@ export const CustomTabBar = ({
           })
         }
 
+        console.log('isFocused', isFocused, label)
+
         return (
           <MotiView
             testID={options.tabBarTestID}
             key={`routes-${index}-${route.key}`}
             animate={{ width: isFocused ? '50%' : '25%' }}
-            transition={{ type: 'timing', duration: 200 }}
+            transition={{
+              type: 'spring',
+              duration: 200
+            }}
           >
             <Pressable onPress={onPress} onLongPress={onLongPress}>
               <View className='flex items-center flex-row h-full justify-center'>
