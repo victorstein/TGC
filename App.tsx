@@ -1,3 +1,5 @@
+import 'react-native-reanimated'
+import 'react-native-gesture-handler'
 import { useApolloCachedClient } from './src/integrations/apollo'
 import { NavigationContainer } from '@react-navigation/native'
 import { SplashScreen } from './src/screens/splash'
