@@ -37,7 +37,7 @@ export const CustomTabBar = ({
           return {
             width: `${buttonWidth.value}%`
           }
-        })
+        }, [isFocused])
 
         const animateWidth = useCallback((newWidth: number) => {
           buttonWidth.value = withTiming(newWidth, {
