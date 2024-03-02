@@ -22,7 +22,14 @@ export const useMain = (): null => {
     if (colorScheme !== storeColorScheme) {
       return setColorScheme(storeColorScheme as ColorScheme)
     }
-  }, [storeColorScheme, setScheme, setColorScheme, colorScheme])
+  }, [
+    storeColorScheme,
+    setScheme,
+    setColorScheme,
+    colorScheme,
+    previousColorScheme,
+    previousStoreColorScheme
+  ])
 
   return null
 }

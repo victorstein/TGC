@@ -6,19 +6,19 @@ import { Avatar, Badge } from '@rneui/themed'
 import { theme } from '@tailwind'
 
 const styles = StyleSheet.create({
+  badgeStyles: {
+    backgroundColor: 'red',
+    borderWidth: 1,
+    left: 24,
+    position: 'absolute',
+    top: -32,
+    zIndex: 10
+  },
   bodyStylesAvatar: {
     backgroundColor: 'transparent',
     padding: 0,
     margin: 0,
     zIndex: 0
-  },
-  badgeStyles: {
-    backgroundColor: 'red',
-    borderWidth: 1,
-    position: 'absolute',
-    top: -32,
-    left: 24,
-    zIndex: 10
   }
 })
 

@@ -26,7 +26,7 @@
     "preview": {
       "android": {
         "track": "internal",
-        "releaseStatus": "completed",
+        "releaseStatus": "draft",
         "serviceAccountKeyPath": "../tgc-service-account.json"
       }
     }

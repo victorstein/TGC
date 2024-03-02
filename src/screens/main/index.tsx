@@ -12,12 +12,14 @@ import SearchIcon from '@shared/components/icons/search-icon'
 import PlayIcon from '@shared/components/icons/play-icon'
 import { TabBarButton } from './components/tabBarButton'
 import { TabBarIcon } from './components/tabBarIcon'
+import { ColorScheme, mainStore } from './store/store'
 
 const Tab = createBottomTabNavigator()
 
 export const Main = (): JSX.Element => {
   const client = apolloStore.use.client()
   const { colors } = theme.extend
+  const colorScheme = mainStore.use.colorScheme()
   const deviceWidth = Dimensions.get('window').width
 
   return (
@@ -32,11 +34,21 @@ export const Main = (): JSX.Element => {
             display: 'flex',
             justifyContent: 'center',
             paddingHorizontal: deviceWidth * 0.1,
-            backgroundColor: colors.background.DEFAULT
+            backgroundColor:
+              colorScheme === ColorScheme.Light
+                ? colors.background.DEFAULT
+                : colors.background.dark,
+            borderTopWidth: 0
           },
           tabBarShowLabel: false,
-          tabBarActiveTintColor: colors.primary.DEFAULT,
-          tabBarInactiveTintColor: colors.text.DEFAULT
+          tabBarActiveTintColor:
+            colorScheme === ColorScheme.Light
+              ? colors.primary.DEFAULT
+              : colors.primary.dark,
+          tabBarInactiveTintColor:
+            colorScheme === ColorScheme.Light
+              ? colors.text.DEFAULT
+              : colors.text.dark
         }}
       >
         <Tab.Screen

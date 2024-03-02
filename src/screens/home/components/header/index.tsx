@@ -1,15 +1,19 @@
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, Pressable } from 'react-native'
 import type { FC } from 'react'
 import NotificationIcon from '../notificationIcon'
+import { useColorScheme } from 'nativewind'
 
 const Header: FC = () => {
   const logoTGC = require('@assets/img/logo.png')
+  const { toggleColorScheme } = useColorScheme()
 
   return (
-    <View className='flex flex-col w-full bg-background dark:bg-background-dark my-5'>
-      <View className='py-5 flex flex-row gap-x-6 justify-between items-center'>
+    <View className='flex flex-col w-full bg-background dark:bg-background-dark mt-5'>
+      <View className='pt-5 flex flex-row gap-x-6 justify-between items-center'>
         <View className='h-full flex flex-row gap-x-6 justify-start items-center'>
-          <Image className='w-[50px] h-[54px]' source={logoTGC} />
+          <Pressable onPress={toggleColorScheme}>
+            <Image className='w-[50px] h-[54px]' source={logoTGC} />
+          </Pressable>
           <Text className='font-lato-bold text-16px leading-[19.2px] text-text dark:text-text-dark'>
             Bienvenido a{'\n'}
             Tech, code y Gaming.

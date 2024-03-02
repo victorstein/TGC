@@ -45,7 +45,7 @@ export const SplashScreen = (): JSX.Element => {
     if (fontsLoaded || fontError !== null) {
       setLoadingFonts(false)
     }
-  }, [fontsLoaded, fontError])
+  }, [fontsLoaded, fontError, setLoadingFonts])
 
   const onLayoutRootView = useCallback(() => {
     NativeSplashScreen.hideAsync().catch(() => {})
