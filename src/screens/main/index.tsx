@@ -26,13 +26,12 @@ export const Main = (): JSX.Element => {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          unmountOnBlur: true,
           tabBarStyle: {
             height: 70,
             flexDirection: 'row',
             display: 'flex',
             justifyContent: 'center',
-            paddingHorizontal: deviceWidth * 0.13,
+            paddingHorizontal: deviceWidth * 0.1,
             backgroundColor: colors.background.DEFAULT
           },
           tabBarShowLabel: false,
