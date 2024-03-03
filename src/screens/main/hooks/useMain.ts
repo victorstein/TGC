@@ -1,5 +1,9 @@
 import { useColorScheme } from 'nativewind'
-import { type ColorScheme, mainStore } from '../store/store'
+import {
+  type ColorScheme,
+  mainStore,
+  useMainStoreHydration
+} from '../store/store'
 import { useEffect } from 'react'
 import { usePrevious } from '../../utils/usePrevious'
 
@@ -9,8 +13,13 @@ export const useMain = (): null => {
   const { setColorScheme, colorScheme } = useColorScheme()
   const previousColorScheme = usePrevious(colorScheme)
   const previousStoreColorScheme = usePrevious(storeColorScheme)
+  const isStoreHydrated = useMainStoreHydration()
 
   useEffect(() => {
+    if (isStoreHydrated) {
+      return
+    }
+
     if (colorScheme !== previousColorScheme) {
       return setScheme(colorScheme as ColorScheme)
     }
@@ -28,7 +37,8 @@ export const useMain = (): null => {
     setColorScheme,
     colorScheme,
     previousColorScheme,
-    previousStoreColorScheme
+    previousStoreColorScheme,
+    isStoreHydrated
   ])
 
   return null
