@@ -9,6 +9,9 @@ import {
   useMainStoreHydration
 } from '@screens/main/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Dialog } from '@rneui/base'
+import { Text } from 'react-native'
 
 export const SplashScreen = (): JSX.Element => {
   const setLoadingAnimation = splashStore.use.setLoadingAnimation()
@@ -21,6 +24,7 @@ export const SplashScreen = (): JSX.Element => {
   const setLoadingFonts = splashStore.use.setLoadingFonts()
   const [layoutLoaded, setLayoutLoaded] = useState(false)
   const isStoreHydrated = useMainStoreHydration()
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!loadingAnimation && !loadingFonts) {
@@ -48,6 +52,16 @@ export const SplashScreen = (): JSX.Element => {
   })
 
   useEffect(() => {
+    AsyncStorage.getItem('app-storage')
+      .then((data): void => {
+        setError(JSON.stringify(data))
+      })
+      .catch((e: Error) => {
+        setError(e.message)
+      })
+  }, [])
+
+  useEffect(() => {
     if (fontsLoaded || fontError !== null) {
       setLoadingFonts(false)
     }
@@ -67,38 +81,44 @@ export const SplashScreen = (): JSX.Element => {
   }, [layoutLoaded, isStoreHydrated])
 
   return (
-    <Animated.View
-      exiting={FadeOut}
-      className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
-      onLayout={onLayoutRootView}
-    >
-      {colorScheme === ColorScheme.Light ? (
-        <LottieView
-          autoPlay
-          style={{
-            width: 450,
-            height: 450
-          }}
-          hardwareAccelerationAndroid
-          loop={false}
-          onAnimationFinish={playLoading}
-          ref={animation}
-          source={require('../../assets/animations/splash.json')}
-        />
-      ) : (
-        <LottieView
-          autoPlay
-          style={{
-            width: 450,
-            height: 450
-          }}
-          hardwareAccelerationAndroid
-          loop={false}
-          onAnimationFinish={playLoading}
-          ref={animation}
-          source={require('../../assets/animations/splash-dark.json')}
-        />
-      )}
-    </Animated.View>
+    <>
+      <Animated.View
+        exiting={FadeOut}
+        className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
+        onLayout={onLayoutRootView}
+      >
+        {colorScheme === ColorScheme.Light ? (
+          <LottieView
+            autoPlay
+            style={{
+              width: 450,
+              height: 450
+            }}
+            hardwareAccelerationAndroid
+            loop={false}
+            onAnimationFinish={playLoading}
+            ref={animation}
+            source={require('../../assets/animations/splash.json')}
+          />
+        ) : (
+          <LottieView
+            autoPlay
+            style={{
+              width: 450,
+              height: 450
+            }}
+            hardwareAccelerationAndroid
+            loop={false}
+            onAnimationFinish={playLoading}
+            ref={animation}
+            source={require('../../assets/animations/splash-dark.json')}
+          />
+        )}
+      </Animated.View>
+      <Dialog isVisible={error !== null} onBackdropPress={() => setError(null)}>
+        <Dialog.Title title='Dialog Title' />
+        <Text style={{ color: 'white' }}>{error}</Text>
+      </Dialog>
+    </>
   )
 }
