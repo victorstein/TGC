@@ -16,7 +16,7 @@ export const useMain = (): null => {
   const isStoreHydrated = useMainStoreHydration()
 
   useEffect(() => {
-    if (isStoreHydrated) {
+    if (!isStoreHydrated) {
       return
     }
 
