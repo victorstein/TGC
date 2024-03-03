@@ -9,9 +9,6 @@ import {
   useMainStoreHydration
 } from '@screens/main/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Dialog } from '@rneui/base'
-import { Text } from 'react-native'
 
 export const SplashScreen = (): JSX.Element | null => {
   const setLoadingAnimation = splashStore.use.setLoadingAnimation()
@@ -23,7 +20,6 @@ export const SplashScreen = (): JSX.Element | null => {
   const animation = useRef<LottieView>(null)
   const setLoadingFonts = splashStore.use.setLoadingFonts()
   const isStoreHydrated = useMainStoreHydration()
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!loadingAnimation && !loadingFonts) {
@@ -49,16 +45,6 @@ export const SplashScreen = (): JSX.Element | null => {
     'lato-regular': require('@assets/fonts/lato-regular.ttf'),
     'lato-semibold': require('@assets/fonts/lato-semi-bold.ttf')
   })
-
-  useEffect(() => {
-    AsyncStorage.getItem('app-storage')
-      .then((data): void => {
-        setError(JSON.stringify(data))
-      })
-      .catch((e: Error) => {
-        setError(e.message)
-      })
-  }, [])
 
   useEffect(() => {
     if (fontsLoaded || fontError !== null) {
@@ -109,10 +95,6 @@ export const SplashScreen = (): JSX.Element | null => {
           />
         )}
       </Animated.View>
-      <Dialog isVisible={error !== null} onBackdropPress={() => setError(null)}>
-        <Dialog.Title title='Dialog Title' />
-        <Text style={{ color: 'white' }}>{error}</Text>
-      </Dialog>
     </>
   )
 }
