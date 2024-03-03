@@ -10,14 +10,23 @@ export enum ColorScheme {
 
 export interface IMainStore {
   colorScheme: ColorScheme
+  storeHydrated: boolean
   toggleColorScheme: () => void
   setColorScheme: (colorScheme: ColorScheme) => void
+  setStoreHydrated: (storeHydrated: boolean) => void
+  resetStore: () => void
 }
+
+const mainStoreInitialState: Pick<IMainStore, 'colorScheme' | 'storeHydrated'> =
+  {
+    colorScheme: ColorScheme.Light,
+    storeHydrated: false
+  }
 
 export const MainStore = create<IMainStore>()(
   persist(
     (set, get) => ({
-      colorScheme: ColorScheme.Light,
+      ...mainStoreInitialState,
       toggleColorScheme: () => {
         const colorScheme =
           get().colorScheme === ColorScheme.Light
@@ -33,11 +42,26 @@ export const MainStore = create<IMainStore>()(
           ...state,
           colorScheme
         }))
+      },
+      setStoreHydrated: (storeHydrated: boolean) => {
+        set((state) => ({
+          ...state,
+          storeHydrated
+        }))
+      },
+      resetStore: () => {
+        set(mainStoreInitialState)
       }
     }),
     {
       name: 'app-storage',
-      storage: createJSONStorage(() => AsyncStorage)
+      storage: createJSONStorage(() => AsyncStorage),
+      onRehydrateStorage: (state) => {
+        console.log('state BEFORE hydration:', state)
+        return () => {
+          state.setStoreHydrated(true)
+        }
+      }
     }
   )
 )

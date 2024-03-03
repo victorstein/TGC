@@ -8,7 +8,7 @@ const Header: FC = () => {
   const { toggleColorScheme } = useColorScheme()
 
   return (
-    <View className='flex flex-col w-full bg-background dark:bg-background-dark mt-5'>
+    <View className='flex flex-col w-full bg-background dark:bg-background-dark mb-5 mt-8'>
       <View className='pt-5 flex flex-row gap-x-6 justify-between items-center'>
         <View className='h-full flex flex-row gap-x-6 justify-start items-center'>
           <Pressable onPress={toggleColorScheme}>
