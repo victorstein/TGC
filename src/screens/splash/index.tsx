@@ -1,12 +1,20 @@
 import LottieView from 'lottie-react-native'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Animated, { FadeOut } from 'react-native-reanimated'
+import { FadeOut } from 'react-native-reanimated'
 import { splashStore } from './store/store'
 import { useFonts } from 'expo-font'
-import { ColorScheme, mainStore } from '@screens/main/store/store'
+import {
+  ColorScheme,
+  mainStore,
+  useMainStoreHydration
+} from '@screens/main/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
+import { MotiView } from 'moti'
+import { theme } from '@tailwind'
 
-export const SplashScreen = (): JSX.Element => {
+const { colors } = theme.extend
+
+export const SplashScreen = (): JSX.Element | null => {
   const setLoadingAnimation = splashStore.use.setLoadingAnimation()
   const loadingAnimation = splashStore.use.loadingAnimation()
   const loadingFonts = splashStore.use.loadingFonts()
@@ -15,6 +23,7 @@ export const SplashScreen = (): JSX.Element => {
   const [animationCounter, setAnimationCounter] = useState(0)
   const animation = useRef<LottieView>(null)
   const setLoadingFonts = splashStore.use.setLoadingFonts()
+  const isStoreHydrated = useMainStoreHydration()
 
   useEffect(() => {
     if (!loadingAnimation && !loadingFonts) {
@@ -45,45 +54,61 @@ export const SplashScreen = (): JSX.Element => {
     if (fontsLoaded || fontError !== null) {
       setLoadingFonts(false)
     }
-  }, [fontsLoaded, fontError])
+  }, [fontsLoaded, fontError, setLoadingFonts])
 
   const onLayoutRootView = useCallback(() => {
     NativeSplashScreen.hideAsync().catch(() => {})
   }, [])
 
+  if (!isStoreHydrated) {
+    return null
+  }
+
   return (
-    <Animated.View
-      exiting={FadeOut}
-      className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
-      onLayout={onLayoutRootView}
-    >
-      {colorScheme === ColorScheme.Light ? (
-        <LottieView
-          autoPlay
-          style={{
-            width: 450,
-            height: 450
-          }}
-          hardwareAccelerationAndroid
-          loop={false}
-          onAnimationFinish={playLoading}
-          ref={animation}
-          source={require('../../assets/animations/splash.json')}
-        />
-      ) : (
-        <LottieView
-          autoPlay
-          style={{
-            width: 450,
-            height: 450
-          }}
-          hardwareAccelerationAndroid
-          loop={false}
-          onAnimationFinish={playLoading}
-          ref={animation}
-          source={require('../../assets/animations/splash-dark.json')}
-        />
-      )}
-    </Animated.View>
+    <>
+      <MotiView
+        exiting={FadeOut}
+        onLayout={onLayoutRootView}
+        from={{
+          backgroundColor: colors.background.DEFAULT
+        }}
+        transition={{ type: 'timing', duration: 200 }}
+        animate={{
+          backgroundColor:
+            colorScheme === ColorScheme.Dark
+              ? colors.background.dark
+              : colors.background.DEFAULT
+        }}
+        className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
+      >
+        {colorScheme === ColorScheme.Light ? (
+          <LottieView
+            autoPlay
+            style={{
+              width: 450,
+              height: 450
+            }}
+            hardwareAccelerationAndroid
+            loop={false}
+            onAnimationFinish={playLoading}
+            ref={animation}
+            source={require('../../assets/animations/splash.json')}
+          />
+        ) : (
+          <LottieView
+            autoPlay
+            style={{
+              width: 450,
+              height: 450
+            }}
+            hardwareAccelerationAndroid
+            loop={false}
+            onAnimationFinish={playLoading}
+            ref={animation}
+            source={require('../../assets/animations/splash-dark.json')}
+          />
+        )}
+      </MotiView>
+    </>
   )
 }

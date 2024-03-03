@@ -1,3 +1,5 @@
+import 'react-native-reanimated'
+import 'react-native-gesture-handler'
 import { useApolloCachedClient } from './src/integrations/apollo'
 import { NavigationContainer } from '@react-navigation/native'
 import { SplashScreen } from './src/screens/splash'
@@ -10,6 +12,9 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { splashStore } from './src/screens/splash/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
+import { StatusBar } from 'expo-status-bar'
+import { ColorScheme, mainStore } from '@screens/main/store/store'
+import { theme } from '@tailwind'
 
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
 
@@ -17,6 +22,7 @@ const App = (): JSX.Element => {
   useMain()
   const client = useApolloCachedClient()
   const splashLoading = splashStore.use.loading()
+  const colorScheme = mainStore.use.colorScheme()
   const MainStack = createNativeStackNavigator()
 
   return (
@@ -39,6 +45,14 @@ const App = (): JSX.Element => {
           )}
         </MainStack.Navigator>
       </NavigationContainer>
+      <StatusBar
+        backgroundColor={
+          colorScheme === ColorScheme.Dark
+            ? theme.extend.colors.background.dark
+            : theme.extend.colors.background.DEFAULT
+        }
+        style={colorScheme === ColorScheme.Dark ? 'light' : 'dark'}
+      />
     </SafeAreaProvider>
   )
 }
