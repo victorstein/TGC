@@ -3,7 +3,11 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Animated, { FadeOut } from 'react-native-reanimated'
 import { splashStore } from './store/store'
 import { useFonts } from 'expo-font'
-import { ColorScheme, mainStore } from '@screens/main/store/store'
+import {
+  ColorScheme,
+  mainStore,
+  useMainStoreHydration
+} from '@screens/main/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
 
 export const SplashScreen = (): JSX.Element => {
@@ -15,6 +19,8 @@ export const SplashScreen = (): JSX.Element => {
   const [animationCounter, setAnimationCounter] = useState(0)
   const animation = useRef<LottieView>(null)
   const setLoadingFonts = splashStore.use.setLoadingFonts()
+  const [layoutLoaded, setLayoutLoaded] = useState(false)
+  const isStoreHydrated = useMainStoreHydration()
 
   useEffect(() => {
     if (!loadingAnimation && !loadingFonts) {
@@ -48,8 +54,17 @@ export const SplashScreen = (): JSX.Element => {
   }, [fontsLoaded, fontError, setLoadingFonts])
 
   const onLayoutRootView = useCallback(() => {
-    NativeSplashScreen.hideAsync().catch(() => {})
-  }, [])
+    setLayoutLoaded(true)
+    if (isStoreHydrated) {
+      NativeSplashScreen.hideAsync().catch(() => {})
+    }
+  }, [isStoreHydrated])
+
+  useEffect(() => {
+    if (layoutLoaded && isStoreHydrated) {
+      NativeSplashScreen.hideAsync().catch(() => {})
+    }
+  }, [layoutLoaded, isStoreHydrated])
 
   return (
     <Animated.View

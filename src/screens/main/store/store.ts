@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { createSelectors } from '../../utils/createSelectors'
+import { useEffect, useState } from 'react'
 
 export enum ColorScheme {
   Light = 'light',
@@ -10,18 +11,14 @@ export enum ColorScheme {
 
 export interface IMainStore {
   colorScheme: ColorScheme
-  storeHydrated: boolean
   toggleColorScheme: () => void
   setColorScheme: (colorScheme: ColorScheme) => void
-  setStoreHydrated: (storeHydrated: boolean) => void
   resetStore: () => void
 }
 
-const mainStoreInitialState: Pick<IMainStore, 'colorScheme' | 'storeHydrated'> =
-  {
-    colorScheme: ColorScheme.Light,
-    storeHydrated: false
-  }
+const mainStoreInitialState: Pick<IMainStore, 'colorScheme'> = {
+  colorScheme: ColorScheme.Light
+}
 
 export const MainStore = create<IMainStore>()(
   persist(
@@ -43,12 +40,6 @@ export const MainStore = create<IMainStore>()(
           colorScheme
         }))
       },
-      setStoreHydrated: (storeHydrated: boolean) => {
-        set((state) => ({
-          ...state,
-          storeHydrated
-        }))
-      },
       resetStore: () => {
         set(mainStoreInitialState)
       }
@@ -56,14 +47,31 @@ export const MainStore = create<IMainStore>()(
     {
       name: 'app-storage',
       storage: createJSONStorage(() => AsyncStorage),
-      onRehydrateStorage: (state) => {
-        console.log('state BEFORE hydration:', state)
-        return () => {
-          state.setStoreHydrated(true)
-        }
-      }
+      partialize: (state) => ({
+        colorScheme: state.colorScheme
+      })
     }
   )
 )
+
+export const useMainStoreHydration = (): boolean => {
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    const unsubHydrate = mainStore.persist.onHydrate(() => setHydrated(false))
+    const unsubFinishHydration = mainStore.persist.onFinishHydration(() =>
+      setHydrated(true)
+    )
+
+    setHydrated(mainStore.persist.hasHydrated())
+
+    return () => {
+      unsubHydrate()
+      unsubFinishHydration()
+    }
+  }, [])
+
+  return hydrated
+}
 
 export const mainStore = createSelectors(MainStore)
