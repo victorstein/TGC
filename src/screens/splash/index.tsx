@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Dialog } from '@rneui/base'
 import { Text } from 'react-native'
 
-export const SplashScreen = (): JSX.Element => {
+export const SplashScreen = (): JSX.Element | null => {
   const setLoadingAnimation = splashStore.use.setLoadingAnimation()
   const loadingAnimation = splashStore.use.loadingAnimation()
   const loadingFonts = splashStore.use.loadingFonts()
@@ -22,7 +22,6 @@ export const SplashScreen = (): JSX.Element => {
   const [animationCounter, setAnimationCounter] = useState(0)
   const animation = useRef<LottieView>(null)
   const setLoadingFonts = splashStore.use.setLoadingFonts()
-  const [layoutLoaded, setLayoutLoaded] = useState(false)
   const isStoreHydrated = useMainStoreHydration()
   const [error, setError] = useState<string | null>(null)
 
@@ -68,24 +67,19 @@ export const SplashScreen = (): JSX.Element => {
   }, [fontsLoaded, fontError, setLoadingFonts])
 
   const onLayoutRootView = useCallback(() => {
-    setLayoutLoaded(true)
-    if (isStoreHydrated) {
-      NativeSplashScreen.hideAsync().catch(() => {})
-    }
-  }, [isStoreHydrated])
+    NativeSplashScreen.hideAsync().catch(() => {})
+  }, [])
 
-  useEffect(() => {
-    if (layoutLoaded && isStoreHydrated) {
-      NativeSplashScreen.hideAsync().catch(() => {})
-    }
-  }, [layoutLoaded, isStoreHydrated])
+  if (!isStoreHydrated) {
+    return null
+  }
 
   return (
     <>
       <Animated.View
         exiting={FadeOut}
-        className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
         onLayout={onLayoutRootView}
+        className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
       >
         {colorScheme === ColorScheme.Light ? (
           <LottieView
