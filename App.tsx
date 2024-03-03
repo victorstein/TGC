@@ -46,7 +46,6 @@ const App = (): JSX.Element => {
         </MainStack.Navigator>
       </NavigationContainer>
       <StatusBar
-        animated
         backgroundColor={
           colorScheme === ColorScheme.Dark
             ? theme.extend.colors.background.dark
