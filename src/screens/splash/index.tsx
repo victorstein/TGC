@@ -1,6 +1,6 @@
 import LottieView from 'lottie-react-native'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Animated, { FadeOut } from 'react-native-reanimated'
+import { FadeOut } from 'react-native-reanimated'
 import { splashStore } from './store/store'
 import { useFonts } from 'expo-font'
 import {
@@ -9,6 +9,10 @@ import {
   useMainStoreHydration
 } from '@screens/main/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
+import { MotiView } from 'moti'
+import { theme } from '@tailwind'
+
+const { colors } = theme.extend
 
 export const SplashScreen = (): JSX.Element | null => {
   const setLoadingAnimation = splashStore.use.setLoadingAnimation()
@@ -62,9 +66,19 @@ export const SplashScreen = (): JSX.Element | null => {
 
   return (
     <>
-      <Animated.View
+      <MotiView
         exiting={FadeOut}
         onLayout={onLayoutRootView}
+        from={{
+          backgroundColor: colors.background.DEFAULT
+        }}
+        transition={{ type: 'timing', duration: 200 }}
+        animate={{
+          backgroundColor:
+            colorScheme === ColorScheme.Dark
+              ? colors.background.dark
+              : colors.background.DEFAULT
+        }}
         className='flex-1 items-center justify-center bg-background dark:bg-background-dark'
       >
         {colorScheme === ColorScheme.Light ? (
@@ -94,7 +108,7 @@ export const SplashScreen = (): JSX.Element | null => {
             source={require('../../assets/animations/splash-dark.json')}
           />
         )}
-      </Animated.View>
+      </MotiView>
     </>
   )
 }
