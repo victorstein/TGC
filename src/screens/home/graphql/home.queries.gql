@@ -1,0 +1,38 @@
+query getPosts {
+  posts {
+    nodes {
+      excerpt
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
+      categories {
+        nodes {
+          slug
+          name
+          databaseId
+        }
+      }
+      blocks {
+        name
+        ... on CoreAudioBlock {
+          attributes {
+            ... on CoreAudioBlockAttributes {
+              src
+              caption
+            }
+          }
+        }
+        ... on CoreParagraphBlock {
+          attributes {
+            ... on CoreParagraphBlockAttributes {
+              content
+              anchor
+            }
+          }
+        }
+      }
+    }
+  }
+}
