@@ -33,7 +33,7 @@ const MainBanner: FC<IMainBannerProps> = ({
     >
       <TouchableHighlight
         onPress={navigateHandler}
-        activeOpacity={0.4}
+        activeOpacity={0.9}
         underlayColor='transparent'
       >
         <ImageBackground
