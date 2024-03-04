@@ -1,7 +1,17 @@
 import { type FC, useState } from 'react'
-import { Tab, Text, TabView } from '@rneui/themed'
+import { Tab, TabView } from '@rneui/themed'
+import { theme } from '@tailwind'
 // Component
 import MainBanner from '../mainBanner'
+import { View, type RippleBackgroundPropType, Text } from 'react-native'
+const { colors } = theme.extend
+
+const tabItemBackConfig: RippleBackgroundPropType = {
+  type: 'RippleAndroid',
+  borderless: false,
+  rippleRadius: undefined,
+  color: 1
+}
 
 const HomeTabs: FC = () => {
   const [tabIndex, setTabIndex] = useState(0)
@@ -12,37 +22,54 @@ const HomeTabs: FC = () => {
 
   return (
     <>
-      <Tab
+      <View className='px-10'>
+        <Tab
+          value={tabIndex}
+          onChange={tabIndexHandler}
+          titleStyle={(active) => ({
+            color: colors.text.DEFAULT,
+            fontSize: 12,
+            fontWeight: active ? '700' : '400',
+            lineHeight: 14.4,
+            paddingHorizontal: 0,
+            paddingVertical: 0,
+            paddingBottom: 6.5
+          })}
+          indicatorStyle={{
+            height: 2,
+            backgroundColor: colors.primary.DEFAULT
+          }}
+        >
+          <Tab.Item background={tabItemBackConfig} title='Podcast' />
+          <Tab.Item title='Gaming' background={tabItemBackConfig} />
+          <Tab.Item title='Tech' background={tabItemBackConfig} />
+          <Tab.Item title='Code' background={tabItemBackConfig} />
+        </Tab>
+      </View>
+      <TabView
         value={tabIndex}
         onChange={tabIndexHandler}
-        titleStyle={(active) => ({
-          fontSize: 12,
-          fontWeight: active ? '700' : '400',
-          lineHeight: 14.4
-        })}
+        tabItemContainerStyle={{ display: 'flex', alignItems: 'baseline' }}
       >
-        <Tab.Item title='Podcast' />
-        <Tab.Item title='Gaming' />
-        <Tab.Item title='Tech' />
-        <Tab.Item title='Code' />
-      </Tab>
-      <TabView value={tabIndex} onChange={tabIndexHandler}>
-        <TabView.Item className='bg-red-200 flex-1 px-2 py-3'>
-          <MainBanner
-            title='The Pokemon company planea investigar a PalWorld'
-            description='La compañía detrás de Pocket Monsters investigará a Palworld por posible infracción de propiedad intelectual'
-            bgImageUrl='https://techraptor.net/sites/default/files/styles/hero/public/2024-01/palworld-and-detective-pikachu.jpg?itok=fUusvjUN'
-            duration={12}
-          />
+        <TabView.Item className='w-full'>
+          <View className='p-2'>
+            <Text>PODCAST</Text>
+          </View>
         </TabView.Item>
-        <TabView.Item className='bg-teal-300 flex-1'>
-          <Text>GAMING</Text>
+        <TabView.Item className='flex-1'>
+          <View className='p-2'>
+            <Text>GAMING</Text>
+          </View>
         </TabView.Item>
-        <TabView.Item className='bg-amber-200 flex-1'>
-          <Text>TECH</Text>
+        <TabView.Item className='flex-1'>
+          <View className='p-2'>
+            <Text>TECH</Text>
+          </View>
         </TabView.Item>
-        <TabView.Item className='bg-lime-500 flex-1'>
-          <Text>CODE</Text>
+        <TabView.Item className='flex-1'>
+          <View className='p-2'>
+            <Text>CODE</Text>
+          </View>
         </TabView.Item>
       </TabView>
     </>

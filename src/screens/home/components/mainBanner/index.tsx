@@ -31,10 +31,16 @@ const MainBanner: FC<IComponentProps> = ({
         imageStyle={{ borderRadius: 16 }}
       >
         <View className='p-5 bg-banner-filter/75 rounded-2xl'>
-          <Text className='text-base leading-4 font-bold text-banner-text mb-2'>
+          <Text
+            className='text-base leading-4 font-bold text-banner-text mb-2'
+            numberOfLines={2}
+          >
             {title}
           </Text>
-          <Text className='text-xs leading-3 font-normal text-banner-text'>
+          <Text
+            className='text-xs leading-3 font-normal text-banner-text'
+            numberOfLines={3}
+          >
             {description}
           </Text>
           <Text className='text-xs leading-3 font-normal text-banner-text/50 mt-4'>{`Duration: ${duration} Mins`}</Text>

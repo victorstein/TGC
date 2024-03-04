@@ -12,7 +12,7 @@ export const HomeScreen = (): JSX.Element => {
   const { toggleColorScheme } = useColorScheme()
 
   return (
-    <View className='flex-1 bg-background dark:bg-background-dark'>
+    <View className='bg-background dark:bg-background-dark flex-1'>
       <Header />
       <View className='px-4'>
         <SearchBar />
