@@ -5,10 +5,26 @@ import NotificationCard from './components/notificationCard'
 import { TabName } from '@screens/main/home.types'
 import SearchBar from '../../shared/components/search-bar'
 import MainBanner from './components/mainBanner'
+import { useCallback, useState } from 'react'
+import { RefreshIndicator } from '@shared/components/refresh-control'
 
 export const HomeScreen = (): JSX.Element => {
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    setTimeout(() => {
+      setRefreshing(false)
+    }, 2000)
+  }, [])
+
   return (
-    <ScrollView className='flex-1 bg-background dark:bg-background-dark'>
+    <ScrollView
+      refreshControl={
+        <RefreshIndicator onRefresh={onRefresh} refreshing={refreshing} />
+      }
+      className='flex-1 bg-background dark:bg-background-dark'
+    >
       <Header />
       <View className='px-4'>
         <SearchBar />
