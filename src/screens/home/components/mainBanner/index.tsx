@@ -39,7 +39,7 @@ const MainBanner: FC<IComponentProps> = ({
           </Text>
           <Text
             className='text-xs leading-3 font-normal text-banner-text'
-            numberOfLines={3}
+            numberOfLines={2}
           >
             {description}
           </Text>

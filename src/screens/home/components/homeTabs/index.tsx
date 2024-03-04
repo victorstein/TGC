@@ -57,14 +57,14 @@ const HomeTabs: FC = () => {
         tabItemContainerStyle={{
           display: 'flex',
           alignItems: 'baseline',
-          backgroundColor: '#000'
+          paddingTop: 13
         }}
       >
         <TabView.Item className='w-full'>
           <View className='p-2'>
             <MainBanner
-              title='The Pokemon company planea investigar a PalWorld'
-              description='La compañía detrás de Pocket Monsters investigará a Palworld por posible infracción de propiedad intelectual'
+              title='Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+              description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting"
               bgImageUrl='https://techraptor.net/sites/default/files/styles/hero/public/2024-01/palworld-and-detective-pikachu.jpg?itok=fUusvjUN'
               duration={12}
             />
@@ -72,17 +72,32 @@ const HomeTabs: FC = () => {
         </TabView.Item>
         <TabView.Item className='flex-1'>
           <View className='p-2'>
-            <Text className='text-text-dark'>GAMING</Text>
+            <MainBanner
+              title='Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+              description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting"
+              bgImageUrl='https://img.freepik.com/foto-gratis/jugador-tiro-medio-sentado-silla_23-2149829176.jpg?w=740&t=st=1709524136~exp=1709524736~hmac=ef0e20645c9439cac626bdefc759b874e671dd6af81920a4eb973dc815bf7732'
+              duration={10}
+            />
           </View>
         </TabView.Item>
         <TabView.Item className='flex-1'>
           <View className='p-2'>
-            <Text>TECH</Text>
+            <MainBanner
+              title='Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+              description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting"
+              bgImageUrl='https://img.freepik.com/foto-gratis/persona-trabajando-html-computadora_23-2150038860.jpg?t=st=1709527890~exp=1709531490~hmac=1b5dfc627407c77cd5bbe9cd42c35a1cb8b9594ee77a6a0ceb3456e5be6fd137&w=996'
+              duration={10}
+            />
           </View>
         </TabView.Item>
         <TabView.Item className='flex-1'>
           <View className='p-2'>
-            <Text>CODE</Text>
+            <MainBanner
+              title='Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+              description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting"
+              bgImageUrl='https://img.freepik.com/vector-gratis/desarrollo-nuevas-aplicaciones-escritorio_23-2148684987.jpg'
+              duration={10}
+            />
           </View>
         </TabView.Item>
       </TabView>
