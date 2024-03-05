@@ -32,7 +32,7 @@ export const useApolloCachedClient = (): ApolloClient<unknown> | null => {
     }
 
     init().catch((e) => e)
-  }, [])
+  }, [setClient])
 
   return client
 }

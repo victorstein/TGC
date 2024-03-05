@@ -54,21 +54,32 @@ const HomeTabs: FC = () => {
       <TabView
         value={tabIndex}
         onChange={tabIndexHandler}
+        containerStyle={{
+          height: 200,
+          backgroundColor: 'yellow',
+          // display: 'flex',
+          // flex: 0,
+          // margin: 10
+          position: 'relative'
+        }}
         tabItemContainerStyle={{
-          display: 'flex',
-          alignItems: 'baseline',
-          paddingTop: 13
+          // display: 'flex',
+          // alignItems: 'baseline',
+          padding: 13,
+          // flex: 0,
+          backgroundColor: 'red',
+          // height: 200,
+          position: 'relative'
         }}
       >
-        <TabView.Item className='w-full'>
-          <View className='p-2'>
-            <MainBanner
-              title='Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-              description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting"
-              bgImageUrl='https://techraptor.net/sites/default/files/styles/hero/public/2024-01/palworld-and-detective-pikachu.jpg?itok=fUusvjUN'
-              duration={12}
-            />
-          </View>
+        <TabView.Item className='bg-blue-600 relative'>
+          <MainBanner
+            title='Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+            description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting"
+            bgImageUrl='https://techraptor.net/sites/default/files/styles/hero/public/2024-01/palworld-and-detective-pikachu.jpg?itok=fUusvjUN'
+            duration={12}
+          />
+          {/* <View className='p-2'></View> */}
         </TabView.Item>
         <TabView.Item className='flex-1'>
           <View className='p-2'>

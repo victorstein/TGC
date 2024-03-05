@@ -5,7 +5,6 @@
   },
   "build": {
     "development": {
-      "developmentClient": true,
       "distribution": "internal",
       "autoIncrement": true
     },
@@ -26,7 +25,7 @@
     "preview": {
       "android": {
         "track": "internal",
-        "releaseStatus": "completed",
+        "releaseStatus": "draft",
         "serviceAccountKeyPath": "../tgc-service-account.json"
       }
     }
