@@ -1,7 +1,8 @@
-query getPosts {
-  posts {
+query getPosts($input: RootQueryToPostConnectionWhereArgs!, $first: Int!) {
+  posts(where: $input, first: $first) {
     nodes {
       excerpt
+      title
       featuredImage {
         node {
           mediaItemUrl
@@ -21,6 +22,25 @@ query getPosts {
             ... on CoreAudioBlockAttributes {
               src
               caption
+            }
+          }
+        }
+        ... on CoreHeadingBlock {
+          attributes {
+            ... on CoreHeadingBlockAttributes {
+              content
+            }
+          }
+        }
+        ... on CoreListBlock {
+          innerBlocks {
+            originalContent
+          }
+        }
+        ... on CoreImageBlock {
+          attributes {
+            ... on CoreImageBlockAttributes {
+              url
             }
           }
         }
