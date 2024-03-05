@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "yarn graphql:codegen & expo start",
+    "start": "expo start",
     "android": "expo start --android",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx",
