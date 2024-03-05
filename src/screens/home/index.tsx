@@ -5,6 +5,7 @@ import NotificationCard from './components/notificationCard'
 import { TabName } from '@screens/main/home.types'
 import SearchBar from '../../shared/components/search-bar'
 import MainBanner from './components/mainBanner'
+import CaroucelSection from './components/caroucel-section'
 
 export const HomeScreen = (): JSX.Element => {
   return (
@@ -21,6 +22,7 @@ export const HomeScreen = (): JSX.Element => {
           duration={12}
         />
       </View>
+      <CaroucelSection />
       <View>
         {new Array(10).fill(0).map((_, index) => (
           <NotificationCard
