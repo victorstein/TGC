@@ -1,7 +1,7 @@
 {
   "name": "tcg",
   "version": "1.0.0",
-  "main": "./app.tsx",
+  "main": "index.ts",
   "scripts": {
     "postinstall": "patch-package",
     "start": "yarn graphql:codegen && expo start",
