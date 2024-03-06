@@ -1,6 +1,6 @@
 import { Text, View, Pressable } from 'react-native'
 import type { FC } from 'react'
-import NotificationIcon from '../notificationIcon'
+import NotificationIcon from '../notification-icon'
 import { useColorScheme } from 'nativewind'
 import { Image } from 'expo-image'
 

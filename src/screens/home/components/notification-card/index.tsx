@@ -1,6 +1,6 @@
 import { View, TouchableHighlight, Text } from 'react-native'
 import type { FC } from 'react'
-import { type INotificationCardProps } from './notification-card.types'
+import { type INotificationCardProps } from './notification-card-types'
 import { useNavigation } from '@react-navigation/native'
 import { MotiView } from 'moti'
 import { Image } from 'expo-image'

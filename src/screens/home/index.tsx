@@ -4,11 +4,10 @@ import Header from './components/header'
 import SearchBar from '../../shared/components/search-bar'
 import { useCallback } from 'react'
 import { RefreshIndicator } from '@shared/components/refresh-control'
-import { CategoryEnum } from './types/home.types'
-import { MainBannerWrapper } from './components/mainBanner/main-banner-wrapper'
-import { usePosts } from './hooks/usePosts'
-import NotificationCard from './components/notificationCard'
-import { TabName } from '@screens/main/home.types'
+import { CategoryEnum, TabName } from './types/home-types'
+import { MainBannerWrapper } from './components/main-banner/main-banner-wrapper'
+import { usePosts } from './hooks/use-posts'
+import NotificationCard from './components/notification-card'
 
 export const HomeScreen = (): JSX.Element => {
   const { refetch, loading } = usePosts({ categoryName: CategoryEnum.CODE })

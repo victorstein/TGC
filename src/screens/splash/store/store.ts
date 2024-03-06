@@ -1,4 +1,4 @@
-import { createSelectors } from '../../../screens/utils/createSelectors'
+import { createSelectors } from '../../utils/create-selectors'
 import { create } from 'zustand'
 
 interface ISplashStore {

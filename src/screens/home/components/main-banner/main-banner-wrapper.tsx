@@ -1,5 +1,5 @@
-import { usePosts } from '@screens/home/hooks/usePosts'
-import { type CategoryEnum } from '@screens/home/types/home.types'
+import { usePosts } from '@screens/home/hooks/use-posts'
+import { type CategoryEnum } from '@screens/home/types/home-types'
 import MainBanner from '.'
 import { Skeleton } from '@rneui/base'
 import { AnimatePresence, MotiView } from 'moti'

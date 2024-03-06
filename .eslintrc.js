@@ -2,7 +2,7 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
-      plugins: ['react', 'react-native'],
+      plugins: ['react', 'react-native', 'check-file'],
       extends: [
         'standard-with-typescript',
         'plugin:react/recommended',
@@ -24,7 +24,19 @@ module.exports = {
         'react-native/no-inline-styles': 0,
         'react-native/no-color-literals': 0,
         'react-native/sort-styles': 0,
-        'react-hooks/exhaustive-deps': 'error'
+        'react-hooks/exhaustive-deps': 'error',
+        'check-file/filename-naming-convention': [
+          'error',
+          {
+            'src/**/*.{ts,tsx}': 'KEBAB_CASE'
+          }
+        ],
+        'check-file/folder-naming-convention': [
+          'error',
+          {
+            'src/**/': 'KEBAB_CASE'
+          }
+        ]
       }
     }
   ]

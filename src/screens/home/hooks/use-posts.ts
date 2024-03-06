@@ -1,10 +1,10 @@
 import { type GetPosts } from '@integrations/graphql/operations'
 import type { ApolloQueryResult } from '@apollo/client'
 import { useGetPosts } from '../graphql/home.queries.generated'
-import { htmlStripper } from '@shared/utils/htmlStripper'
-import { type CategoryEnum } from '../types/home.types'
+import { htmlStripper } from '@shared/utils/html-stripper'
+import { type CategoryEnum } from '../types/home-types'
 import { OrderEnum, PostObjectsConnectionOrderbyEnum } from '@appTypes/schema'
-import { combineHTMLBlocks } from '@shared/utils/combineHtmlBlocks'
+import { combineHTMLBlocks } from '@shared/utils/combine-html-blocks'
 
 type Post = NonNullable<GetPosts['posts']>['nodes'][number] & {
   stringifiedBlocks: string

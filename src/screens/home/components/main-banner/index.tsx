@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 // components
 import { View, Text, ImageBackground, TouchableHighlight } from 'react-native'
-import { type IMainBannerProps } from './main-banner.types'
+import { type IMainBannerProps } from './main-banner-types'
 // types or hooks
-import { TabName } from '@screens/main/home.types'
 import { useNavigation } from '@react-navigation/native'
+import { TabName } from '@screens/home/types/home-types'
 
 const MainBanner: FC<IMainBannerProps> = ({
   title,
