@@ -15,6 +15,7 @@ import * as NativeSplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { theme } from '@tailwind'
+import { registerRootComponent } from 'expo'
 
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
 
@@ -57,4 +58,4 @@ const App = (): JSX.Element => {
   )
 }
 
-export default App
+export default registerRootComponent(App)

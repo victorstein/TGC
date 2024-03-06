@@ -4,10 +4,9 @@ import Header from './components/header'
 import SearchBar from '../../shared/components/search-bar'
 import { useCallback } from 'react'
 import { RefreshIndicator } from '@shared/components/refresh-control'
-import { CategoryEnum, TabName } from './types/home-types'
-import { MainBannerWrapper } from './components/main-banner/main-banner-wrapper'
+import { CategoryEnum } from './types/home-types'
 import { usePosts } from './hooks/use-posts'
-import NotificationCard from './components/notification-card'
+import { HomeTabsComponent } from './components/home-tabs/home-tabs'
 
 export const HomeScreen = (): JSX.Element => {
   const { refetch, loading } = usePosts({ categoryName: CategoryEnum.CODE })
@@ -27,18 +26,8 @@ export const HomeScreen = (): JSX.Element => {
       <View className='px-4 mb-4'>
         <SearchBar />
       </View>
-      <View className='mb-4'>
-        <MainBannerWrapper categoryName={CategoryEnum.CODE} loading={loading} />
-      </View>
-      <View>
-        <NotificationCard
-          redirect={TabName.SEARCH}
-          date='12 de Feb 2023'
-          isRead={false}
-          delay={400}
-          title='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper tortor vitae nisi pellentesque, eu posuere erat lobortis. Phasellus auctor ullamcorper risus sed rutrum. Maecenas porttitor eros ipsum, eu aliquet nunc rutrum et.'
-          photoURL='https://s3-alpha-sig.figma.com/img/d455/56e1/2924f00073b9f3212b507abc986a7a4d?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BcYak7vQ44Q6NwJcvwArd1qlfeXADcGORV7iWTfDjGPyjZlR9eXxXCjrUTHcUFVVFbQc9bRsUH-LKS-n-856LtDDAdEiGChaE0Fv6uKVbC-xuVHpUVpt2cQ5zE6bG7OcDhxScPqdutw-vCJxBykEY7PzVDdEHmSntr03KlELu2K40jy2Eo2aXWLeIubeFSOEiZl3AplNVYpENIuYtAaZO31usc2~SyjmT42HchVIBX6G~~GOYTpyCTiW9wkU5DKaSm3g0Eqdnoq7-z4Cif1xAQtQwyWlxjFtczdvujwZtP0mWfsaTq7RNgzs7qVa-2dcRfwo2~KI2gXMWSRFysQpCw__'
-        />
+      <View className='mb-4 flex-1'>
+        <HomeTabsComponent />
       </View>
     </ScrollView>
   )

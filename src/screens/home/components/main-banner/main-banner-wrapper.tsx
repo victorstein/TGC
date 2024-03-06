@@ -8,14 +8,14 @@ import { ColorScheme, mainStore } from '@screens/main/store/store'
 
 export interface IMainBannerWrapperProps {
   categoryName: CategoryEnum
-  loading: boolean
+  loading?: boolean
 }
 
 const { colors } = theme.extend
 
 export const MainBannerWrapper = ({
   categoryName,
-  loading
+  loading = false
 }: IMainBannerWrapperProps): JSX.Element | null => {
   const colorScheme = mainStore.use.colorScheme()
   const { latestPost, loading: internalLoading } = usePosts({
@@ -26,9 +26,9 @@ export const MainBannerWrapper = ({
     return (
       <AnimatePresence>
         <MotiView
-          className='px-4 flex flex-1'
-          from={{ opacity: 0, translateY: -10 }}
-          animate={{ opacity: 1, translateY: 0 }}
+          className='flex flex-1'
+          from={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{
             type: 'timing',
             duration: 200
