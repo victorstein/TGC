@@ -21,7 +21,12 @@ export const useApolloCachedClient = (): ApolloClient<unknown> | null => {
       const client = new ApolloClient({
         uri: Constants.GRAPHQL_ENDPOINT,
         cache,
-        defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } }
+        defaultOptions: {
+          watchQuery: {
+            fetchPolicy: 'cache-and-network',
+            nextFetchPolicy: 'cache-and-network'
+          }
+        }
       })
 
       client.onClearStore(async () => {

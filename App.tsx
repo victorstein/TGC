@@ -4,7 +4,7 @@ import { useApolloCachedClient } from './src/integrations/apollo'
 import { NavigationContainer } from '@react-navigation/native'
 import { SplashScreen } from './src/screens/splash'
 import { Main } from './src/screens/main'
-import { useMain } from './src/screens/main/hooks/useMain'
+import { useMain } from './src/screens/main/hooks/use-main'
 import {
   SafeAreaProvider,
   initialWindowMetrics

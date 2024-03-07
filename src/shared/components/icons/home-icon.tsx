@@ -1,5 +1,5 @@
 import Svg, { Path } from 'react-native-svg'
-import { type EnhancedSvgProps } from './svg.types'
+import { type EnhancedSvgProps } from './svg-types'
 
 const HomeIcon = ({
   focused = true,

@@ -1,4 +1,4 @@
-import { type TabName } from '@screens/main/home.types'
+import { type TabName } from '@screens/home/types/home-types'
 
 export interface INotificationCardProps {
   photoURL: string
