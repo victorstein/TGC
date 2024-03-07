@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeScreen } from '@screens/home'
 import { SearchScreen } from '@screens/search'
 import { PlayScreen } from '@screens/play'
 import { ApolloProvider } from '@apollo/client'
@@ -13,6 +12,7 @@ import PlayIcon from '@shared/components/icons/play-icon'
 import { TabBarButton } from './components/tabBarButton'
 import { TabBarIcon } from './components/tabBarIcon'
 import { ColorScheme, mainStore } from './store/store'
+import HomeStack from '@screens/home/navigation'
 
 const Tab = createBottomTabNavigator()
 
@@ -53,7 +53,7 @@ export const Main = (): JSX.Element => {
       >
         <Tab.Screen
           name={TabName.HOME}
-          component={HomeScreen}
+          component={HomeStack}
           options={{
             tabBarButton: TabBarButton,
             tabBarIcon: (props) => (
