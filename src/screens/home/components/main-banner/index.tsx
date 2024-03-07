@@ -5,6 +5,7 @@ import { type IMainBannerProps } from './main-banner-types'
 // types or hooks
 import { useNavigation } from '@react-navigation/native'
 import { TabName } from '@screens/home/types/home-types'
+import { MotiView } from 'moti'
 
 const MainBanner: FC<IMainBannerProps> = ({
   title,
@@ -20,7 +21,14 @@ const MainBanner: FC<IMainBannerProps> = ({
   }
 
   return (
-    <View>
+    <MotiView
+      from={{ opacity: 0 }}
+      transition={{
+        type: 'timing',
+        duration: 500
+      }}
+      animate={{ opacity: 1 }}
+    >
       <TouchableHighlight
         onPress={navigateHandler}
         activeOpacity={0.9}
@@ -50,7 +58,7 @@ const MainBanner: FC<IMainBannerProps> = ({
           </View>
         </ImageBackground>
       </TouchableHighlight>
-    </View>
+    </MotiView>
   )
 }
 

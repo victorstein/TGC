@@ -29,10 +29,6 @@ export const MainBannerWrapper = ({
           className='flex flex-1'
           from={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{
-            type: 'timing',
-            duration: 200
-          }}
           exit={{ opacity: 0 }}
         >
           <Skeleton
