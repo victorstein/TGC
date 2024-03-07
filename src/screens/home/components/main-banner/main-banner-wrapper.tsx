@@ -5,24 +5,24 @@ import { Skeleton } from '@rneui/base'
 import { AnimatePresence, MotiView } from 'moti'
 import { theme } from '@tailwind'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
+import { homeStore } from '@screens/home/store/home-store'
 
 export interface IMainBannerWrapperProps {
   categoryName: CategoryEnum
-  loading?: boolean
 }
 
 const { colors } = theme.extend
 
 export const MainBannerWrapper = ({
-  categoryName,
-  loading = false
+  categoryName
 }: IMainBannerWrapperProps): JSX.Element | null => {
   const colorScheme = mainStore.use.colorScheme()
+  const homeLoading = homeStore.use.isRefreshing()
   const { latestPost, loading: internalLoading } = usePosts({
     categoryName
   })
 
-  if (internalLoading || loading) {
+  if (internalLoading || homeLoading) {
     return (
       <AnimatePresence>
         <MotiView
