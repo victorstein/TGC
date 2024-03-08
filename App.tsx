@@ -17,6 +17,7 @@ import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { theme } from '@tailwind'
 import Toast from 'react-native-toast-message'
 import { toastConfig } from '@shared/components/toast/toast-config'
+import Constants from 'expo-constants'
 
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
 
@@ -26,10 +27,13 @@ const App = (): JSX.Element => {
   const splashLoading = splashStore.use.loading()
   const colorScheme = mainStore.use.colorScheme()
   const MainStack = createNativeStackNavigator()
+  const isConnected = mainStore.use.isConnected()
+  const statusBarHeight = Constants.statusBarHeight
 
   return (
     <SafeAreaProvider
       initialMetrics={initialWindowMetrics}
+      style={{ marginTop: statusBarHeight }}
       className='flex flex-1 bg-background dark:bg-background-dark'
     >
       <NavigationContainer>
@@ -49,9 +53,11 @@ const App = (): JSX.Element => {
       </NavigationContainer>
       <StatusBar
         backgroundColor={
-          colorScheme === ColorScheme.Dark
-            ? theme.extend.colors.background.dark
-            : theme.extend.colors.background.DEFAULT
+          isConnected === false
+            ? theme.extend.colors.primary.DEFAULT
+            : colorScheme === ColorScheme.Dark
+              ? theme.extend.colors.background.dark
+              : theme.extend.colors.background.DEFAULT
         }
         style={colorScheme === ColorScheme.Dark ? 'light' : 'dark'}
       />

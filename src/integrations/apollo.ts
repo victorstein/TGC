@@ -39,7 +39,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       text1: 'Ooops! Algo salió mal 🫠'
     })
   }
-  if (networkError !== undefined) {
+  if (
+    networkError !== undefined &&
+    !String(networkError).toLowerCase().includes('network request failed')
+  ) {
     Toast.show({
       type: 'warning',
       text1: 'No hay conexión al servidor 📡',

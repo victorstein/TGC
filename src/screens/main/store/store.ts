@@ -9,15 +9,23 @@ export enum ColorScheme {
   Dark = 'dark'
 }
 
-export interface IMainStore {
+export interface IMainStoreGetters {
   colorScheme: ColorScheme
+  isConnected: boolean
+}
+
+export interface IMainStoreSetters {
+  setIsConnected: (connected: boolean) => void
   toggleColorScheme: () => void
   setColorScheme: (colorScheme: ColorScheme) => void
   resetStore: () => void
 }
 
-const mainStoreInitialState: Pick<IMainStore, 'colorScheme'> = {
-  colorScheme: ColorScheme.Light
+export interface IMainStore extends IMainStoreGetters, IMainStoreSetters {}
+
+const mainStoreInitialState: IMainStoreGetters = {
+  colorScheme: ColorScheme.Light,
+  isConnected: true
 }
 
 export const MainStore = create<IMainStore>()(
@@ -42,6 +50,12 @@ export const MainStore = create<IMainStore>()(
       },
       resetStore: () => {
         set(mainStoreInitialState)
+      },
+      setIsConnected: (connected: boolean) => {
+        set((state) => ({
+          ...state,
+          isConnected: connected
+        }))
       }
     }),
     {
