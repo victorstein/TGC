@@ -11,12 +11,13 @@ import PlayIcon from '@shared/components/icons/play-icon'
 import { TabBarButton } from './components/tab-bar-button'
 import { TabBarIcon } from './components/tab-bar-icon'
 import { ColorScheme, mainStore } from './store/store'
-import HomeStack from '@screens/home/navigation'
+// import HomeStack from '@screens/home/navigation'
 import { TabName } from '@screens/home/types/home-types'
+import { HomeScreen } from '@screens/home'
 
 const Tab = createBottomTabNavigator()
 
-export const Main = (): JSX.Element => {
+export const MainScreen = (): JSX.Element => {
   const client = apolloStore.use.client()
   const { colors } = theme.extend
   const colorScheme = mainStore.use.colorScheme()
@@ -53,7 +54,7 @@ export const Main = (): JSX.Element => {
       >
         <Tab.Screen
           name={TabName.HOME}
-          component={HomeStack}
+          component={HomeScreen}
           options={{
             tabBarButton: TabBarButton,
             tabBarIcon: (props) => (

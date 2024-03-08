@@ -1,9 +1,17 @@
 import { type FC } from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
+import { NotificationAnimation } from './animation'
 // components
 
 const NotificationScreen: FC = () => {
-  return <Text>NOTIFICATION SCREEN</Text>
+  return (
+    <View className='relative bg-background flex-1'>
+      <NotificationAnimation />
+      <Text className='text-center font-bold text-2xl leading-[28.8px] text-text-notification-dark px-16 absolute top-96'>
+        Sin notificaciones por ahora...
+      </Text>
+    </View>
+  )
 }
 
 export default NotificationScreen

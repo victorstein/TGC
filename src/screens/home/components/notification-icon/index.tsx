@@ -30,7 +30,7 @@ const NotificationIcon: FC = () => {
   const coloScheme = mainStore.use.colorScheme()
 
   const openNotificationHandler = (): void => {
-    navigation.navigate('Notifications')
+    navigation.navigate('Notificaciones')
   }
 
   return (
