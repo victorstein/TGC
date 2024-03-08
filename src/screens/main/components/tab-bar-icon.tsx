@@ -1,4 +1,4 @@
-import { type EnhancedSvgProps } from '@shared/components/icons/svg.types'
+import { type EnhancedSvgProps } from '@shared/components/icons/svg-types'
 import { View, AnimatePresence } from 'moti'
 import { type FC } from 'react'
 import { Text } from 'react-native'

@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { createSelectors } from '../../utils/createSelectors'
+import { createSelectors } from '../../utils/create-selectors'
 import { useEffect, useState } from 'react'
 
 export enum ColorScheme {

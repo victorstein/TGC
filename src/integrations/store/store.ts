@@ -1,5 +1,5 @@
 import { type ApolloClient } from '@apollo/client'
-import { createSelectors } from '../../screens/utils/createSelectors'
+import { createSelectors } from '../../screens/utils/create-selectors'
 import { create } from 'zustand'
 
 interface IApolloStore {

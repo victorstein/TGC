@@ -4,5 +4,4 @@ export interface IMainBannerProps {
   bgImageUrl: string
   redirectId?: string
   duration?: number
-  delay?: number
 }
