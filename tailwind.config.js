@@ -37,6 +37,10 @@ module.exports = {
             visited: {
               DEFAULT: '#FFF',
               dark: '#162C36'
+            },
+            toast: {
+              error: '#94271f',
+              warning: '#d88736'
             }
           },
           border: {

@@ -27,6 +27,8 @@ const MainBanner: FC<IMainBannerProps> = ({
         type: 'timing',
         duration: 500
       }}
+      exitTransition={{ type: 'timing', duration: 200 }}
+      exit={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
       <TouchableHighlight

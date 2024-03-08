@@ -15,6 +15,8 @@ import * as NativeSplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { theme } from '@tailwind'
+import Toast from 'react-native-toast-message'
+import { toastConfig } from '@shared/components/toast/toast-config'
 
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
 
@@ -53,6 +55,7 @@ const App = (): JSX.Element => {
         }
         style={colorScheme === ColorScheme.Dark ? 'light' : 'dark'}
       />
+      <Toast config={toastConfig} visibilityTime={3000} />
     </SafeAreaProvider>
   )
 }

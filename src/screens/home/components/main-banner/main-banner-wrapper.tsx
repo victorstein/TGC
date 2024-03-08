@@ -22,12 +22,22 @@ export const MainBannerWrapper = ({
     categoryName
   })
 
-  if (internalLoading || homeLoading) {
-    return (
-      <AnimatePresence>
+  if (latestPost === undefined) {
+    return null
+  }
+
+  return (
+    <AnimatePresence exitBeforeEnter>
+      {internalLoading || homeLoading ? (
         <MotiView
+          key='skeleton'
           className='flex flex-1'
           from={{ opacity: 0 }}
+          transition={{
+            type: 'timing',
+            duration: 100
+          }}
+          exitTransition={{ type: 'timing', duration: 100 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
@@ -49,19 +59,14 @@ export const MainBannerWrapper = ({
             }}
           />
         </MotiView>
-      </AnimatePresence>
-    )
-  }
-
-  if (latestPost === undefined) {
-    return null
-  }
-
-  return (
-    <MainBanner
-      title={latestPost.title ?? ''}
-      description={latestPost.excerpt ?? ''}
-      bgImageUrl={latestPost.featuredImage?.node.mediaItemUrl ?? ''}
-    />
+      ) : (
+        <MainBanner
+          key='main-banner'
+          title={latestPost.title ?? ''}
+          description={latestPost.excerpt ?? ''}
+          bgImageUrl={latestPost.featuredImage?.node.mediaItemUrl ?? ''}
+        />
+      )}
+    </AnimatePresence>
   )
 }
