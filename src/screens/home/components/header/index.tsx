@@ -3,13 +3,19 @@ import type { FC } from 'react'
 import NotificationIcon from '../notification-icon'
 import { useColorScheme } from 'nativewind'
 import { Image } from 'expo-image'
+import { MotiView } from 'moti'
 
 const Header: FC = () => {
   const logoTGC = require('@assets/img/logo.png')
   const { toggleColorScheme } = useColorScheme()
 
   return (
-    <View className='flex flex-col w-full bg-background dark:bg-background-dark mb-5'>
+    <MotiView
+      from={{ opacity: 0, translateX: -20 }}
+      transition={{ type: 'timing', duration: 200 }}
+      animate={{ opacity: 1, translateX: 0 }}
+      className='flex flex-col w-full bg-background dark:bg-background-dark mb-5'
+    >
       <View className='pt-5 flex flex-row gap-x-6 justify-between items-center'>
         <View className='h-full flex flex-row gap-x-6 justify-start items-center'>
           <Pressable onPress={toggleColorScheme}>
@@ -26,7 +32,7 @@ const Header: FC = () => {
         </View>
         <NotificationIcon />
       </View>
-    </View>
+    </MotiView>
   )
 }
 

@@ -32,7 +32,7 @@ const App = (): JSX.Element => {
     >
       <NavigationContainer>
         <MainStack.Navigator
-          screenOptions={{ headerShown: false, animation: 'fade' }}
+          screenOptions={{ headerShown: false, animation: 'default' }}
         >
           {client === null || splashLoading ? (
             <MainStack.Screen

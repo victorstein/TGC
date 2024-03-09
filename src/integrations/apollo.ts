@@ -43,7 +43,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
   if (
     networkError !== undefined &&
-    !String(networkError).toLowerCase().includes('network request failed')
+    (!String(networkError).toLowerCase().includes('network request failed') ||
+      !String(networkError).toLowerCase().includes('timeout'))
   ) {
     notification.show({
       type: NotificationType.Warning,
