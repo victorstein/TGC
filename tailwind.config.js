@@ -37,17 +37,15 @@ module.exports = {
             visited: {
               DEFAULT: '#FFF',
               dark: '#162C36'
-            },
-            toast: {
-              error: '#94271f',
-              warning: '#d88736'
             }
           },
           border: {
             new: {
               DEFAULT: '#D83636'
             }
-          }
+          },
+          warning: '#FFA500',
+          error: '#D83636'
         },
         banner: {
           filter: {

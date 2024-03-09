@@ -1,3 +1,3 @@
 export enum Constants {
-  GRAPHQL_ENDPOINT = 'https://rubikcloud.net/graphql'
+  GRAPHQL_ENDPOINT = 'https://rubikcloud.net/graphq'
 }

@@ -5,8 +5,10 @@ import { useEffect } from 'react'
 import { Constants } from '../shared/constants'
 import { apolloStore } from './store/store'
 import { onError } from '@apollo/client/link/error'
-import Toast from 'react-native-toast-message'
 import { RetryLink } from '@apollo/client/link/retry'
+import notification from '@shared/components/notification/hooks/notification'
+import { NotificationType } from '@shared/components/notification/store/notification-store'
+import ApolloLinkTimeout from 'apollo-link-timeout'
 
 const cache = new InMemoryCache()
 
@@ -19,7 +21,7 @@ const retryLink = new RetryLink({
   attempts: {
     max: 5,
     retryIf: (error, _operation) => {
-      if (String(error.message).includes('failed to fetch')) {
+      if (String(error.message).includes('network request failed')) {
         return true
       }
       return false
@@ -34,19 +36,18 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         `[GraphQL error]: Message: ${message}, Location: ${String(locations)}, Path: ${String(path)}`
       )
     }
-    Toast.show({
-      type: 'error',
-      text1: 'Ooops! Algo salió mal 🫠'
+    notification.show({
+      type: NotificationType.Error,
+      message: 'Ooops! Algo salió mal 🫠'
     })
   }
   if (
     networkError !== undefined &&
     !String(networkError).toLowerCase().includes('network request failed')
   ) {
-    Toast.show({
-      type: 'warning',
-      text1: 'No hay conexión al servidor 📡',
-      swipeable: true
+    notification.show({
+      type: NotificationType.Warning,
+      message: 'No hay conexión al servidor 📡'
     })
     console.log(`[Network error]: ${String(networkError)}`)
   }
@@ -55,6 +56,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const httpLink = new HttpLink({
   uri: Constants.GRAPHQL_ENDPOINT
 })
+
+const timeoutLink = new ApolloLinkTimeout(10000)
+const timeoutHttpLink = timeoutLink.concat(httpLink)
 
 const persistLayer = new CachePersistor({
   cache,
@@ -69,7 +73,7 @@ export const useApolloCachedClient = (): ApolloClient<unknown> | null => {
     const init = async (): Promise<void> => {
       await persistLayer.restore()
       const client = new ApolloClient({
-        link: from([errorLink, retryLink, httpLink]),
+        link: from([errorLink, retryLink, timeoutHttpLink]),
         cache,
         defaultOptions: {
           watchQuery: {

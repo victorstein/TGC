@@ -9,7 +9,8 @@ import { ColorScheme, mainStore } from './store/store'
 import { TabName } from '@screens/home/types/home-types'
 import { CustomTabBar } from './components/custom-tab-bar'
 import { View } from 'react-native'
-import { NetworkNotification } from '@shared/components/network-notification/network-notification'
+import { Notification } from '@shared/components/notification/notification'
+import { useNetwork } from '@shared/hooks/use-network'
 
 const Tab = createBottomTabNavigator()
 
@@ -17,10 +18,11 @@ export const Main = (): JSX.Element => {
   const client = apolloStore.use.client()
   const { colors } = theme.extend
   const colorScheme = mainStore.use.colorScheme()
+  useNetwork()
 
   return (
     <View className='flex flex-col flex-1 bg-background dark:bg-background-dark'>
-      <NetworkNotification />
+      <Notification />
       <View className='flex-1'>
         {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unnecessary-type-assertion */}
         <ApolloProvider client={client!}>

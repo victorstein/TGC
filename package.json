@@ -24,6 +24,7 @@
     "@react-navigation/native-stack": "^6.9.18",
     "@rneui/base": "^4.0.0-rc.8",
     "@rneui/themed": "^4.0.0-rc.8",
+    "apollo-link-timeout": "^4.0.0",
     "apollo3-cache-persist": "^0.14.1",
     "expo": "~50.0.11",
     "expo-constants": "~15.4.5",
@@ -44,7 +45,6 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg": "14.1.0",
     "react-native-tab-view": "^3.5.2",
-    "react-native-toast-message": "^2.2.0",
     "react-native-vector-icons": "^10.0.3",
     "zustand": "^4.5.0"
   },
