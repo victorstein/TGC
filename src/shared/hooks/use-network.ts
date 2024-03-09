@@ -12,16 +12,16 @@ export const useNetwork = (): INetwork => {
 
   useEffect(() => {
     const unSubscribe = NetInfo.addEventListener((state) => {
-      if (state.isConnected) {
-        notification.hide()
-      }
-
-      if (!state.isConnected || state.isConnected === null) {
+      if (state.isConnected === null || !state.isConnected) {
         notification.show({
           message: 'Sin Conexión',
           type: NotificationType.Error,
           autoClose: false
         })
+      }
+
+      if (state.isConnected !== null && state.isConnected) {
+        notification.hide()
       }
       setIsConnected(state.isConnected ?? false)
     })
