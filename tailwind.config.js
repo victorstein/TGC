@@ -43,7 +43,9 @@ module.exports = {
             new: {
               DEFAULT: '#D83636'
             }
-          }
+          },
+          warning: '#FFA500',
+          error: '#D83636'
         },
         banner: {
           filter: {
