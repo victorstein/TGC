@@ -1,8 +1,9 @@
-import { View, Image, TouchableHighlight, Text } from 'react-native'
+import { View, TouchableHighlight, Text } from 'react-native'
 import type { FC } from 'react'
-import { type INotificationCardProps } from './notification-card.types'
+import { type INotificationCardProps } from './notification-card-types'
 import { useNavigation } from '@react-navigation/native'
 import { MotiView } from 'moti'
+import { Image } from 'expo-image'
 
 const NotificationCard: FC<INotificationCardProps> = ({
   photoURL,
@@ -42,7 +43,8 @@ const NotificationCard: FC<INotificationCardProps> = ({
             <View className='w-1/4'>
               <Image
                 className='w-[70px] h-[70px] rounded-2xl'
-                resizeMode='cover'
+                contentFit='cover'
+                cachePolicy='memory-disk'
                 source={{ uri: photoURL }}
               />
             </View>

@@ -1,3 +1,9 @@
+export enum CategoryEnum {
+  CODE = 'code',
+  TECH = 'tech',
+  GAMING = 'gaming'
+}
+
 export enum TabName {
   HOME = 'Inicio',
   SEARCH = 'Buscar',

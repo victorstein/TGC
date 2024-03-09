@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 // components
 import { View, Text, ImageBackground, TouchableHighlight } from 'react-native'
-import { type IMainBannerProps } from './main-banner.types'
+import { type IMainBannerProps } from './main-banner-types'
 // types or hooks
-import { TabName } from '@screens/main/home.types'
 import { useNavigation } from '@react-navigation/native'
+import { TabName } from '@screens/home/types/home-types'
 import { MotiView } from 'moti'
 
 const MainBanner: FC<IMainBannerProps> = ({
@@ -12,8 +12,7 @@ const MainBanner: FC<IMainBannerProps> = ({
   description,
   bgImageUrl,
   redirectId,
-  duration,
-  delay = 0
+  duration
 }) => {
   const navigation = useNavigation()
 
@@ -23,33 +22,41 @@ const MainBanner: FC<IMainBannerProps> = ({
 
   return (
     <MotiView
-      from={{ opacity: 0, translateY: -10 }}
-      animate={{ opacity: 1, translateY: 0 }}
+      from={{ opacity: 0 }}
       transition={{
         type: 'timing',
-        duration: 400,
-        delay
+        duration: 500
       }}
+      exitTransition={{ type: 'timing', duration: 200 }}
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
     >
       <TouchableHighlight
         onPress={navigateHandler}
-        activeOpacity={0.4}
+        activeOpacity={0.9}
         underlayColor='transparent'
       >
         <ImageBackground
           source={{ uri: bgImageUrl }}
           borderRadius={16}
           imageStyle={{ borderRadius: 16 }}
-          className='mx-2 my-4'
         >
           <View className='p-5 bg-banner-filter/75 rounded-2xl'>
-            <Text className='text-base leading-6 font-bold text-banner-text mb-2'>
+            <Text
+              className='text-base leading-6 font-bold text-banner-text mb-2'
+              numberOfLines={2}
+            >
               {title}
             </Text>
-            <Text className='text-xs leading-5 font-normal text-banner-text'>
+            <Text
+              className='text-xs leading-5 font-normal text-banner-text'
+              numberOfLines={3}
+            >
               {description}
             </Text>
-            <Text className='text-xs leading-3 font-normal text-banner-text/50 mt-4'>{`Duration: ${duration} Mins`}</Text>
+            {duration !== undefined && (
+              <Text className='text-xs leading-3 font-normal text-banner-text/50 mt-4'>{`Duration: ${duration} Mins`}</Text>
+            )}
           </View>
         </ImageBackground>
       </TouchableHighlight>

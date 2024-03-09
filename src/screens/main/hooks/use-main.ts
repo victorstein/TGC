@@ -5,7 +5,7 @@ import {
   useMainStoreHydration
 } from '../store/store'
 import { useEffect } from 'react'
-import { usePrevious } from '../../utils/usePrevious'
+import { usePrevious } from '../../utils/use-previous'
 
 export const useMain = (): null => {
   const setScheme = mainStore.use.setColorScheme()

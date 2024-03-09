@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { createSelectors } from '../../utils/createSelectors'
+import { createSelectors } from '../../utils/create-selectors'
 import { useEffect, useState } from 'react'
 
 export enum ColorScheme {
@@ -9,14 +9,19 @@ export enum ColorScheme {
   Dark = 'dark'
 }
 
-export interface IMainStore {
+export interface IMainStoreGetters {
   colorScheme: ColorScheme
+}
+
+export interface IMainStoreSetters {
   toggleColorScheme: () => void
   setColorScheme: (colorScheme: ColorScheme) => void
   resetStore: () => void
 }
 
-const mainStoreInitialState: Pick<IMainStore, 'colorScheme'> = {
+export interface IMainStore extends IMainStoreGetters, IMainStoreSetters {}
+
+const mainStoreInitialState: IMainStoreGetters = {
   colorScheme: ColorScheme.Light
 }
 

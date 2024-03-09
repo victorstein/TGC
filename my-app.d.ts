@@ -1,6 +1,6 @@
 /// <reference types="nativewind/types" />
 
-import { type NavigatorOverride } from '@screens/main/home.types'
+import { type NavigatorOverride } from '@screens/home/types/home-types'
 
 declare global {
   namespace ReactNavigation {

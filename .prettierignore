@@ -1,0 +1,3 @@
+*.generated.tsx
+src/integrations/graphql/*
+src/types/schema.ts
