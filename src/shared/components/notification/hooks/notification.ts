@@ -1,6 +1,6 @@
 import {
   NotificationType,
-  notificationStore
+  notificationStore as store
 } from '../store/notification-store'
 import { theme } from '@tailwind'
 
@@ -15,24 +15,35 @@ export interface INotificationShowOptions {
 
 class Notification {
   private readonly defaultTime = 4000
-  private readonly store = notificationStore.getState()
-
+  private notificationStore = store.getState()
   private timer: NodeJS.Timeout | undefined
+  private static instance: Notification
+
+  public getInstance(): Notification {
+    if (Notification.instance === undefined) {
+      Notification.instance = new Notification()
+    }
+
+    return Notification.instance
+  }
 
   public show(options: INotificationShowOptions): void {
-    if (this.store.open) {
+    // refresh the store
+    this.notificationStore = store.getState()
+    const { message, type, autoClose = true, timeout } = options
+
+    if (this.notificationStore.open && autoClose) {
       return
     }
 
-    const { message, type, autoClose = true, timeout } = options
-
-    this.store.setNotification(true, message, type)
+    this.notificationStore.setNotification(true, message, type)
     if (!autoClose) {
+      clearTimeout(this.timer)
       return
     }
 
     this.timer = setTimeout(() => {
-      this.store.setOpen(false)
+      this.notificationStore.setOpen(false)
     }, timeout ?? this.defaultTime)
   }
 
@@ -40,12 +51,12 @@ class Notification {
     if (this.timer !== undefined) {
       clearTimeout(this.timer)
     }
-    this.store.setOpen(false)
+    this.notificationStore.setOpen(false)
   }
 
   public updateNotification(message: string, type: NotificationType): void {
-    this.store.setMessage(message)
-    this.store.setNotificationType(type)
+    this.notificationStore.setMessage(message)
+    this.notificationStore.setNotificationType(type)
   }
 
   public getColorBasedOnNotificationType(type: NotificationType): string {
@@ -58,4 +69,4 @@ class Notification {
   }
 }
 
-export default new Notification()
+export default new Notification().getInstance()
