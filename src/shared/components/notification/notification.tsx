@@ -18,8 +18,6 @@ export const Notification = (): JSX.Element => {
     [type]
   )
 
-  console.log('backgroundColor', useColorBasedOnBg(backgroundColor))
-
   return (
     <MotiView
       animate={{
