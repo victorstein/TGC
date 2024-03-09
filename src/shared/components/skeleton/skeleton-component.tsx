@@ -15,6 +15,7 @@ export const SkeletonComponent = (
   return (
     <Skeleton
       animation='pulse'
+      {...props}
       skeletonStyle={{
         backgroundColor:
           colorScheme === ColorScheme.Dark
@@ -31,7 +32,6 @@ export const SkeletonComponent = (
             : colors.background.search,
         ...(props.style as ViewStyle)
       }}
-      {...props}
     />
   )
 }
