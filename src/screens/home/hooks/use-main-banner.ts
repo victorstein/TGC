@@ -1,32 +1,27 @@
-import { type GetPosts } from '@integrations/graphql/operations'
+import { type GetMainBanner } from '@integrations/graphql/operations'
 import type { ApolloQueryResult } from '@apollo/client'
-import { useGetPosts } from '../graphql/home.queries.generated'
+import { useGetMainBanner } from '../graphql/home.queries.generated'
 import { htmlStripper } from '@shared/utils/html-stripper'
 import { type CategoryEnum } from '../types/home-types'
 import { OrderEnum, PostObjectsConnectionOrderbyEnum } from '@appTypes/schema'
-import { combineHTMLBlocks } from '@shared/utils/combine-html-blocks'
 
-type Post = NonNullable<GetPosts['posts']>['nodes'][number] & {
-  stringifiedBlocks: string
-  stringifiedHTMLBlocks: string
-}
+type Post = NonNullable<GetMainBanner['posts']>['nodes'][number]
 
 export interface IUseHomeOutput {
-  posts: Post[]
   error?: Error
   loading: boolean
   latestPost?: Post[][0]
-  refetch: () => Promise<ApolloQueryResult<GetPosts>>
+  refetch: () => Promise<ApolloQueryResult<GetMainBanner>>
 }
 
 export interface IUseHomeInput {
   categoryName?: CategoryEnum
 }
 
-export const usePosts = ({
+export const useMainBanner = ({
   categoryName
 }: IUseHomeInput = {}): IUseHomeOutput => {
-  const { loading, error, data, refetch } = useGetPosts({
+  const { loading, error, data, refetch } = useGetMainBanner({
     variables: {
       input: {
         categoryName,
@@ -46,14 +41,11 @@ export const usePosts = ({
   const posts = unParsed.map((item) => {
     return {
       ...item,
-      excerpt: htmlStripper(item.excerpt ?? ''),
-      stringifiedBlocks: htmlStripper(combineHTMLBlocks(item.blocks ?? [])),
-      stringifiedHTMLBlocks: combineHTMLBlocks(item.blocks ?? [])
+      excerpt: htmlStripper(String(item.excerpt) ?? '')
     }
   })
 
   return {
-    posts,
     latestPost: posts[0],
     error,
     loading,

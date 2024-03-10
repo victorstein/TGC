@@ -1,4 +1,4 @@
-import { usePosts } from '@screens/home/hooks/use-posts'
+import { useMainBanner } from '@screens/home/hooks/use-main-banner'
 import { type CategoryEnum } from '@screens/home/types/home-types'
 import MainBanner from '.'
 import { homeStore } from '@screens/home/store/home-store'
@@ -13,7 +13,7 @@ export const MainBannerWrapper = ({
   categoryName
 }: IMainBannerWrapperProps): JSX.Element | null => {
   const homeLoading = homeStore.use.isRefreshing()
-  const { latestPost, loading: internalLoading } = usePosts({
+  const { latestPost, loading: internalLoading } = useMainBanner({
     categoryName
   })
 

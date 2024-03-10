@@ -1,10 +1,6 @@
-import { type GetPosts } from '@integrations/graphql/operations'
+import { type BlockFragment } from '@integrations/graphql/operations'
 
-export const combineHTMLBlocks = (
-  htmlBlocks: NonNullable<
-    NonNullable<GetPosts['posts']>['nodes'][number]['blocks']
-  >
-): string => {
+export const combineHTMLBlocks = (htmlBlocks: BlockFragment[]): string => {
   const parsed = htmlBlocks.map((block): string => {
     if (
       'attributes' in block &&
