@@ -27,6 +27,7 @@ module.exports = {
         'react-native/no-color-literals': 0,
         'react-native/sort-styles': 0,
         'react-hooks/exhaustive-deps': 'error',
+        'react/prop-types': 0,
         'check-file/filename-naming-convention': [
           'error',
           {
