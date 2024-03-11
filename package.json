@@ -4,7 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "postinstall": "patch-package",
-    "start": "yarn graphql:codegen && expo start",
+    "fetch-possible-types": "ts-node src/integrations/possible-types-fetcher.ts",
+    "start": "yarn graphql:codegen && yarn fetch-possible-types && expo start",
     "android": "expo start --android",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx",
@@ -41,6 +42,7 @@
     "react-native-gesture-handler": "2.14.0",
     "react-native-pager-view": "^7.0.0-rc.1",
     "react-native-reanimated": "~3.6.2",
+    "react-native-render-html": "^6.3.4",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
     "react-native-svg": "14.1.0",
@@ -60,6 +62,7 @@
     "@types/react": "~18.2.45",
     "@types/react-native-vector-icons": "^6.4.18",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "cross-fetch": "^4.0.0",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-check-file": "^2.7.1",
@@ -73,6 +76,7 @@
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^3.2.4",
     "tailwindcss": "3.3.2",
+    "ts-node": "^10.9.2",
     "typescript": "5.3.3"
   },
   "private": true
