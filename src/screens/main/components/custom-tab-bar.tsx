@@ -6,8 +6,8 @@ import SearchIcon from '@shared/components/icons/search-icon'
 import PlayIcon from '@shared/components/icons/play-icon'
 import { mainStore } from '../store/store'
 import { theme } from '@tailwind'
-import { TabName } from '@screens/home/types/home-types'
 import { MotiView } from 'moti'
+import { NavigationRoutes } from '@screens/home/types/home-types'
 
 const { colors } = theme.extend
 
@@ -22,7 +22,7 @@ export const CustomTabBar = ({
     <View className='flex flex-row h-[70px] justify-center px-[10vw] bg-background dark:bg-background-dark'>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key]
-        const label = (options.title ?? route.name) as TabName
+        const label = options.title ?? route.name
 
         const isFocused = state.index === index
         const {
@@ -73,21 +73,21 @@ export const CustomTabBar = ({
                   transition={{ type: 'timing', duration: 200 }}
                 >
                   <View className='flex max-h-6 mr-2'>
-                    {label === TabName.HOME ? (
+                    {label === NavigationRoutes.HOME ? (
                       <HomeIcon
                         size={24}
                         focused={isFocused}
                         activeTintColor={tabBarActiveTintColor}
                         inactiveTintColor={tabBarInactiveTintColor}
                       />
-                    ) : label === TabName.SEARCH ? (
+                    ) : label === NavigationRoutes.SEARCH ? (
                       <SearchIcon
                         size={24}
                         focused={isFocused}
                         activeTintColor={tabBarActiveTintColor}
                         inactiveTintColor={tabBarInactiveTintColor}
                       />
-                    ) : label === TabName.PLAY ? (
+                    ) : label === NavigationRoutes.PLAY ? (
                       <PlayIcon
                         size={24}
                         focused={isFocused}

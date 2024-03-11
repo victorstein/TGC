@@ -1,10 +1,10 @@
-import { type TabName } from '@screens/home/types/home-types'
+import { type NavigationRoutesNames } from '@screens/home/types/home-types'
 
 export interface INotificationCardProps {
   photoURL: string
   title: string
   date: string
-  redirect: TabName
+  redirect: NavigationRoutesNames
   isRead?: boolean
   delay?: number
 }
