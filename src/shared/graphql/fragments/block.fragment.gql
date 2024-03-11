@@ -1,0 +1,38 @@
+fragment BlockFragment on Block {
+  name
+  ... on CoreAudioBlock {
+    attributes {
+      ... on CoreAudioBlockAttributes {
+        src
+        caption
+      }
+    }
+  }
+  ... on CoreHeadingBlock {
+    attributes {
+      ... on CoreHeadingBlockAttributes {
+        content
+      }
+    }
+  }
+  ... on CoreListBlock {
+    innerBlocks {
+      originalContent
+    }
+  }
+  ... on CoreImageBlock {
+    attributes {
+      ... on CoreImageBlockAttributes {
+        url
+      }
+    }
+  }
+  ... on CoreParagraphBlock {
+    attributes {
+      ... on CoreParagraphBlockAttributes {
+        content
+        anchor
+      }
+    }
+  }
+}
