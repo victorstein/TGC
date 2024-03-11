@@ -9,7 +9,10 @@ export const combineHTMLBlocks = (htmlBlocks: BlockFragment[]): string => {
     ) {
       if ('content' in block.attributes) {
         if (block.name === 'core/paragraph') {
-          return `<p>${String(block.attributes?.content)}</p>` ?? ''
+          return (
+            `<p style="font-family:'lato-regular'">${String(block.attributes?.content)}</p>` ??
+            ''
+          )
         }
 
         if (block.name === 'core/heading') {
