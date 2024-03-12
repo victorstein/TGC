@@ -21,9 +21,9 @@ export const LoadingWrapper: FC<ILoadingWrapperProps> = ({
           from={{ opacity: 0 }}
           transition={{
             type: 'timing',
-            duration: 100
+            duration: 500
           }}
-          exitTransition={{ type: 'timing', duration: 100 }}
+          exitTransition={{ type: 'timing', duration: 500 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
@@ -37,7 +37,7 @@ export const LoadingWrapper: FC<ILoadingWrapperProps> = ({
             type: 'timing',
             duration: 500
           }}
-          exitTransition={{ type: 'timing', duration: 200 }}
+          exitTransition={{ type: 'timing', duration: 500 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
