@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react'
 
 export interface ILoadingWrapperProps {
   loading: boolean
-  skeleton: ReactNode
+  skeleton?: ReactNode
   children: ReactNode
 }
 

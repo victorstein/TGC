@@ -8,24 +8,15 @@ export interface itemCardCarouselProps {
   title: string
   urlImg: string | any
   subTitle: string
-  disable?: boolean
-  goToView: string
+  postId: string
 }
 
 const ItemCardCarousel: FC<itemCardCarouselProps> = (props) => {
-  const {
-    subTitle,
-    title,
-    urlImg,
-    disable = false,
-    goToView = TabName.HOME
-  } = props
+  const { subTitle, title, urlImg } = props
   const navigation = useNavigation()
 
   const navigateHandler = (): void => {
-    if (!disable) {
-      navigation.navigate(goToView)
-    }
+    navigation.navigate(TabName.SEARCH)
   }
 
   return (
@@ -34,9 +25,7 @@ const ItemCardCarousel: FC<itemCardCarouselProps> = (props) => {
       activeOpacity={0.9}
       underlayColor='transparent'
     >
-      <View
-        className={`flex flex-row justify-center px-[19px] items-center border border-solid h-[90px] w-full max-w-[73vw] rounded-xl border-separator dark:border-separator-dark mr-[10px] ${disable ? 'opacity-50' : ''}`}
-      >
+      <View className='flex flex-row justify-center px-[19px] items-center border border-solid h-[90px] w-full max-w-[73vw] rounded-xl border-separator dark:border-separator-dark mr-[10px]'>
         <Image
           className='w-[52px] h-[56px] mr-[16px]'
           source={urlImg}
@@ -49,7 +38,10 @@ const ItemCardCarousel: FC<itemCardCarouselProps> = (props) => {
           >
             {title}
           </Text>
-          <Text className='text-xs text-text/80 dark:text-text-dark/80'>
+          <Text
+            numberOfLines={1}
+            className='text-xs text-text/80 dark:text-text-dark/80'
+          >
             {subTitle}
           </Text>
         </View>

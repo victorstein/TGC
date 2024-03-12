@@ -7,6 +7,7 @@ import { SkeletonComponent } from '@shared/components/skeleton/skeleton-componen
 import { Icon } from '@rneui/themed'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { theme } from '@tailwind'
+import { LoadingWrapper } from '../loading-wrapper/loading-wrapper'
 
 interface simpleCarouselProps {
   data?: itemCardCarouselProps[]
@@ -44,35 +45,36 @@ const SimpleCarousel: FC<simpleCarouselProps> = (props) => {
     )
   }
 
-  if (isLoading) {
-    return (
-      <View className='w-full flex flex-row'>
-        <SkeletonComponent width={275} height={90} />
-        <View className='px-[10px]' />
-        <SkeletonComponent width={275} height={90} />
-      </View>
-    )
-  }
-
   return (
-    <>
-      <ScrollView
-        className='w-full flex flex-row'
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        pagingEnabled
-        decelerationRate={0}
-        snapToAlignment='center'
-        contentInset={{
-          top: 0,
-          bottom: 0
-        }}
+    <ScrollView
+      className='w-full flex flex-row'
+      showsHorizontalScrollIndicator={false}
+      horizontal
+      pagingEnabled
+      decelerationRate={0}
+      snapToAlignment='center'
+      contentInset={{
+        top: 0,
+        bottom: 0
+      }}
+    >
+      <LoadingWrapper
+        skeleton={
+          <View className='w-full flex flex-row'>
+            <SkeletonComponent width={275} height={90} />
+            <View className='px-[10px]' />
+            <SkeletonComponent width={275} height={90} />
+          </View>
+        }
+        loading={isLoading}
       >
-        {data.map((value, key) => (
-          <ItemCardCarousel {...value} key={key} />
-        ))}
-      </ScrollView>
-    </>
+        <>
+          {data.map((value, key) => (
+            <ItemCardCarousel {...value} key={key} />
+          ))}
+        </>
+      </LoadingWrapper>
+    </ScrollView>
   )
 }
 
