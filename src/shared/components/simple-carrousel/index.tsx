@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, View, useWindowDimensions } from 'react-native'
 import ItemCardCarousel, {
   type itemCardCarouselProps
 } from './item-card-carousel'
@@ -19,6 +19,7 @@ const SimpleCarousel: FC<simpleCarouselProps> = (props) => {
   const coloScheme = mainStore.use.colorScheme()
   const { colors } = theme.extend
   const { data = [], isLoading = false, isError = false } = props
+  const { width } = useWindowDimensions()
 
   if (isError) {
     return (
@@ -49,9 +50,9 @@ const SimpleCarousel: FC<simpleCarouselProps> = (props) => {
     <LoadingWrapper
       skeleton={
         <View className='w-full flex flex-row'>
-          <SkeletonComponent width={275} height={90} />
+          <SkeletonComponent width={width * 0.75} height={90} />
           <View className='px-[10px]' />
-          <SkeletonComponent width={275} height={90} />
+          <SkeletonComponent width={width * 0.75} height={90} />
         </View>
       }
       loading={isLoading}
