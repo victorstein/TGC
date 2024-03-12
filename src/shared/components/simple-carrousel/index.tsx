@@ -46,33 +46,33 @@ const SimpleCarousel: FC<simpleCarouselProps> = (props) => {
   }
 
   return (
-    <ScrollView
-      className='w-full flex flex-row'
-      showsHorizontalScrollIndicator={false}
-      horizontal
-      pagingEnabled
-      decelerationRate={0}
-      snapToAlignment='center'
-      contentInset={{
-        top: 0,
-        bottom: 0
-      }}
+    <LoadingWrapper
+      skeleton={
+        <View className='w-full flex flex-row'>
+          <SkeletonComponent width={275} height={90} />
+          <View className='px-[10px]' />
+          <SkeletonComponent width={275} height={90} />
+        </View>
+      }
+      loading={isLoading}
     >
-      <LoadingWrapper
-        skeleton={
-          <View className='w-full flex flex-row'>
-            <SkeletonComponent width={275} height={90} />
-            <View className='px-[10px]' />
-            <SkeletonComponent width={275} height={90} />
-          </View>
-        }
-        loading={isLoading}
+      <ScrollView
+        className='w-full flex flex-row'
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        pagingEnabled
+        decelerationRate={0}
+        snapToAlignment='center'
+        contentInset={{
+          top: 0,
+          bottom: 0
+        }}
       >
         {data.map((value, key) => (
           <ItemCardCarousel {...value} key={key} />
         ))}
-      </LoadingWrapper>
-    </ScrollView>
+      </ScrollView>
+    </LoadingWrapper>
   )
 }
 
