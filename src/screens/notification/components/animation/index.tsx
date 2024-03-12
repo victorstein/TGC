@@ -1,12 +1,10 @@
 import LottieView from 'lottie-react-native'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { View } from 'react-native'
-import { useRef } from 'react'
 // import { MotiView } from 'moti'
 
 export const NotificationAnimation = (): JSX.Element => {
   const colorScheme = mainStore.use.colorScheme()
-  const animation = useRef<LottieView>(null)
 
   return (
     <View className='flex-1 items-center pt-16'>
@@ -18,19 +16,17 @@ export const NotificationAnimation = (): JSX.Element => {
             height: 351
           }}
           hardwareAccelerationAndroid
-          ref={animation}
-          source={require('../../../assets/animations/notification.json')}
+          source={require('@assets/animations/notification.json')}
         />
       ) : (
         <LottieView
           autoPlay
           style={{
-            width: 450,
+            width: 490,
             height: 351
           }}
           hardwareAccelerationAndroid
-          ref={animation}
-          source={require('../../../assets/animations/notification-dark.json')}
+          source={require('@assets/animations/notification-dark.json')}
         />
       )}
     </View>
