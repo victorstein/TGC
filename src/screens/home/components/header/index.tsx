@@ -10,17 +10,13 @@ const Header: FC = () => {
   const { toggleColorScheme } = useColorScheme()
 
   return (
-<<<<<<< HEAD
-    <View className='flex flex-col w-full bg-background dark:bg-background-dark mb-5'>
-=======
     <MotiView
       from={{ opacity: 0, translateX: -20 }}
       transition={{ type: 'timing', duration: 200 }}
       animate={{ opacity: 1, translateX: 0 }}
       className='flex flex-col w-full bg-background dark:bg-background-dark mb-5'
     >
->>>>>>> 81f1d73b161eba31a84d1f479bf73b113dfc083b
-      <View className='pt-5 flex flex-row gap-x-6 justify-between items-center'>
+      <View className='flex flex-row gap-x-6 justify-between items-center'>
         <View className='h-full flex flex-row gap-x-6 justify-start items-center'>
           <Pressable onPress={toggleColorScheme}>
             <Image
