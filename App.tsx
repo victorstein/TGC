@@ -12,15 +12,12 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { splashStore } from './src/screens/splash/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
-import { StatusBar } from 'expo-status-bar'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { theme } from '@tailwind'
-// import MainStack from '@screens/main/navigation'
-// import NotificationScreen from '@screens/notification'
-import MainStack from '@screens/main/navigation'
 import NotificationScreen from '@screens/notification'
-import { HomeScreen } from '@screens/home'
 import { MainScreen } from '@screens/main'
+import Constants from 'expo-constants'
+import { CustomStatusBar } from '@shared/status-bar/status-bar'
 
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
 
@@ -30,15 +27,17 @@ const App = (): JSX.Element => {
   const splashLoading = splashStore.use.loading()
   const colorScheme = mainStore.use.colorScheme()
   const RootStack = createNativeStackNavigator()
+  const statusBarHeight = Constants.statusBarHeight
 
   return (
     <SafeAreaProvider
       initialMetrics={initialWindowMetrics}
+      style={{ marginTop: statusBarHeight }}
       className='flex flex-1 bg-background dark:bg-background-dark'
     >
       <NavigationContainer>
         <RootStack.Navigator
-          screenOptions={{ headerShown: false, animation: 'fade' }}
+          screenOptions={{ headerShown: false, animation: 'default' }}
         >
           {client === null || splashLoading ? (
             <RootStack.Screen
@@ -59,22 +58,15 @@ const App = (): JSX.Element => {
                 options={{
                   headerShown: true,
                   headerShadowVisible: false,
-                  headerTitleStyle: { fontSize: 24, fontWeight: '700' }
+                  headerTitleStyle: { fontSize: 24, fontWeight: '700' },
+                  headerStyle: { backgroundColor: 'red' }
                 }}
               />
             </RootStack.Group>
           )}
         </RootStack.Navigator>
       </NavigationContainer>
-      <StatusBar
-        // backgroundColor='pink'
-        backgroundColor={
-          colorScheme === ColorScheme.Dark
-            ? theme.extend.colors.background.dark
-            : theme.extend.colors.background.DEFAULT
-        }
-        style={colorScheme === ColorScheme.Dark ? 'light' : 'dark'}
-      />
+      <CustomStatusBar />
     </SafeAreaProvider>
   )
 }

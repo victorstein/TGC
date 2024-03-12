@@ -9,14 +9,19 @@ export enum ColorScheme {
   Dark = 'dark'
 }
 
-export interface IMainStore {
+export interface IMainStoreGetters {
   colorScheme: ColorScheme
+}
+
+export interface IMainStoreSetters {
   toggleColorScheme: () => void
   setColorScheme: (colorScheme: ColorScheme) => void
   resetStore: () => void
 }
 
-const mainStoreInitialState: Pick<IMainStore, 'colorScheme'> = {
+export interface IMainStore extends IMainStoreGetters, IMainStoreSetters {}
+
+const mainStoreInitialState: IMainStoreGetters = {
   colorScheme: ColorScheme.Light
 }
 

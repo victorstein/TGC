@@ -42,7 +42,7 @@ export const HomeTabsComponent: FC = () => {
         },
         tabBarLabel: ({ focused, children }) => (
           <Text
-            className={`text-sm ${focused ? 'font-lato-bold text-[13.4px]' : 'font-lato-regular'} text-text dark:text-text-dark self-center`}
+            className={`text-sm ${focused ? 'font-lato-bold text-[13px]' : 'font-lato-regular'} text-text dark:text-text-dark self-center`}
           >
             {children}
           </Text>
