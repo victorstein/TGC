@@ -20,16 +20,18 @@ export const MainBannerWrapper = ({
   return (
     <LoadingWrapper
       loading={homeLoading || internalLoading}
-      skeleton={<SkeletonComponent height={160} />}
+      skeleton={<SkeletonComponent height={132} />}
     >
-      {latestPost !== undefined && (
-        <MainBanner
-          key='main-banner'
-          title={latestPost?.title ?? ''}
-          description={latestPost?.excerpt ?? ''}
-          bgImageUrl={latestPost?.featuredImage?.node.mediaItemUrl ?? ''}
-        />
-      )}
+      <>
+        {latestPost !== undefined && (
+          <MainBanner
+            key='main-banner'
+            title={latestPost?.title ?? ''}
+            description={latestPost?.excerpt ?? ''}
+            bgImageUrl={latestPost?.featuredImage?.node.mediaItemUrl ?? ''}
+          />
+        )}
+      </>
     </LoadingWrapper>
   )
 }
