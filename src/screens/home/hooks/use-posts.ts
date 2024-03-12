@@ -4,12 +4,8 @@ import { useGetPosts } from '../graphql/home.queries.generated'
 import { htmlStripper } from '@shared/utils/html-stripper'
 import { type CategoryEnum } from '../types/home-types'
 import { OrderEnum, PostObjectsConnectionOrderbyEnum } from '@appTypes/schema'
-import { combineHTMLBlocks } from '@shared/utils/combine-html-blocks'
 
-type Post = NonNullable<GetPosts['posts']>['nodes'][number] & {
-  stringifiedBlocks: string
-  stringifiedHTMLBlocks: string
-}
+type Post = NonNullable<GetPosts['posts']>['nodes'][number]
 
 export interface IUseHomeOutput {
   posts: Post[]
@@ -21,10 +17,12 @@ export interface IUseHomeOutput {
 
 export interface IUseHomeInput {
   categoryName?: CategoryEnum
+  first?: number
 }
 
 export const usePosts = ({
-  categoryName
+  categoryName,
+  first = 1
 }: IUseHomeInput = {}): IUseHomeOutput => {
   const { loading, error, data, refetch } = useGetPosts({
     variables: {
@@ -37,24 +35,22 @@ export const usePosts = ({
           }
         ]
       },
-      first: 1
+      first
     }
   })
 
   const unParsed = data?.posts?.nodes ?? []
 
-  const posts = unParsed.map((item) => {
+  const [latestPost, ...posts] = unParsed.map((item) => {
     return {
       ...item,
-      excerpt: htmlStripper(item.excerpt ?? ''),
-      stringifiedBlocks: htmlStripper(combineHTMLBlocks(item.blocks ?? [])),
-      stringifiedHTMLBlocks: combineHTMLBlocks(item.blocks ?? [])
+      excerpt: htmlStripper(item.excerpt ?? '')
     }
   })
 
   return {
     posts,
-    latestPost: posts[0],
+    latestPost,
     error,
     loading,
     refetch
