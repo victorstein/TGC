@@ -12,7 +12,6 @@ import { usePosts } from '@screens/home/hooks/use-posts'
 import { homeStore } from '@screens/home/store/home-store'
 import { LoadingWrapper } from '@shared/components/loading-wrapper/loading-wrapper'
 import { SkeletonComponent } from '@shared/components/skeleton/skeleton-component'
-import { MotiView } from 'moti'
 
 const { colors } = theme.extend
 
@@ -43,11 +42,6 @@ const CarrouselLastPodcast: FC<ICarrouselLastPodcast> = ({ categoryName }) => {
     }))
   }, [posts])
 
-  console.log('loading', loading)
-  console.log('homeLoading', homeLoading)
-  console.log('isLoadingPost', isLoadingPost)
-  console.log('-------------------------')
-
   return (
     <>
       <LoadingWrapper
@@ -59,29 +53,27 @@ const CarrouselLastPodcast: FC<ICarrouselLastPodcast> = ({ categoryName }) => {
         loading={isLoadingPost}
       >
         {parsedPosts.length > 0 && (
-          <MotiView key='fasfasf'>
-            <TouchableHighlight
-              onPress={navigateHandler}
-              activeOpacity={0.9}
-              underlayColor='transparent'
-            >
-              <View className='mb-4 my-5 flex flex-row justify-between items-center'>
-                <Text className='font-lato-bold text-lg text-background-dark dark:text-background'>
-                  Ultimos Podcasts
-                </Text>
-                <Icon
-                  size={18}
-                  type='ionicon'
-                  name='chevron-forward-outline'
-                  color={
-                    coloScheme === ColorScheme.Dark
-                      ? colors.text.dark
-                      : colors.text.DEFAULT
-                  }
-                />
-              </View>
-            </TouchableHighlight>
-          </MotiView>
+          <TouchableHighlight
+            onPress={navigateHandler}
+            activeOpacity={0.9}
+            underlayColor='transparent'
+          >
+            <View className='mb-4 my-5 flex flex-row justify-between items-center'>
+              <Text className='font-lato-bold text-lg text-background-dark dark:text-background'>
+                Ultimos Podcasts
+              </Text>
+              <Icon
+                size={18}
+                type='ionicon'
+                name='chevron-forward-outline'
+                color={
+                  coloScheme === ColorScheme.Dark
+                    ? colors.text.dark
+                    : colors.text.DEFAULT
+                }
+              />
+            </View>
+          </TouchableHighlight>
         )}
       </LoadingWrapper>
       <SimpleCarousel data={parsedPosts} isLoading={isLoadingPost} />
