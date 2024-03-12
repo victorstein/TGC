@@ -58,33 +58,31 @@ const CarrouselLastPodcast: FC<ICarrouselLastPodcast> = ({ categoryName }) => {
         }
         loading={isLoadingPost}
       >
-        <>
-          {parsedPosts.length > 0 && (
-            <MotiView key='fasfasf'>
-              <TouchableHighlight
-                onPress={navigateHandler}
-                activeOpacity={0.9}
-                underlayColor='transparent'
-              >
-                <View className='mb-4 my-5 flex flex-row justify-between items-center'>
-                  <Text className='font-lato-bold text-lg text-background-dark dark:text-background'>
-                    Ultimos Podcasts
-                  </Text>
-                  <Icon
-                    size={18}
-                    type='ionicon'
-                    name='chevron-forward-outline'
-                    color={
-                      coloScheme === ColorScheme.Dark
-                        ? colors.text.dark
-                        : colors.text.DEFAULT
-                    }
-                  />
-                </View>
-              </TouchableHighlight>
-            </MotiView>
-          )}
-        </>
+        {parsedPosts.length > 0 && (
+          <MotiView key='fasfasf'>
+            <TouchableHighlight
+              onPress={navigateHandler}
+              activeOpacity={0.9}
+              underlayColor='transparent'
+            >
+              <View className='mb-4 my-5 flex flex-row justify-between items-center'>
+                <Text className='font-lato-bold text-lg text-background-dark dark:text-background'>
+                  Ultimos Podcasts
+                </Text>
+                <Icon
+                  size={18}
+                  type='ionicon'
+                  name='chevron-forward-outline'
+                  color={
+                    coloScheme === ColorScheme.Dark
+                      ? colors.text.dark
+                      : colors.text.DEFAULT
+                  }
+                />
+              </View>
+            </TouchableHighlight>
+          </MotiView>
+        )}
       </LoadingWrapper>
       <SimpleCarousel data={parsedPosts} isLoading={isLoadingPost} />
     </>

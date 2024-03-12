@@ -68,11 +68,9 @@ const SimpleCarousel: FC<simpleCarouselProps> = (props) => {
         }
         loading={isLoading}
       >
-        <>
-          {data.map((value, key) => (
-            <ItemCardCarousel {...value} key={key} />
-          ))}
-        </>
+        {data.map((value, key) => (
+          <ItemCardCarousel {...value} key={key} />
+        ))}
       </LoadingWrapper>
     </ScrollView>
   )

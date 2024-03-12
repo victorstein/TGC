@@ -30,7 +30,19 @@ export const LoadingWrapper: FC<ILoadingWrapperProps> = ({
           {skeleton}
         </MotiView>
       ) : (
-        children
+        <MotiView
+          key='content'
+          from={{ opacity: 0 }}
+          transition={{
+            type: 'timing',
+            duration: 500
+          }}
+          exitTransition={{ type: 'timing', duration: 200 }}
+          exit={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          {children}
+        </MotiView>
       )}
     </AnimatePresence>
   )
