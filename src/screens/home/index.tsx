@@ -3,20 +3,20 @@ import { View } from 'react-native'
 import Header from './components/header'
 import SearchBar from '../../shared/components/search-bar'
 import { CategoryEnum } from './types/home-types'
-import { useMainBanner } from './hooks/use-main-banner'
+import { usePosts } from './hooks/use-posts'
 import { HomeTabsComponent } from './components/home-tabs/home-tabs'
 import { ScrollRefreshView } from '@shared/components/scroll-refresh-view'
 
 export const HomeScreen = (): JSX.Element => {
-  const { refetch: refetchCodeBanner } = useMainBanner({
+  const { refetch: refetchCodeBanner } = usePosts({
     categoryName: CategoryEnum.CODE
   })
 
-  const { refetch: refetchGamingBanner } = useMainBanner({
+  const { refetch: refetchGamingBanner } = usePosts({
     categoryName: CategoryEnum.GAMING
   })
 
-  const { refetch: refetchTechBanner } = useMainBanner({
+  const { refetch: refetchTechBanner } = usePosts({
     categoryName: CategoryEnum.TECH
   })
 

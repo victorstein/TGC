@@ -1,9 +1,10 @@
-query getMainBanner($input: RootQueryToPostConnectionWhereArgs!, $first: Int!) {
+query getPosts($input: RootQueryToPostConnectionWhereArgs!, $first: Int!) {
   posts(where: $input, first: $first) {
     nodes {
       id
       excerpt
       title
+      date
       featuredImage {
         node {
           mediaItemUrl
