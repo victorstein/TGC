@@ -1,56 +1,13 @@
 query getPosts($input: RootQueryToPostConnectionWhereArgs!, $first: Int!) {
   posts(where: $input, first: $first) {
     nodes {
+      id
       excerpt
       title
+      date
       featuredImage {
         node {
           mediaItemUrl
-        }
-      }
-      categories {
-        nodes {
-          slug
-          name
-          databaseId
-        }
-      }
-      blocks {
-        name
-        ... on CoreAudioBlock {
-          attributes {
-            ... on CoreAudioBlockAttributes {
-              src
-              caption
-            }
-          }
-        }
-        ... on CoreHeadingBlock {
-          attributes {
-            ... on CoreHeadingBlockAttributes {
-              content
-            }
-          }
-        }
-        ... on CoreListBlock {
-          innerBlocks {
-            originalContent
-          }
-        }
-        ... on CoreImageBlock {
-          attributes {
-            ... on CoreImageBlockAttributes {
-              url
-            }
-          }
-        }
-        ... on CoreParagraphBlock {
-          attributes {
-            ... on CoreParagraphBlockAttributes {
-              content
-              anchor
-            }
-          }
         }
       }
     }
