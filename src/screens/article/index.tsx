@@ -5,7 +5,6 @@ import { useRoute } from '@react-navigation/native'
 import { ScrollRefreshView } from '@shared/components/scroll-refresh-view'
 import { Image } from 'expo-image'
 import { HtmlRenderer } from '@shared/components/html-renderer/html-renderer'
-import { BookmarkButton } from '@shared/components/bookmark-button/bookmark-button'
 
 export const ArticleScreen = (): JSX.Element => {
   const { params } = useRoute()
