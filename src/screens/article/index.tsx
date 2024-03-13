@@ -31,7 +31,7 @@ export const ArticleScreen = (): JSX.Element => {
       >
         <ScrollRefreshView
           refetch={[refetch]}
-          scrollViewProps={{ showsVerticalScrollIndicator: false }}
+          showsVerticalScrollIndicator={false}
         >
           <View className='items-baseline'>
             <View className='px-2 py-1 rounded-lg bg-primary/10 mb-4'>
@@ -40,14 +40,9 @@ export const ArticleScreen = (): JSX.Element => {
               </Text>
             </View>
             <View className='flex flex-row'>
-              <View className='flex w-3/4'>
-                <Text className='font-lato-extra-bold text-text dark:text-text-dark text-base mb-4'>
-                  {article.title}
-                </Text>
-              </View>
-              <View className='flex w-1/4 items-end justify-start'>
-                <BookmarkButton />
-              </View>
+              <Text className='font-lato-extra-bold text-text dark:text-text-dark text-base mb-4'>
+                {article.title}
+              </Text>
             </View>
           </View>
           <HtmlRenderer htmlString={article.htmlBlocks ?? ''} />

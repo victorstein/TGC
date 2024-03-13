@@ -2,7 +2,6 @@ import type { FC } from 'react'
 import { Text, View, TouchableHighlight } from 'react-native'
 import { Image } from 'expo-image'
 import { useNavigation } from '@react-navigation/native'
-import { TabName } from '@screens/home/types/home-types'
 
 export interface itemCardCarouselProps {
   title: string
@@ -16,7 +15,7 @@ const ItemCardCarousel: FC<itemCardCarouselProps> = (props) => {
   const navigation = useNavigation()
 
   const navigateHandler = (): void => {
-    navigation.navigate(TabName.SEARCH)
+    navigation.navigate('Articulo', { redirectId: props.postId })
   }
 
   return (

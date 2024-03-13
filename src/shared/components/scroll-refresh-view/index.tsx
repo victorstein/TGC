@@ -4,16 +4,15 @@ import { homeStore } from '@screens/home/store/home-store'
 import { useCallback } from 'react'
 import { type ApolloQueryResult } from '@apollo/client'
 
-export interface IScrollRefreshViewProps<T> {
+export interface IScrollRefreshViewProps<T> extends ScrollViewProps {
   children: React.ReactNode
   refetch: Array<() => Promise<ApolloQueryResult<T>>>
-  scrollViewProps?: ScrollViewProps
 }
 
 export function ScrollRefreshView<T>({
   children,
   refetch,
-  scrollViewProps
+  ...props
 }: IScrollRefreshViewProps<T>): JSX.Element {
   const refreshing = homeStore.use.isRefreshing()
   const setIsRefreshing = homeStore.use.setIsRefreshing()
@@ -35,11 +34,11 @@ export function ScrollRefreshView<T>({
 
   return (
     <ScrollView
-      {...scrollViewProps}
       refreshControl={
         <RefreshIndicator onRefresh={onRefresh} refreshing={refreshing} />
       }
       className='flex-1 bg-background dark:bg-background-dark'
+      {...props}
     >
       {children}
     </ScrollView>
