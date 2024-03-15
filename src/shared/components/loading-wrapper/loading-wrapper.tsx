@@ -37,6 +37,7 @@ export const LoadingWrapper: FC<ILoadingWrapperProps> = ({
             type: 'timing',
             duration: 500
           }}
+          className='flex flex-1'
           exitTransition={{ type: 'timing', duration: 500 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
