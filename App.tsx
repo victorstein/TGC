@@ -14,7 +14,7 @@ import * as NativeSplashScreen from 'expo-splash-screen'
 import { ColorScheme as themeColor, mainStore } from '@screens/main/store/store'
 import { theme } from '@tailwind'
 import NotificationScreen from '@screens/notification'
-import { MainScreen } from '@screens/main'
+import MainScreen from '@screens/main'
 import { CustomStatusBar } from '@shared/status-bar/status-bar'
 import { Icon } from '@rneui/themed'
 

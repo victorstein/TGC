@@ -1,17 +1,15 @@
 import { type FC } from 'react'
-import { Text, View } from 'react-native'
-import { NotificationAnimation } from './components/animation'
+import { View } from 'react-native'
+import { useNotifications } from './hooks/use-notifications'
+import withApollo from '@integrations/components/with-apollo'
 // components
 
 const NotificationScreen: FC = () => {
-  return (
-    <View className='relative bg-background dark:bg-background-dark flex-1'>
-      <NotificationAnimation />
-      <Text className='text-center font-bold text-2xl leading-[28.8px] text-text-notification-dark px-16 absolute top-96'>
-        Sin notificaciones por ahora...
-      </Text>
-    </View>
-  )
+  const { notifications, loading } = useNotifications()
+
+  console.log('notifications', notifications)
+  console.log('loading', loading)
+  return <View className='bg-background dark:bg-background-dark flex-1'></View>
 }
 
-export default NotificationScreen
+export default withApollo(NotificationScreen)

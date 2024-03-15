@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { SearchScreen } from '@screens/search'
 import { PlayScreen } from '@screens/play'
-import { ApolloProvider } from '@apollo/client'
-import { apolloStore } from '@integrations/store/store'
+// import { ApolloProvider } from '@apollo/client'
+// import { apolloStore } from '@integrations/store/store'
 import { theme } from '@tailwind'
 import { ColorScheme, mainStore } from './store/store'
 // import HomeStack from '@screens/home/navigation'
@@ -12,11 +12,12 @@ import { CustomTabBar } from './components/custom-tab-bar'
 import { View } from 'react-native'
 import { Notification } from '@shared/components/notification/notification'
 import { useNetwork } from '@shared/hooks/use-network'
+import withApollo from '@integrations/components/with-apollo'
 
 const Tab = createBottomTabNavigator()
 
-export const MainScreen = (): JSX.Element => {
-  const client = apolloStore.use.client()
+const MainScreen = (): JSX.Element => {
+  // const client = apolloStore.use.client()
   const { colors } = theme.extend
   const colorScheme = mainStore.use.colorScheme()
   useNetwork()
@@ -26,27 +27,27 @@ export const MainScreen = (): JSX.Element => {
       <Notification />
       <View className='flex-1'>
         {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unnecessary-type-assertion */}
-        <ApolloProvider client={client!}>
-          <Tab.Navigator
-            tabBar={(props) => <CustomTabBar {...props} />}
-            screenOptions={{
-              headerShown: false,
-              tabBarActiveTintColor:
-                colorScheme === ColorScheme.Light
-                  ? colors.primary.DEFAULT
-                  : colors.primary.dark,
-              tabBarInactiveTintColor:
-                colorScheme === ColorScheme.Light
-                  ? colors.text.DEFAULT
-                  : colors.text.dark
-            }}
-          >
-            <Tab.Screen name={TabName.HOME} component={HomeScreen} />
-            <Tab.Screen name={TabName.SEARCH} component={SearchScreen} />
-            <Tab.Screen name={TabName.PLAY} component={PlayScreen} />
-          </Tab.Navigator>
-        </ApolloProvider>
+        <Tab.Navigator
+          tabBar={(props) => <CustomTabBar {...props} />}
+          screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor:
+              colorScheme === ColorScheme.Light
+                ? colors.primary.DEFAULT
+                : colors.primary.dark,
+            tabBarInactiveTintColor:
+              colorScheme === ColorScheme.Light
+                ? colors.text.DEFAULT
+                : colors.text.dark
+          }}
+        >
+          <Tab.Screen name={TabName.HOME} component={HomeScreen} />
+          <Tab.Screen name={TabName.SEARCH} component={SearchScreen} />
+          <Tab.Screen name={TabName.PLAY} component={PlayScreen} />
+        </Tab.Navigator>
       </View>
     </View>
   )
 }
+
+export default withApollo(MainScreen)
