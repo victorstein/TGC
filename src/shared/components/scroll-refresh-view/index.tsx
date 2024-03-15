@@ -1,10 +1,10 @@
-import { ScrollView, type ScrollViewProps } from 'react-native'
 import { RefreshIndicator } from '../refresh-control'
 import { homeStore } from '@screens/home/store/home-store'
 import { useCallback } from 'react'
 import { type ApolloQueryResult } from '@apollo/client'
+import Animated, { type AnimatedScrollViewProps } from 'react-native-reanimated'
 
-export interface IScrollRefreshViewProps<T> extends ScrollViewProps {
+export interface IScrollRefreshViewProps<T> extends AnimatedScrollViewProps {
   children: React.ReactNode
   refetch: Array<() => Promise<ApolloQueryResult<T>>>
 }
@@ -33,7 +33,7 @@ export function ScrollRefreshView<T>({
   }, [refresh])
 
   return (
-    <ScrollView
+    <Animated.ScrollView
       refreshControl={
         <RefreshIndicator onRefresh={onRefresh} refreshing={refreshing} />
       }
@@ -41,6 +41,6 @@ export function ScrollRefreshView<T>({
       {...props}
     >
       {children}
-    </ScrollView>
+    </Animated.ScrollView>
   )
 }
