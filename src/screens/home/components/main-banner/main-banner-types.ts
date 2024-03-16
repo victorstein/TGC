@@ -2,6 +2,6 @@ export interface IMainBannerProps {
   title: string
   description: string
   bgImageUrl: string
-  redirectId?: string
+  redirectId: string
   duration?: number
 }

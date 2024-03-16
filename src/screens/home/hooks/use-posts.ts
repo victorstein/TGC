@@ -44,7 +44,7 @@ export const usePosts = ({
   const [latestPost, ...posts] = unParsed.map((item) => {
     return {
       ...item,
-      excerpt: htmlStripper(item.excerpt ?? '')
+      excerpt: htmlStripper(String(item.excerpt) ?? '')
     }
   })
 

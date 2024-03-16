@@ -1,8 +1,6 @@
 import { type BlockFragment } from '@integrations/graphql/operations'
 
-export const combineHTMLBlocks = (
-  htmlBlocks: NonNullable<BlockFragment[]>
-): string => {
+export const combineHTMLBlocks = (htmlBlocks: BlockFragment[]): string => {
   const parsed = htmlBlocks.map((block): string => {
     if (
       'attributes' in block &&
@@ -11,7 +9,10 @@ export const combineHTMLBlocks = (
     ) {
       if ('content' in block.attributes) {
         if (block.name === 'core/paragraph') {
-          return `<p>${String(block.attributes?.content)}</p>` ?? ''
+          return (
+            `<p style="font-family:'lato-regular'">${String(block.attributes?.content)}</p>` ??
+            ''
+          )
         }
 
         if (block.name === 'core/heading') {

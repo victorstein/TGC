@@ -1,0 +1,20 @@
+query getArticleById($id: ID!) {
+  post(id: $id) {
+    featuredImage {
+      node {
+        mediaItemUrl
+      }
+    }
+    categories {
+      nodes {
+        slug
+        name
+        databaseId
+      }
+    }
+    title
+    blocks {
+      ...BlockFragment
+    }
+  }
+}

@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "tcg",
     "name": "tcg",
     "slug": "tcg",
     "version": "0.0.1",
