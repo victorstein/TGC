@@ -124,7 +124,7 @@ export const Article: FC<IArticleProps> = ({
           </Text>
         </View>
         <View className='flex flex-1 items-center justify-center p-1'>
-          <ShareButton screen='Articulo' id={id} isIcon />
+          <ShareButton screen='Articulo' id={id} isIcon message={title} />
         </View>
       </Animated.View>
       <Animated.View
@@ -142,7 +142,7 @@ export const Article: FC<IArticleProps> = ({
             }
           ]}
         >
-          <ShareButton screen='Articulo' id={id} />
+          <ShareButton screen='Articulo' id={id} message={title} />
         </Animated.View>
         <Animated.ScrollView
           onScroll={onScroll}

@@ -9,7 +9,10 @@ export const useArticleDeepLinking = (): void => {
 
   useEffect(() => {
     if (url !== null) {
-      const { queryParams } = Linking.parse(url)
+      const { path, queryParams } = Linking.parse(url)
+      if (path === null || path.includes(NavigationRoutes.ARTICLE) === false) {
+        return
+      }
 
       navigator.navigate(NavigationRoutes.HOME, {
         screen: NavigationRoutes.ARTICLE,

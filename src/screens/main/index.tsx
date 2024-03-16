@@ -14,7 +14,7 @@ import { View } from 'react-native'
 import { Notification } from '@shared/components/notification/notification'
 import { useNetwork } from '@shared/hooks/use-network'
 import { HomeNavigator } from '@screens/home/navigation/home-stack'
-import { useArticleDeepLinking } from '@shared/hooks/use-deep-linking'
+import { useArticleDeepLinking } from '@shared/hooks/use-article-deep-linking'
 
 const Tab = createBottomTabNavigator<NavigatorOverride>()
 
