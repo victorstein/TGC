@@ -1,4 +1,5 @@
 import { HtmlRenderer } from '@shared/components/html-renderer/html-renderer'
+import { ShareButton } from '@shared/components/share-button/share-button'
 import { Image } from 'expo-image'
 import { useMemo, type FC } from 'react'
 import { View, Text, Dimensions } from 'react-native'
@@ -14,6 +15,7 @@ import Animated, {
 const { height } = Dimensions.get('window')
 
 export interface IArticleProps {
+  id: string
   htmlString: string
   title: string
   category: string
@@ -21,6 +23,7 @@ export interface IArticleProps {
 }
 
 export const Article: FC<IArticleProps> = ({
+  id,
   htmlString,
   title,
   category,
@@ -38,6 +41,17 @@ export const Article: FC<IArticleProps> = ({
       } else if (contentOffset.y === 0 && scrollValue.value === titleHeight) {
         scrollValue.value = withTiming(initialPosition, { duration: 200 })
       }
+    }
+  })
+
+  const shareButtonStyles = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        scrollValue.value,
+        [titleHeight, initialPosition],
+        [0, 1],
+        Extrapolation.CLAMP
+      )
     }
   })
 
@@ -98,20 +112,38 @@ export const Article: FC<IArticleProps> = ({
         cachePolicy={'memory-disk'}
       />
       <Animated.View
-        className='w-full bg-notification-bg dark:bg-notification-bg-dark p-3 absolute'
+        className='w-full bg-notification-bg dark:bg-notification-bg-dark p-3 absolute flex flex-row'
         style={titleStyles}
       >
-        <Text
-          numberOfLines={1}
-          className='text-lg font-lato-bold text-text dark:text-text-dark'
-        >
-          {title}
-        </Text>
+        <View className='w-[85%] flex'>
+          <Text
+            numberOfLines={1}
+            className='text-lg font-lato-bold text-text dark:text-text-dark'
+          >
+            {title}
+          </Text>
+        </View>
+        <View className='flex flex-1 items-center justify-center p-1'>
+          <ShareButton screen='Articulo' id={id} isIcon />
+        </View>
       </Animated.View>
       <Animated.View
         style={containerStyles}
         className='bg-background dark:bg-background-dark absolute w-full'
       >
+        <Animated.View
+          style={[
+            shareButtonStyles,
+            {
+              position: 'absolute',
+              right: 50,
+              top: -31,
+              zIndex: 20
+            }
+          ]}
+        >
+          <ShareButton screen='Articulo' id={id} />
+        </Animated.View>
         <Animated.ScrollView
           onScroll={onScroll}
           bounces={false}

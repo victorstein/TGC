@@ -4,7 +4,7 @@ export interface INotificationCardProps {
   photoURL: string
   title: string
   date: string
-  redirect: NavigationRoutesNames
+  redirectId: NavigationRoutesNames
   isRead?: boolean
   delay?: number
 }

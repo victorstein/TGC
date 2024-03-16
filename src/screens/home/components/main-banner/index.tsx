@@ -13,7 +13,7 @@ const MainBanner: FC<IMainBannerProps> = ({
   const navigation = useNavigation()
 
   const navigateHandler = (): void => {
-    navigation.navigate('Articulo', { redirectId })
+    navigation.navigate('Articulo', { id: redirectId })
   }
 
   return (

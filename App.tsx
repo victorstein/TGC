@@ -14,12 +14,18 @@ import { splashStore } from './src/screens/splash/store/store'
 import * as NativeSplashScreen from 'expo-splash-screen'
 import Constants from 'expo-constants'
 import { CustomStatusBar } from '@shared/status-bar/status-bar'
+import * as Linking from 'expo-linking'
+
+const prefix = Linking.createURL('/')
 
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
 const MainStack = createNativeStackNavigator()
 
 const App = (): JSX.Element => {
   useMain()
+  const linking = {
+    prefixes: [prefix]
+  }
   const client = useApolloCachedClient()
   const splashLoading = splashStore.use.loading()
   const statusBarHeight = Constants.statusBarHeight
@@ -30,13 +36,13 @@ const App = (): JSX.Element => {
       style={{ marginTop: statusBarHeight }}
       className='flex flex-1 bg-background dark:bg-background-dark'
     >
-      <NavigationContainer>
+      <NavigationContainer linking={linking}>
         <MainStack.Navigator screenOptions={{ headerShown: false }}>
           {client === null || splashLoading ? (
             <MainStack.Screen
               name='Splash'
               component={SplashScreen}
-              options={{ animationTypeForReplace: 'pop', animation: 'fade' }}
+              options={{ animation: 'fade' }}
             />
           ) : (
             <MainStack.Screen name='Main' component={Main} />

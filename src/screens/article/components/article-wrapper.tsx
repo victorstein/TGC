@@ -66,6 +66,7 @@ export const ArticleWrapper: FC<IArticleWrapperProps> = ({ articleId }) => {
     <>
       <LoadingWrapper loading={loading} skeleton={skeleton}>
         <Article
+          id={articleId}
           category={article.categories?.nodes[0].name ?? ''}
           featuredImage={article.featuredImage?.node.mediaItemUrl ?? ''}
           htmlString={article.htmlBlocks ?? ''}

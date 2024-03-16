@@ -14,6 +14,7 @@ import { View } from 'react-native'
 import { Notification } from '@shared/components/notification/notification'
 import { useNetwork } from '@shared/hooks/use-network'
 import { HomeNavigator } from '@screens/home/navigation/home-stack'
+import { useArticleDeepLinking } from '@shared/hooks/use-deep-linking'
 
 const Tab = createBottomTabNavigator<NavigatorOverride>()
 
@@ -22,6 +23,7 @@ export const Main = (): JSX.Element => {
   const { colors } = theme.extend
   const colorScheme = mainStore.use.colorScheme()
   useNetwork()
+  useArticleDeepLinking()
 
   return (
     <View className='flex flex-col flex-1 bg-background dark:bg-background-dark'>

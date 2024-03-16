@@ -15,7 +15,7 @@ const ItemCardCarousel: FC<itemCardCarouselProps> = (props) => {
   const navigation = useNavigation()
 
   const navigateHandler = (): void => {
-    navigation.navigate('Articulo', { redirectId: props.postId })
+    navigation.navigate('Articulo', { id: props.postId })
   }
 
   return (
