@@ -25,18 +25,18 @@ export const ArticleWrapper: FC<IArticleWrapperProps> = ({ articleId }) => {
         <MotiView
           from={{
             opacity: 0,
-            top: height
+            transform: [{ translateY: height }]
           }}
           animate={{
             opacity: 1,
-            top: initialPosition
+            transform: [{ translateY: initialPosition }]
           }}
           transition={{
             type: 'spring'
           }}
-          className='bg-background dark:bg-background-dark absolute w-full h-full'
+          className='bg-background dark:bg-background-dark absolute w-full h-full rounded-t-[40px]'
         >
-          <View className='px-8 pt-10 rounded-t-[40px] z-10'>
+          <View className='px-8 pt-10 z-10'>
             <View className='items-baseline mb-10'>
               <View className='py-1 rounded-lg mb-4'>
                 <SkeletonComponent height={18} width={width * 0.2} />
