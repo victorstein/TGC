@@ -14,6 +14,7 @@ export interface IShareButtonProps {
   isIcon?: boolean
   screen: NavigationRoutesNames
   id: string
+  message?: string
   avatarProps?: AvatarProps
   iconProps?: IconProps
 }
@@ -22,15 +23,21 @@ export const ShareButton: FC<IShareButtonProps> = ({
   screen,
   id,
   isIcon = false,
+  message = 'comparte este artículo con tus amigos y familiares!',
   avatarProps,
   iconProps
 }) => {
   const colorScheme = mainStore.use.colorScheme()
 
   const onPress = (): void => {
+    const url = Linking.createURL(`/Main/Inicio/${screen}`, {
+      queryParams: { id },
+      isTripleSlashed: false
+    })
+
     Share.share({
-      message: `comparte este artículo con tus amigos y familiares:
-      ${Linking.createURL(`/Main/Inicio/${screen}`, { queryParams: { id } })}`,
+      message: `${message} ${url}`,
+      url,
       title: 'Compartir artículo'
     }).catch(() => {
       Notification.show({
