@@ -10,7 +10,7 @@ export const useArticleDeepLinking = (): void => {
   useEffect(() => {
     if (url !== null) {
       const { path, queryParams } = Linking.parse(url)
-      if (path === null || path.includes(NavigationRoutes.ARTICLE) === false) {
+      if (path === null || Boolean(path.includes(NavigationRoutes.ARTICLE))) {
         return
       }
 
