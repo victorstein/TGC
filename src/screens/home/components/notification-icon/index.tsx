@@ -4,6 +4,7 @@ import { View, StyleSheet } from 'react-native'
 // rneui
 import { Avatar, Badge } from '@rneui/themed'
 import { theme } from '@tailwind'
+import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   badgeStyles: {
@@ -25,7 +26,12 @@ const styles = StyleSheet.create({
 const { colors } = theme.extend
 
 const NotificationIcon: FC = () => {
+  const navigation = useNavigation()
   const coloScheme = mainStore.use.colorScheme()
+
+  const openNotificationHandler = (): void => {
+    navigation.navigate('Notificaciones')
+  }
 
   return (
     <View className='pr-3 relative'>
@@ -41,6 +47,7 @@ const NotificationIcon: FC = () => {
               : colors.text.DEFAULT
         }}
         containerStyle={styles.bodyStylesAvatar}
+        onPress={openNotificationHandler}
       />
       <Badge
         badgeStyle={{

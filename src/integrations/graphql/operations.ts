@@ -16,6 +16,11 @@ export type GetPostsVariables = Types.Exact<{
 
 export type GetPosts = { posts?: { nodes: Array<{ id: string, excerpt?: string | null, title?: string | null, date?: string | null, featuredImage?: { node: { mediaItemUrl?: string | null } } | null }> } | null };
 
+export type NotificationsVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type Notifications = { notificationCenter?: Array<{ id?: string | null, title?: string | null, excerpt?: string | null, date?: string | null, image?: string | null } | null> | null };
+
 type BlockFragment_CoreArchivesBlock = { name: string };
 
 type BlockFragment_CoreAudioBlock = { name: string, attributes?: { src?: string | null, caption?: string | null } | {} | null };
@@ -280,6 +285,17 @@ export const GetPosts = gql`
         }
       }
     }
+  }
+}
+    `;
+export const Notifications = gql`
+    query notifications {
+  notificationCenter {
+    id
+    title
+    excerpt
+    date
+    image
   }
 }
     `;

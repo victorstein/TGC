@@ -1,4 +1,4 @@
-import { useMemo, type FC } from 'react'
+import { useEffect, useMemo, type FC } from 'react'
 import { useArticle } from '../hooks/use-article'
 import { Article } from './article'
 import { SkeletonComponent } from '@shared/components/skeleton/skeleton-component'
@@ -6,6 +6,7 @@ import { Dimensions, View } from 'react-native'
 import { MotiView } from 'moti'
 import { LoadingWrapper } from '@shared/components/loading-wrapper/loading-wrapper'
 import { generateSkeletonWidth } from '@shared/utils/generate-skeleting-width'
+import { useNavigation } from '@react-navigation/native'
 
 export interface IArticleWrapperProps {
   articleId: string
@@ -14,9 +15,16 @@ export interface IArticleWrapperProps {
 const { height, width } = Dimensions.get('window')
 export const ArticleWrapper: FC<IArticleWrapperProps> = ({ articleId }) => {
   const initialPosition = height * 0.25
-  const { article, loading } = useArticle({
+  const navigation = useNavigation()
+  const { article, loading, error } = useArticle({
     id: articleId
   })
+
+  useEffect(() => {
+    if (error !== undefined) {
+      navigation.goBack()
+    }
+  }, [error, navigation])
 
   const skeleton = useMemo(
     () => (

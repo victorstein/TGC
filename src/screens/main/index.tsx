@@ -1,8 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { SearchScreen } from '@screens/search'
 import { PlayScreen } from '@screens/play'
-import { ApolloProvider } from '@apollo/client'
-import { apolloStore } from '@integrations/store/store'
 import { theme } from '@tailwind'
 import { ColorScheme, mainStore } from './store/store'
 import {
@@ -13,13 +11,13 @@ import { CustomTabBar } from './components/custom-tab-bar'
 import { View } from 'react-native'
 import { Notification } from '@shared/components/notification/notification'
 import { useNetwork } from '@shared/hooks/use-network'
+import ApolloWrapper from '@integrations/components/apollo-wrapper'
 import { HomeNavigator } from '@screens/home/navigation/home-stack'
 import { useArticleDeepLinking } from '@shared/hooks/use-article-deep-linking'
 
 const Tab = createBottomTabNavigator<NavigatorOverride>()
 
-export const Main = (): JSX.Element => {
-  const client = apolloStore.use.client()
+const MainScreen = (): JSX.Element => {
   const { colors } = theme.extend
   const colorScheme = mainStore.use.colorScheme()
   useNetwork()
@@ -29,8 +27,7 @@ export const Main = (): JSX.Element => {
     <View className='flex flex-col flex-1 bg-background dark:bg-background-dark'>
       <Notification />
       <View className='flex-1'>
-        {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unnecessary-type-assertion */}
-        <ApolloProvider client={client!}>
+        <ApolloWrapper>
           <Tab.Navigator
             tabBar={(props) => <CustomTabBar {...props} />}
             screenOptions={{
@@ -55,8 +52,10 @@ export const Main = (): JSX.Element => {
             />
             <Tab.Screen name={NavigationRoutes.PLAY} component={PlayScreen} />
           </Tab.Navigator>
-        </ApolloProvider>
+        </ApolloWrapper>
       </View>
     </View>
   )
 }
+
+export default MainScreen
