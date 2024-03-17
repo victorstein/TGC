@@ -1,6 +1,8 @@
 import { type Notifications } from '../graphql/notification.queries.generated'
 
-export type TApiNotifications = Array<NonNullable<NonNullable<Notifications['notificationCenter']>[0]>>
+export type TApiNotifications = Array<
+  NonNullable<NonNullable<Notifications['notificationCenter']>[0]>
+>
 
 export type TNotificationCenter = Omit<TApiNotifications[0], 'id'> & {
   read: boolean
@@ -20,4 +22,6 @@ export interface INotificationSetters {
   resetStore: () => void
 }
 
-export interface INotificationStore extends INotificationGetters, INotificationSetters { }
+export interface INotificationStore
+  extends INotificationGetters,
+    INotificationSetters {}

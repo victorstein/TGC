@@ -9,14 +9,14 @@ const NotificationCard: FC<INotificationCardProps> = ({
   photoURL,
   title,
   date,
-  redirect,
+  redirectId,
   isRead = false,
   delay = 0
 }) => {
   const navigation = useNavigation()
 
   const redirectHandler = (): void => {
-    navigation.navigate(redirect)
+    navigation.navigate('Article', { id: redirectId })
   }
 
   return (

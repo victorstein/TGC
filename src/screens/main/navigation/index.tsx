@@ -2,7 +2,8 @@ import { type FC } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { theme } from '@tailwind'
-import { MainScreen } from '..'
+import MainScreen from '..'
+
 // components
 const Stack = createNativeStackNavigator()
 

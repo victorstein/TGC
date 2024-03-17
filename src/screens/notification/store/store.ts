@@ -1,5 +1,9 @@
 import { create } from 'zustand'
-import { type TApiNotifications, type INotificationGetters, type INotificationStore } from './store-types'
+import {
+  type TApiNotifications,
+  type INotificationGetters,
+  type INotificationStore
+} from './store-types'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createSelectors } from '@screens/utils/create-selectors'
@@ -14,19 +18,22 @@ const NotificationStore = create<INotificationStore>()(
       ...initialState,
       setNotifications: (apiNotifications: TApiNotifications) => {
         set((state) => {
-          const notificationStore = get().notifications
-          apiNotifications.filter(({ id }) => id ?? '' in notificationStore).forEach(({ id, ...notification }) => {
-            const newId = id ?? ''
-            notificationStore[newId] = {
-              read: false,
-              dismissed: false,
-              ...notification
-            }
-          })
-          return ({
+          const notifications = get().notifications
+          apiNotifications
+            .filter(({ id }) => id ?? '' in notificationStore)
+            .forEach(({ id, ...notification }) => {
+              const newId = id ?? ''
+              notifications[newId] = {
+                read: false,
+                dismissed: false,
+                ...notification
+              }
+            })
+
+          return {
             ...state.notifications,
-            notifications: notificationStore
-          })
+            notifications
+          }
         })
       },
       setRead: (notificationId) => {
@@ -54,8 +61,8 @@ const NotificationStore = create<INotificationStore>()(
     {
       name: 'notification-storage',
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: () => ({
-        notifications: true
+      partialize: (state) => ({
+        notifications: state.notifications
       })
     }
   )

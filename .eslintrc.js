@@ -20,7 +20,7 @@ module.exports = {
         '@typescript-eslint/triple-slash-reference': 0,
         '@typescript-eslint/indent': 0,
         '@typescript-eslint/no-confusing-void-expression': 0,
-        'space-before-function-paren': 'off',
+        '@typescript-eslint/consistent-type-assertions': 0,
         '@typescript-eslint/space-before-function-paren': 0,
         'multiline-ternary': 0,
         'react-native/no-inline-styles': 0,

@@ -1,8 +1,14 @@
 import { type ApolloError, type ApolloQueryResult } from '@apollo/client'
-import { type Notifications, useNotifications as useNotificationFetch } from '../graphql/notification.queries.generated'
+import {
+  type Notifications,
+  useNotifications as useNotificationFetch
+} from '../graphql/notification.queries.generated'
 import { notificationStore } from '../store/store'
 import { useEffect } from 'react'
-import { type TApiNotifications, type TNotifications } from '../store/store-types'
+import {
+  type TApiNotifications,
+  type TNotifications
+} from '../store/store-types'
 
 interface IUseNotificationsOutput {
   notifications: TNotifications
@@ -18,7 +24,10 @@ export const useNotifications = (): IUseNotificationsOutput => {
 
   useEffect(() => {
     const apiNotifications = data?.notificationCenter ?? []
-    const parsedApiNotifications = apiNotifications.filter((apiNotification): apiNotification is TApiNotifications[0] => apiNotification !== null)
+    const parsedApiNotifications = apiNotifications.filter(
+      (apiNotification): apiNotification is TApiNotifications[0] =>
+        apiNotification !== null
+    )
     setNotification(parsedApiNotifications)
   }, [setNotification, data?.notificationCenter])
 
