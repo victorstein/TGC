@@ -30,7 +30,7 @@ export const ShareButton: FC<IShareButtonProps> = ({
   const colorScheme = mainStore.use.colorScheme()
 
   const onPress = (): void => {
-    const url = Linking.createURL(`/Main/Inicio/${screen}`, {
+    const url = Linking.createURL(`/Root/Inicio/${screen}`, {
       queryParams: { id },
       isTripleSlashed: false
     })
