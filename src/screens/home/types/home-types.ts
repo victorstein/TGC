@@ -10,7 +10,30 @@ export enum TabName {
   PLAY = 'Reproducir'
 }
 
-export interface NavigatorOverride {
-  [key: string]: Record<string, unknown> | undefined
-  [TabName.HOME]: Record<string, unknown> | undefined
+export enum HomeScreen {
+  HOME_STACK = 'Inicio_Stack',
+  ARTICLE = 'Articulo'
 }
+
+export enum RootStack {
+  MAIN = 'Main',
+  NOTIFICATIONS = 'Notificaciones'
+}
+
+export const NavigationRoutes = {
+  ...TabName,
+  ...HomeScreen,
+  ...RootStack
+}
+
+export type NavigationRoutesEnum = typeof NavigationRoutes
+
+export type NavigationRoutesNames =
+  | `${TabName}`
+  | `${HomeScreen}`
+  | `${RootStack}`
+
+export type NavigatorOverride = Record<
+  NavigationRoutesNames,
+  object | undefined
+>

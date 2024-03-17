@@ -9,8 +9,11 @@ import { RetryLink } from '@apollo/client/link/retry'
 import notification from '@shared/components/notification/hooks/notification'
 import { NotificationType } from '@shared/components/notification/store/notification-store'
 import ApolloLinkTimeout from 'apollo-link-timeout'
+import possibleTypes from './possible-types.json'
 
-const cache = new InMemoryCache()
+const cache = new InMemoryCache({
+  possibleTypes
+})
 
 const retryLink = new RetryLink({
   delay: {

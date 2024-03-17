@@ -1,10 +1,7 @@
 import type { FC } from 'react'
-// components
 import { View, Text, ImageBackground, TouchableHighlight } from 'react-native'
 import { type IMainBannerProps } from './main-banner-types'
-// types or hooks
 import { useNavigation } from '@react-navigation/native'
-import { TabName } from '@screens/home/types/home-types'
 
 const MainBanner: FC<IMainBannerProps> = ({
   title,
@@ -16,7 +13,7 @@ const MainBanner: FC<IMainBannerProps> = ({
   const navigation = useNavigation()
 
   const navigateHandler = (): void => {
-    navigation.navigate(TabName.SEARCH, { redirectId })
+    navigation.navigate('Articulo', { id: redirectId })
   }
 
   return (

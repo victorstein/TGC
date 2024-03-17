@@ -17,13 +17,20 @@ import NotificationScreen from '@screens/notification'
 import MainScreen from '@screens/main'
 import { CustomStatusBar } from '@shared/status-bar/status-bar'
 import { Icon } from '@rneui/themed'
+import * as Linking from 'expo-linking'
+
+const prefix = Linking.createURL('/')
 
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
+const MainStack = createNativeStackNavigator()
 
 const { colors } = theme.extend
 
 const App = (): JSX.Element => {
   useMain()
+  const linking = {
+    prefixes: [prefix]
+  }
   const client = useApolloCachedClient()
   const splashLoading = splashStore.use.loading()
   const colorScheme = mainStore.use.colorScheme()
@@ -34,15 +41,13 @@ const App = (): JSX.Element => {
       initialMetrics={initialWindowMetrics}
       className='flex flex-1 bg-background dark:bg-background-dark'
     >
-      <NavigationContainer>
-        <RootStack.Navigator
-          screenOptions={{ headerShown: false, animation: 'default' }}
-        >
+      <NavigationContainer linking={linking}>
+        <RootStack.Navigator screenOptions={{ headerShown: false }}>
           {client === null || splashLoading ? (
             <RootStack.Screen
               name='Splash'
               component={SplashScreen}
-              options={{ animationTypeForReplace: 'pop', animation: 'fade' }}
+              options={{ animation: 'fade' }}
             />
           ) : (
             <RootStack.Group

@@ -16,7 +16,7 @@ const NotificationCard: FC<INotificationCardProps> = ({
   const navigation = useNavigation()
 
   const redirectHandler = (): void => {
-    navigation.navigate('Article', { id: redirectId })
+    navigation.navigate('Articulo', { id: redirectId })
   }
 
   return (

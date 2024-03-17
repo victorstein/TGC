@@ -24,10 +24,10 @@ export const MainBannerWrapper = ({
     >
       {latestPost !== undefined && (
         <MainBanner
-          key='main-banner'
           title={latestPost?.title ?? ''}
           description={latestPost?.excerpt ?? ''}
           bgImageUrl={latestPost?.featuredImage?.node.mediaItemUrl ?? ''}
+          redirectId={latestPost?.id ?? ''}
         />
       )}
     </LoadingWrapper>
