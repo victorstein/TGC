@@ -30,7 +30,7 @@ const MainBanner: FC<IMainBannerProps> = ({
         <View className='p-5 bg-banner-filter/75 rounded-2xl'>
           <Text
             className='text-base leading-6 font-bold text-banner-text mb-2'
-            numberOfLines={2}
+            numberOfLines={1}
           >
             {title}
           </Text>
