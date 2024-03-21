@@ -1,8 +1,9 @@
 import { type CodegenConfig } from '@graphql-codegen/cli'
+import { Constants } from './src/shared/constants'
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'https://rubikcloud.net/graphql',
+  schema: Constants.GRAPHQL_ENDPOINT,
   documents: './src/**/*.gql',
   generates: {
     'src/types/schema.ts': { plugins: ['typescript'] },
