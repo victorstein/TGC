@@ -27,7 +27,7 @@ const MainBanner: FC<IMainBannerProps> = ({
         borderRadius={16}
         imageStyle={{ borderRadius: 16 }}
       >
-        <View className='p-5 bg-banner-filter/75 rounded-2xl'>
+        <View className='p-5 bg-banner-filter/75 rounded-2xl min-h-[156]'>
           <Text
             className='text-base leading-6 font-bold text-banner-text mb-2'
             numberOfLines={2}
