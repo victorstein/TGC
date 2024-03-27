@@ -6,6 +6,7 @@ import { GamingTab } from './gaming-tab'
 import { TechTab } from './tech-tab'
 import { theme } from '@tailwind'
 import { Dimensions, Text } from 'react-native'
+import { NavigationRoutes } from '@screens/home/types/home-types'
 
 const { colors } = theme.extend
 
@@ -49,10 +50,19 @@ export const HomeTabsComponent: FC = () => {
         )
       }}
     >
-      <HomeTabs.Screen name='Podcast' component={PodcastTab} />
-      <HomeTabs.Screen name='Gaming' component={GamingTab} />
-      <HomeTabs.Screen name='Tech' component={TechTab} />
-      <HomeTabs.Screen name='Coding' component={CodingTab} />
+      <HomeTabs.Screen
+        name={NavigationRoutes.PODCAST_TAB}
+        component={PodcastTab}
+      />
+      <HomeTabs.Screen
+        name={NavigationRoutes.GAMING_TAB}
+        component={GamingTab}
+      />
+      <HomeTabs.Screen name={NavigationRoutes.TECH_TAB} component={TechTab} />
+      <HomeTabs.Screen
+        name={NavigationRoutes.CODING_TAB}
+        component={CodingTab}
+      />
     </HomeTabs.Navigator>
   )
 }
