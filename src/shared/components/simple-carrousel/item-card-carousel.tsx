@@ -26,7 +26,7 @@ const ItemCardCarousel: FC<itemCardCarouselProps> = (props) => {
     >
       <View className='flex flex-row justify-center px-[19px] items-center border border-solid h-[90px] w-full max-w-[73vw] rounded-xl border-separator dark:border-separator-dark mr-[10px]'>
         <Image
-          className='w-[52px] h-[56px] mr-[16px]'
+          className='w-[52px] h-[56px] mr-[16px] rounded-[8px]'
           source={urlImg}
           cachePolicy='memory-disk'
         />

@@ -6,6 +6,7 @@ import { CategoryEnum } from './types/home-types'
 import { usePosts } from './hooks/use-posts'
 import { HomeTabsComponent } from './components/home-tabs/home-tabs'
 import { ScrollRefreshView } from '@shared/components/scroll-refresh-view'
+import RecentArticles from './components/recent-articles'
 
 export const HomeScreen = (): JSX.Element => {
   const { refetch: refetchCodeBanner } = usePosts({
@@ -30,6 +31,7 @@ export const HomeScreen = (): JSX.Element => {
       </View>
       <View className='mb-4 flex-1'>
         <HomeTabsComponent />
+        <RecentArticles />
       </View>
     </ScrollRefreshView>
   )
