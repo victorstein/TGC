@@ -1,13 +1,38 @@
+fragment simplifiedPost on Post {
+  id
+  excerpt
+  title
+  date
+  featuredImage {
+    node {
+      mediaItemUrl
+    }
+  }
+}
+
 query getPosts($input: RootQueryToPostConnectionWhereArgs!, $first: Int!) {
   posts(where: $input, first: $first) {
     nodes {
-      id
-      excerpt
-      title
-      date
-      featuredImage {
-        node {
-          mediaItemUrl
+      ...simplifiedPost
+    }
+  }
+}
+
+query lastPosts($after: String, $first: Int) {
+  posts(
+    first: $first
+    after: $after
+    where: { orderby: { field: DATE, order: ASC } }
+  ) {
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    nodes {
+      ...simplifiedPost
+      categories {
+        nodes {
+          name
         }
       }
     }
