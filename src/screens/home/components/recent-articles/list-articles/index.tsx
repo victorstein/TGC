@@ -1,41 +1,50 @@
 import { type FC } from 'react'
-import { View } from 'react-native'
-import ItemArticle, { type IitemArticle } from './item-article'
+import { View, Text } from 'react-native'
+import ItemArticle from './item-article'
 import ItemArticleSkeleton from './item-article-skeleton'
+import { FlashList } from '@shopify/flash-list'
+import usePaginatedPost from '@screens/home/hooks/use-paginated-posts'
+import { LoadingWrapper } from '@shared/components/loading-wrapper/loading-wrapper'
 
 const ListArticles: FC = () => {
-  const imgRito = require('../../../../../../assets/lolLogo.jpg')
-
-  const listArticle: IitemArticle[] = [
-    {
-      postId: '1',
-      subTitle: ' Gaming | 25:30',
-      title:
-        'Riot Games recorta 530 puestos de trabajo y cierra la división editorial',
-      urlImg: imgRito
-    },
-    {
-      postId: '2',
-      subTitle: ' Gaming | 25:30',
-      title:
-        'Riot Games recorta 530 puestos de trabajo y cierra la división editorial',
-      urlImg: imgRito
-    },
-    {
-      postId: '3',
-      subTitle: ' Gaming | 25:30',
-      title:
-        'Riot Games recorta 530 puestos de trabajo y cierra la división editorial',
-      urlImg: imgRito
-    }
-  ]
+  const { posts, getNextPage, hasNextPage, loading, isFirtsLoad } =
+    usePaginatedPost()
 
   return (
     <View className='flex flex-col'>
-      {listArticle.map((value: IitemArticle, key: number) => (
-        <ItemArticle {...value} key={key} />
-      ))}
-      <ItemArticleSkeleton />
+      <LoadingWrapper
+        loading={loading && isFirtsLoad}
+        skeleton={<ItemArticleSkeleton />}
+      >
+        <FlashList
+          keyExtractor={(item) => item.id}
+          data={posts}
+          renderItem={({ item }) => (
+            <ItemArticle
+              key={item.id}
+              id={item.id}
+              subTitle={item.categories?.nodes[0].name ?? ''}
+              title={item.title ?? ''}
+              urlImg={item.featuredImage?.node.mediaItemUrl}
+            />
+          )}
+          onEndReached={getNextPage}
+          estimatedItemSize={115}
+          ListFooterComponent={() => {
+            if (hasNextPage) {
+              return <ItemArticleSkeleton />
+            } else {
+              return (
+                <View className='flex justify-center items-center'>
+                  <Text className='opacity-60 font-lato-bold text-background-dark dark:text-background'>
+                    Es Todo por el Momento
+                  </Text>
+                </View>
+              )
+            }
+          }}
+        />
+      </LoadingWrapper>
     </View>
   )
 }

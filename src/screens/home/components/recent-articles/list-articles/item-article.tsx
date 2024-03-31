@@ -11,22 +11,22 @@ export interface IitemArticle {
   title: string
   urlImg: string | any
   subTitle: string
-  postId: string
+  id: string
 }
 
-const ItemArticle: FC<IitemArticle> = () => {
-  const imgRito = require('../../../../../../assets/lolLogo.jpg')
+const ItemArticle: FC<IitemArticle> = (props) => {
   const navigation = useNavigation()
+  const { id, subTitle, title, urlImg } = props
 
   const navigateHandler = (): void => {
-    navigation.navigate('Articulo', { id: '1' })
+    navigation.navigate('Articulo', { id })
   }
 
   return (
     <View className='mb-[24px] flex flex-row'>
       <Image
         className='w-[110px] h-[110px] mr-[12px] rounded-[24px]'
-        source={imgRito}
+        source={urlImg}
         cachePolicy='memory-disk'
       />
       <View className='flex flex-col w-full max-w-[68%]'>
@@ -34,14 +34,13 @@ const ItemArticle: FC<IitemArticle> = () => {
           numberOfLines={2}
           className='font-lato-bold text-background-dark dark:text-background'
         >
-          Riot Games recorta 530 puestos de trabajo y cierra la división
-          editorial
+          {title}
         </Text>
         <Text
           numberOfLines={1}
           className='font-lato-regular  text-xs text-text/80 dark:text-text-dark/80 py-2'
         >
-          Gaming | 25:30
+          {subTitle}
         </Text>
         <Button
           onPress={() => navigateHandler()}
