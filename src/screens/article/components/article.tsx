@@ -42,6 +42,11 @@ export const Article: FC<IArticleProps> = ({
       } else if (contentOffset.y === 0 && scrollValue.value === titleHeight) {
         scrollValue.value = withTiming(initialPosition, { duration: 200 })
       }
+    },
+    onBeginDrag: ({ contentOffset, velocity }): void => {
+      if (contentOffset.y === 0 && scrollValue.value === titleHeight) {
+        scrollValue.value = withTiming(initialPosition, { duration: 200 })
+      }
     }
   })
 
