@@ -1,7 +1,6 @@
-import type { ApolloQueryResult } from '@apollo/client'
 import type { LastPosts } from '@integrations/graphql/operations'
 import { useLastPosts } from '../graphql/home.queries.generated'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 type Post = NonNullable<LastPosts['posts']>['nodes'][number]
 
@@ -12,7 +11,7 @@ export interface IUsePaginatedPostOutput {
   error?: Error
   loading: boolean
   isFirtsLoad: boolean
-  refetch: () => Promise<ApolloQueryResult<LastPosts>>
+  refetch: () => Promise<void>
   getNextPage: () => void
 }
 
@@ -26,7 +25,12 @@ const usePaginatedPost = ({
   const [after, setAfter] = useState<string>('')
   const [posts, setPosts] = useState<Post[]>([])
 
-  const { data, loading, error, refetch } = useLastPosts({
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchApi
+  } = useLastPosts({
     variables: {
       after,
       first
@@ -40,6 +44,12 @@ const usePaginatedPost = ({
   const getNextPage = (): void => {
     if (hasNextPage === true) setAfter(String(nextCursor))
   }
+
+  const refetch = useCallback(async () => {
+    setPosts([])
+    setAfter('')
+    await refetchApi()
+  }, [setPosts, refetchApi])
 
   useEffect(() => {
     const apiPosts = data?.posts?.nodes ?? []

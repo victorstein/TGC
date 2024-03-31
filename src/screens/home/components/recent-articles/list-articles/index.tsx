@@ -5,15 +5,17 @@ import ItemArticleSkeleton from './item-article-skeleton'
 import { FlashList } from '@shopify/flash-list'
 import usePaginatedPost from '@screens/home/hooks/use-paginated-posts'
 import { LoadingWrapper } from '@shared/components/loading-wrapper/loading-wrapper'
+import { homeStore } from '@screens/home/store/home-store'
 
 const ListArticles: FC = () => {
+  const homeLoading = homeStore.use.isRefreshing()
   const { posts, getNextPage, hasNextPage, loading, isFirtsLoad } =
     usePaginatedPost()
 
   return (
     <View className='flex flex-col'>
       <LoadingWrapper
-        loading={loading && isFirtsLoad}
+        loading={(loading && isFirtsLoad) || homeLoading}
         skeleton={<ItemArticleSkeleton />}
       >
         <FlashList
