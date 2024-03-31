@@ -1,3 +1,4 @@
+import { BackButton } from '@shared/components/back-button/back-button'
 import { HtmlRenderer } from '@shared/components/html-renderer/html-renderer'
 import { ShareButton } from '@shared/components/share-button/share-button'
 import { Image } from 'expo-image'
@@ -112,10 +113,24 @@ export const Article: FC<IArticleProps> = ({
         cachePolicy={'memory-disk'}
       />
       <Animated.View
-        className='w-full bg-notification-bg dark:bg-notification-bg-dark p-3 absolute flex flex-row'
+        className='absolute top-3 left-3'
+        style={shareButtonStyles}
+      >
+        <BackButton isIcon={false} avatarProps={{ size: 50 }} />
+      </Animated.View>
+      <Animated.View
+        className='w-full bg-notification-bg dark:bg-notification-bg-dark absolute flex flex-row items-center'
         style={titleStyles}
       >
-        <View className='w-[85%] flex'>
+        <View className='flex items-center justify-center'>
+          <BackButton
+            isIcon
+            iconProps={{
+              iconStyle: { padding: 16 }
+            }}
+          />
+        </View>
+        <View className='flex flex-1'>
           <Text
             numberOfLines={1}
             className='text-lg font-lato-bold text-text dark:text-text-dark'
@@ -123,8 +138,14 @@ export const Article: FC<IArticleProps> = ({
             {title}
           </Text>
         </View>
-        <View className='flex flex-1 items-center justify-center p-1'>
-          <ShareButton screen='Articulo' id={id} isIcon message={title} />
+        <View className='flex items-center justify-center'>
+          <ShareButton
+            screen='Articulo'
+            id={id}
+            isIcon
+            message={title}
+            iconProps={{ iconStyle: { padding: 16 } }}
+          />
         </View>
       </Animated.View>
       <Animated.View
@@ -142,7 +163,12 @@ export const Article: FC<IArticleProps> = ({
             }
           ]}
         >
-          <ShareButton screen='Articulo' id={id} message={title} />
+          <ShareButton
+            screen='Articulo'
+            id={id}
+            message={title}
+            isIcon={false}
+          />
         </Animated.View>
         <Animated.ScrollView
           onScroll={onScroll}

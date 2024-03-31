@@ -20,7 +20,7 @@ export const MainBannerWrapper = ({
   return (
     <LoadingWrapper
       loading={homeLoading || internalLoading}
-      skeleton={<SkeletonComponent height={132} />}
+      skeleton={<SkeletonComponent height={156} />}
     >
       {latestPost !== undefined && (
         <MainBanner

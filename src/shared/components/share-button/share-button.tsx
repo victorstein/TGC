@@ -10,24 +10,34 @@ import * as Linking from 'expo-linking'
 
 const { colors } = theme.extend
 
-export interface IShareButtonProps {
+export interface IShareCommonProps {
   isIcon?: boolean
   screen: NavigationRoutesNames
   id: string
   message?: string
-  avatarProps?: AvatarProps
-  iconProps?: IconProps
+}
+export interface IShareIconProps extends IShareCommonProps {
+  isIcon: true
+  iconProps?: Omit<IconProps, 'name' | 'type'>
 }
 
-export const ShareButton: FC<IShareButtonProps> = ({
+export interface IShareAvatarProps extends IShareCommonProps {
+  isIcon: false
+  avatarProps?: Omit<AvatarProps, 'name' | 'type'>
+}
+
+export type TShareButtonProps = IShareIconProps | IShareAvatarProps
+
+export const ShareButton: FC<TShareButtonProps> = ({
   screen,
   id,
   isIcon = false,
   message = 'comparte este artículo con tus amigos y familiares!',
-  avatarProps,
-  iconProps
+  ...props
 }) => {
   const colorScheme = mainStore.use.colorScheme()
+  const { iconProps = {} } = props as IShareIconProps
+  const { avatarProps = {} } = props as IShareAvatarProps
 
   const onPress = (): void => {
     const url = Linking.createURL(`/Main/Inicio/${screen}`, {

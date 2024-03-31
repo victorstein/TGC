@@ -15,14 +15,25 @@ export enum HomeScreen {
   ARTICLE = 'Articulo'
 }
 
+export enum HomeTabsNavigation {
+  PODCAST_TAB = 'Podcast',
+  GAMING_TAB = 'Gaming',
+  TECH_TAB = 'Tech',
+  CODING_TAB = 'Coding'
+}
+
 export const NavigationRoutes = {
   ...TabName,
-  ...HomeScreen
+  ...HomeScreen,
+  ...HomeTabsNavigation
 }
 
 export type NavigationRoutesEnum = typeof NavigationRoutes
 
-export type NavigationRoutesNames = `${TabName}` | `${HomeScreen}`
+export type NavigationRoutesNames =
+  | `${TabName}`
+  | `${HomeScreen}`
+  | `${HomeTabsNavigation}`
 
 export type NavigatorOverride = Record<
   NavigationRoutesNames,
