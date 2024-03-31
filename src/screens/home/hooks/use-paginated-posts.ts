@@ -37,7 +37,7 @@ const usePaginatedPost = ({
     }
   })
 
-  const isFirtsLoad = after === '' && loading === true
+  const isFirtsLoad = after === '' && loading
   const nextCursor = data?.posts?.pageInfo.endCursor ?? ''
   const hasNextPage = data?.posts?.pageInfo.hasNextPage ?? false
 
