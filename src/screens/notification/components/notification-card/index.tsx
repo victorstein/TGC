@@ -75,16 +75,33 @@ const NotificationCard: FC<INotificationCardProps> = ({
                 source={{ uri: photoURL }}
               />
             </View>
-            <View className='w-3/4'>
-              <Text
-                numberOfLines={2}
-                className='font-semibold text-sm leading-5 text-text mb-3 dark:text-text-dark'
+            <View className='flex w-3/4 flex-row'>
+              <View className='flex flex-1'>
+                <Text
+                  numberOfLines={2}
+                  className='font-semibold text-sm leading-5 text-text mb-3 dark:text-text-dark'
+                >
+                  {title}
+                </Text>
+                <Text className='font-normal text-text/50 dark:text-text-notification-dark'>
+                  {date}
+                </Text>
+              </View>
+              <View
+                collapsable={false}
+                className='flex px-5 justify-center items-end'
               >
-                {title}
-              </Text>
-              <Text className='font-normal text-text/50 dark:text-text-notification-dark'>
-                {date}
-              </Text>
+                <Icon
+                  type='antdesign'
+                  name='closecircleo'
+                  onPress={dismissNotification}
+                  color={
+                    colorScheme === ColorScheme.Dark
+                      ? colors.text.dark
+                      : colors.text.DEFAULT
+                  }
+                />
+              </View>
             </View>
           </View>
         </View>
