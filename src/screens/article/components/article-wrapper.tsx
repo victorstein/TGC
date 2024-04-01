@@ -7,13 +7,18 @@ import { MotiView } from 'moti'
 import { LoadingWrapper } from '@shared/components/loading-wrapper/loading-wrapper'
 import { generateSkeletonWidth } from '@shared/utils/generate-skeleting-width'
 import { useNavigation } from '@react-navigation/native'
+import { type NavigationRoutesEnum } from '@screens/home/types/home-types'
 
 export interface IArticleWrapperProps {
   articleId: string
+  backScreen?: NavigationRoutesEnum[keyof NavigationRoutesEnum]
 }
 
 const { height, width } = Dimensions.get('window')
-export const ArticleWrapper: FC<IArticleWrapperProps> = ({ articleId }) => {
+export const ArticleWrapper: FC<IArticleWrapperProps> = ({
+  articleId,
+  backScreen
+}) => {
   const initialPosition = height * 0.25
   const navigation = useNavigation()
   const { article, loading, error } = useArticle({
@@ -75,6 +80,7 @@ export const ArticleWrapper: FC<IArticleWrapperProps> = ({ articleId }) => {
       <LoadingWrapper loading={loading} skeleton={skeleton}>
         <Article
           id={articleId}
+          backScreen={backScreen}
           category={article.categories?.nodes[0].name ?? ''}
           featuredImage={article.featuredImage?.node.mediaItemUrl ?? ''}
           htmlString={article.htmlBlocks ?? ''}
