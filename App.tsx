@@ -18,13 +18,9 @@ import MainScreen from '@screens/main'
 import { CustomStatusBar } from '@shared/status-bar/status-bar'
 import { Icon } from '@rneui/themed'
 import * as Linking from 'expo-linking'
-import { View } from 'moti'
 
 const prefix = Linking.createURL('/')
-
 NativeSplashScreen.preventAutoHideAsync().catch(() => {})
-const MainStack = createNativeStackNavigator()
-
 const { colors } = theme.extend
 
 const App = (): JSX.Element => {
