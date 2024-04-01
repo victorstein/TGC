@@ -4,16 +4,16 @@ import { useCallback } from 'react'
 import { type ApolloQueryResult } from '@apollo/client'
 import { ScrollView, type ScrollViewProps } from 'react-native'
 
-export interface IScrollRefreshViewProps<T> extends ScrollViewProps {
+export interface IScrollRefreshViewProps extends ScrollViewProps {
   children: React.ReactNode
-  refetch: Array<() => Promise<ApolloQueryResult<T>> | Promise<void>>
+  refetch: Array<() => Promise<ApolloQueryResult<unknown>> | Promise<void>>
 }
 
-export function ScrollRefreshView<T>({
+export const ScrollRefreshView = ({
   children,
   refetch,
   ...props
-}: IScrollRefreshViewProps<T>): JSX.Element {
+}: IScrollRefreshViewProps): JSX.Element => {
   const refreshing = homeStore.use.isRefreshing()
   const setIsRefreshing = homeStore.use.setIsRefreshing()
 
