@@ -6,6 +6,7 @@ import { Avatar, Badge } from '@rneui/themed'
 import { theme } from '@tailwind'
 import { useNavigation } from '@react-navigation/native'
 import { NavigationRoutes } from '@screens/home/types/home-types'
+import { useHasUnreadNotifications } from '@screens/home/hooks/use-has-unread-notifications'
 
 const styles = StyleSheet.create({
   badgeStyles: {
@@ -29,6 +30,7 @@ const { colors } = theme.extend
 const NotificationIcon: FC = () => {
   const navigation = useNavigation()
   const coloScheme = mainStore.use.colorScheme()
+  const hasUnreadNotifications = useHasUnreadNotifications()
 
   const openNotificationHandler = (): void => {
     navigation.navigate(NavigationRoutes.NOTIFICATIONS)
@@ -50,15 +52,17 @@ const NotificationIcon: FC = () => {
         containerStyle={styles.bodyStylesAvatar}
         onPress={openNotificationHandler}
       />
-      <Badge
-        badgeStyle={{
-          ...styles.badgeStyles,
-          borderColor:
-            coloScheme === ColorScheme.Dark
-              ? colors.background.dark
-              : colors.background.DEFAULT
-        }}
-      />
+      {hasUnreadNotifications && (
+        <Badge
+          badgeStyle={{
+            ...styles.badgeStyles,
+            borderColor:
+              coloScheme === ColorScheme.Dark
+                ? colors.background.dark
+                : colors.background.DEFAULT
+          }}
+        />
+      )}
     </View>
   )
 }
