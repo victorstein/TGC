@@ -4,7 +4,7 @@ import {
   useNotifications as useNotificationFetch
 } from '../graphql/notification.queries.generated'
 import { notificationStore } from '../store/store'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import {
   type TApiNotifications,
   type TNotifications
@@ -15,12 +15,14 @@ interface IUseNotificationsOutput {
   error?: ApolloError
   refetch: () => Promise<ApolloQueryResult<Notifications>>
   loading: boolean
+  resetStore: () => void
 }
 
 export const useNotifications = (): IUseNotificationsOutput => {
   const { data, error, refetch, loading } = useNotificationFetch()
   const setNotification = notificationStore.use.setNotifications()
   const notifications = notificationStore.use.notifications()
+  const resetStore = notificationStore.use.resetStore()
 
   useEffect(() => {
     const apiNotifications = data?.notificationCenter ?? []
@@ -31,10 +33,23 @@ export const useNotifications = (): IUseNotificationsOutput => {
     setNotification(parsedApiNotifications)
   }, [setNotification, data?.notificationCenter])
 
+  const filteredNotifications = useMemo(() => {
+    return Object.entries(notifications).reduce<TNotifications>(
+      (acc, [id, notification]) => {
+        if (notification.dismissed === false) {
+          acc[id] = notification
+        }
+        return acc
+      },
+      {}
+    )
+  }, [notifications])
+
   return {
-    notifications,
+    notifications: filteredNotifications,
     error,
     refetch,
-    loading
+    loading,
+    resetStore
   }
 }
