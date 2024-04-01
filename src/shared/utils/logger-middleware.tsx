@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import type { State, StateCreator, StoreMutatorIdentifier } from 'zustand'
 
 type Logger = <
@@ -18,13 +17,10 @@ type LoggerImpl = <T extends State>(
 const loggerImpl: LoggerImpl = (f, name) => (set, get, store) => {
   const loggedSet: typeof set = (...a) => {
     set(...a)
-    console.log(...(name !== undefined ? [`${name}:`] : []), get())
+    console.log('========================>')
     console.log(
-      AsyncStorage.getItem('app-storage')
-        .then((data): void => {
-          console.log('app-storage AsyncStorage:', data)
-        })
-        .catch(() => {})
+      ...(name !== undefined ? [`${name}:`] : []),
+      JSON.stringify(get(), null, 2)
     )
   }
   const setState = store.setState

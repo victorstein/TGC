@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native'
+import { type NavigationRoutesEnum } from '@screens/home/types/home-types'
 import { BackButton } from '@shared/components/back-button/back-button'
 import { HtmlRenderer } from '@shared/components/html-renderer/html-renderer'
 import { ShareButton } from '@shared/components/share-button/share-button'
 import { Image } from 'expo-image'
-import { useMemo, type FC } from 'react'
+import { useEffect, useMemo, type FC } from 'react'
 import { View, Text, Dimensions } from 'react-native'
 import Animated, {
   Extrapolation,
@@ -21,6 +23,7 @@ export interface IArticleProps {
   title: string
   category: string
   featuredImage: string
+  backScreen?: NavigationRoutesEnum[keyof NavigationRoutesEnum]
 }
 
 export const Article: FC<IArticleProps> = ({
@@ -28,12 +31,28 @@ export const Article: FC<IArticleProps> = ({
   htmlString,
   title,
   category,
-  featuredImage
+  featuredImage,
+  backScreen
 }) => {
+  const navigation = useNavigation()
   const initialPosition = height * 0.25
   const titleHeight = 52
   const scrollValue = useSharedValue(initialPosition)
   const containerHeight = useSharedValue(height * 0.83)
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener(
+      'beforeRemove',
+      ({ data, preventDefault }) => {
+        if (data.action.type === 'GO_BACK' && backScreen !== undefined) {
+          preventDefault()
+          navigation.navigate(backScreen)
+        }
+      }
+    )
+
+    return unsubscribe
+  }, [navigation, backScreen])
 
   const onScroll = useAnimatedScrollHandler({
     onScroll: ({ contentOffset }): void => {
@@ -121,7 +140,11 @@ export const Article: FC<IArticleProps> = ({
         className='absolute top-3 left-3'
         style={shareButtonStyles}
       >
-        <BackButton isIcon={false} avatarProps={{ size: 50 }} />
+        <BackButton
+          backScreen={backScreen}
+          isIcon={false}
+          avatarProps={{ size: 50 }}
+        />
       </Animated.View>
       <Animated.View
         className='w-full bg-notification-bg dark:bg-notification-bg-dark absolute flex flex-row items-center'
@@ -133,6 +156,7 @@ export const Article: FC<IArticleProps> = ({
             iconProps={{
               iconStyle: { padding: 16 }
             }}
+            backScreen={backScreen}
           />
         </View>
         <View className='flex flex-1'>

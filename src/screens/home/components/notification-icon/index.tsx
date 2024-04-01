@@ -4,6 +4,9 @@ import { View, StyleSheet } from 'react-native'
 // rneui
 import { Avatar, Badge } from '@rneui/themed'
 import { theme } from '@tailwind'
+import { useNavigation } from '@react-navigation/native'
+import { NavigationRoutes } from '@screens/home/types/home-types'
+import { useHasUnreadNotifications } from '@screens/home/hooks/use-has-unread-notifications'
 
 const styles = StyleSheet.create({
   badgeStyles: {
@@ -25,7 +28,13 @@ const styles = StyleSheet.create({
 const { colors } = theme.extend
 
 const NotificationIcon: FC = () => {
+  const navigation = useNavigation()
   const coloScheme = mainStore.use.colorScheme()
+  const hasUnreadNotifications = useHasUnreadNotifications()
+
+  const openNotificationHandler = (): void => {
+    navigation.navigate(NavigationRoutes.NOTIFICATIONS)
+  }
 
   return (
     <View className='pr-3 relative'>
@@ -41,16 +50,19 @@ const NotificationIcon: FC = () => {
               : colors.text.DEFAULT
         }}
         containerStyle={styles.bodyStylesAvatar}
+        onPress={openNotificationHandler}
       />
-      <Badge
-        badgeStyle={{
-          ...styles.badgeStyles,
-          borderColor:
-            coloScheme === ColorScheme.Dark
-              ? colors.background.dark
-              : colors.background.DEFAULT
-        }}
-      />
+      {hasUnreadNotifications && (
+        <Badge
+          badgeStyle={{
+            ...styles.badgeStyles,
+            borderColor:
+              coloScheme === ColorScheme.Dark
+                ? colors.background.dark
+                : colors.background.DEFAULT
+          }}
+        />
+      )}
     </View>
   )
 }

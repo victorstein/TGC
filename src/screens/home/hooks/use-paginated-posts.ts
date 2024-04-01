@@ -2,15 +2,15 @@ import type { LastPosts } from '@integrations/graphql/operations'
 import { useLastPosts } from '../graphql/home.queries.generated'
 import { useState, useEffect, useCallback } from 'react'
 
-type Post = NonNullable<LastPosts['posts']>['nodes'][number]
+export type PaginatedPost = NonNullable<LastPosts['posts']>['nodes'][number]
 
 export interface IUsePaginatedPostOutput {
   nextCursor?: string
   hasNextPage: boolean
-  posts: Post[]
+  posts: PaginatedPost[]
   error?: Error
   loading: boolean
-  isFirtsLoad: boolean
+  isFirstLoad: boolean
   refetch: () => Promise<void>
   getNextPage: () => void
 }
@@ -23,7 +23,7 @@ const usePaginatedPost = ({
   first = 2
 }: IUsePaginatedPostInput = {}): IUsePaginatedPostOutput => {
   const [after, setAfter] = useState<string>('')
-  const [posts, setPosts] = useState<Post[]>([])
+  const [posts, setPosts] = useState<PaginatedPost[]>([])
 
   const {
     data,
@@ -37,7 +37,7 @@ const usePaginatedPost = ({
     }
   })
 
-  const isFirtsLoad = after === '' && loading
+  const isFirstLoad = after === '' && loading
   const nextCursor = data?.posts?.pageInfo.endCursor ?? ''
   const hasNextPage = data?.posts?.pageInfo.hasNextPage ?? false
 
@@ -59,7 +59,7 @@ const usePaginatedPost = ({
   }, [setPosts, data])
 
   return {
-    isFirtsLoad,
+    isFirstLoad,
     getNextPage,
     nextCursor,
     hasNextPage,

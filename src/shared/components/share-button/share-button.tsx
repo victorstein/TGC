@@ -40,7 +40,7 @@ export const ShareButton: FC<TShareButtonProps> = ({
   const { avatarProps = {} } = props as IShareAvatarProps
 
   const onPress = (): void => {
-    const url = Linking.createURL(`/Main/Inicio/${screen}`, {
+    const url = Linking.createURL(`/Root/Inicio/${screen}`, {
       queryParams: { id },
       isTripleSlashed: false
     })

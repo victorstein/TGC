@@ -1,0 +1,9 @@
+query notifications {
+  notificationCenter {
+    id
+    title
+    excerpt
+    date
+    image
+  }
+}

@@ -1,7 +1,7 @@
 import { Button } from '@rneui/base'
 import { Image } from 'expo-image'
 import { type FC } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { theme } from '@tailwind'
 import { useNavigation } from '@react-navigation/native'
 
@@ -45,6 +45,7 @@ const ItemArticle: FC<IitemArticle> = (props) => {
         <Button
           onPress={() => navigateHandler()}
           title='Leer articulo'
+          TouchableComponent={TouchableOpacity}
           containerStyle={{
             width: 'auto',
             borderRadius: 50

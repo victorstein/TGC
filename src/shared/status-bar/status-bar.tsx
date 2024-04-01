@@ -23,6 +23,7 @@ export const CustomStatusBar = (): JSX.Element => {
     <StatusBar
       backgroundColor={computeBackgroundColor}
       style={useColorBasedOnBg(computeBackgroundColor)}
+      translucent={false}
     />
   )
 }
