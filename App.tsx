@@ -18,6 +18,7 @@ import MainScreen from '@screens/main'
 import { CustomStatusBar } from '@shared/status-bar/status-bar'
 import { Icon } from '@rneui/themed'
 import * as Linking from 'expo-linking'
+import { View } from 'moti'
 
 const prefix = Linking.createURL('/')
 
@@ -85,10 +86,13 @@ const App = (): JSX.Element => {
                     return (
                       <Icon
                         onPress={() => {
-                          navigation.goBack()
+                          navigation.navigate('Inicio_Stack')
                         }}
                         size={25}
                         type='ionicon'
+                        style={{
+                          padding: 10
+                        }}
                         name='chevron-back-outline'
                         color={
                           colorScheme === themeColor.Dark
