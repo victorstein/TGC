@@ -3,15 +3,18 @@ import { Avatar, type AvatarProps, Icon, type IconProps } from '@rneui/base'
 import { type FC, useCallback } from 'react'
 import { theme } from '@tailwind'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
-
-export interface IIconBackButtonProps {
+import { type NavigationRoutesEnum } from '@screens/home/types/home-types'
+interface IBaseBackButtonProps {
   onPress?: () => void
+  backScreen?: NavigationRoutesEnum[keyof NavigationRoutesEnum]
+  isIcon: boolean
+}
+export interface IIconBackButtonProps extends IBaseBackButtonProps {
   isIcon: true
   iconProps?: Omit<IconProps, 'name' | 'type'>
 }
 
-export interface IAvatarBackButtonProps {
-  onPress?: () => void
+export interface IAvatarBackButtonProps extends IBaseBackButtonProps {
   isIcon: false
   avatarProps?: Omit<AvatarProps, 'name' | 'type'>
 }
@@ -23,6 +26,7 @@ const { colors } = theme.extend
 export const BackButton: FC<IBackButtonProps> = ({
   onPress,
   isIcon,
+  backScreen,
   ...props
 }) => {
   const navigation = useNavigation()
@@ -31,8 +35,10 @@ export const BackButton: FC<IBackButtonProps> = ({
   const { avatarProps = {} } = props as IAvatarBackButtonProps
 
   const handleBack = useCallback(() => {
-    navigation.goBack()
-  }, [navigation])
+    backScreen !== undefined
+      ? navigation.navigate(backScreen)
+      : navigation.goBack()
+  }, [navigation, backScreen])
 
   const AvatarComponent: FC = () => (
     <Avatar
