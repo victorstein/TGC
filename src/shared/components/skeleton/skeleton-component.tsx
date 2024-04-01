@@ -29,7 +29,7 @@ export const SkeletonComponent = (
         backgroundColor:
           colorScheme === ColorScheme.Dark
             ? colors.background['search-dark']
-            : colors.background.search,
+            : colors.separator.DEFAULT,
         ...(props.style as ViewStyle)
       }}
     />
