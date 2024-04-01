@@ -3,12 +3,9 @@ import { View } from 'react-native'
 import ApolloWrapper from '@integrations/components/apollo-wrapper'
 import { NotificationWrapper } from './components/notification-wrapper'
 import { useNavigation } from '@react-navigation/native'
-import { useHasUnDismissedNotifications } from '@screens/home/hooks/use-has-un-dismissed-notifications'
-import NoNotification from './components/no-notification'
 
-const NotificationScreen: FC = () => {
+const NotificationScreenComponent: FC = () => {
   const navigation = useNavigation()
-  const hasUnDismissedNotifications = useHasUnDismissedNotifications()
 
   useEffect(() => {
     const unsubscribe = navigation.addListener(

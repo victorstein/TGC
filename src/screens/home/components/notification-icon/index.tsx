@@ -6,7 +6,7 @@ import { Avatar, Badge } from '@rneui/themed'
 import { theme } from '@tailwind'
 import { useNavigation } from '@react-navigation/native'
 import { NavigationRoutes } from '@screens/home/types/home-types'
-import { useHasUnreadNotifications } from '@screens/home/hooks/use-has-unread-notifications'
+import { useHasUnreadNotifications } from '@screens/notification/hooks/use-has-unread-notifications'
 
 const styles = StyleSheet.create({
   badgeStyles: {
