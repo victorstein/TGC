@@ -1,7 +1,6 @@
 import LottieView from 'lottie-react-native'
 import { ColorScheme, mainStore } from '@screens/main/store/store'
 import { View } from 'react-native'
-// import { MotiView } from 'moti'
 
 export const NotificationAnimation = (): JSX.Element => {
   const colorScheme = mainStore.use.colorScheme()
