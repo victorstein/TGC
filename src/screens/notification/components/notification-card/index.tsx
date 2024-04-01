@@ -4,6 +4,13 @@ import { type INotificationCardProps } from './notification-card-types'
 import { useNavigation } from '@react-navigation/native'
 import { MotiView } from 'moti'
 import { Image } from 'expo-image'
+import { notificationStore } from '@screens/notification/store/store'
+import { NavigationRoutes } from '@screens/home/types/home-types'
+import { Icon } from '@rneui/base'
+import { theme } from '@tailwind'
+import { ColorScheme, mainStore } from '@screens/main/store/store'
+
+const { colors } = theme.extend
 
 const NotificationCard: FC<INotificationCardProps> = ({
   photoURL,
@@ -14,13 +21,25 @@ const NotificationCard: FC<INotificationCardProps> = ({
   delay = 0
 }) => {
   const navigation = useNavigation()
+  const colorScheme = mainStore.use.colorScheme()
+  const setRead = notificationStore.use.setRead()
+  const setDismissed = notificationStore.use.setDismissed()
 
   const redirectHandler = (): void => {
-    navigation.navigate('Articulo', { id: redirectId })
+    setRead(redirectId)
+    navigation.navigate(NavigationRoutes.ARTICLE, {
+      id: redirectId,
+      backScreen: NavigationRoutes.NOTIFICATIONS
+    })
+  }
+
+  const dismissNotification = (): void => {
+    setDismissed(redirectId)
   }
 
   return (
     <MotiView
+      key={redirectId}
       from={{
         opacity: 0,
         translateX: -10
@@ -34,10 +53,18 @@ const NotificationCard: FC<INotificationCardProps> = ({
         duration: 200,
         delay
       }}
+      exit={{
+        opacity: 0,
+        translateX: 100
+      }}
+      exitTransition={{
+        type: 'timing',
+        duration: 200
+      }}
     >
       <TouchableHighlight onPress={redirectHandler} className='mx-2'>
         <View
-          className={`w-full p-4 border-none border-l-[5px] ${isRead ? 'border-notification-bg-visited dark:border-notification-bg-visited-dark bg-notification-bg-visited dark:bg-notification-bg-visited-dark' : 'border-notification-border-new bg-notification-bg dark:bg-notification-bg-dark'}`}
+          className={`w-full py-4 pl-4 border-none border-l-[5px] ${isRead ? 'border-notification-bg-visited dark:border-notification-bg-visited-dark bg-notification-bg-visited dark:bg-notification-bg-visited-dark' : 'border-notification-border-new bg-notification-bg dark:bg-notification-bg-dark'}`}
         >
           <View className='flex flex-row items-center'>
             <View className='w-1/4'>
