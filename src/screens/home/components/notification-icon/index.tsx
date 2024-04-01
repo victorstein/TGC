@@ -5,6 +5,7 @@ import { View, StyleSheet } from 'react-native'
 import { Avatar, Badge } from '@rneui/themed'
 import { theme } from '@tailwind'
 import { useNavigation } from '@react-navigation/native'
+import { NavigationRoutes } from '@screens/home/types/home-types'
 
 const styles = StyleSheet.create({
   badgeStyles: {
@@ -30,7 +31,7 @@ const NotificationIcon: FC = () => {
   const coloScheme = mainStore.use.colorScheme()
 
   const openNotificationHandler = (): void => {
-    navigation.navigate('Notificaciones')
+    navigation.navigate(NavigationRoutes.NOTIFICATIONS)
   }
 
   return (

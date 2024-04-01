@@ -13,7 +13,9 @@ module.exports = {
           dark: '#23343b',
           DEFAULT: '#ffffff',
           search: '#F2F2F6',
-          'search-dark': '#21313C'
+          'search-dark': '#21313C',
+          'articles-default': '#F5F5F8',
+          'articles-dark': '#1F2D34'
         },
         text: {
           dark: '#ffffff',

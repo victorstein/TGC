@@ -56,7 +56,7 @@ export const SplashScreen = (): JSX.Element | null => {
     }
   }, [fontsLoaded, fontError, setLoadingFonts])
 
-  const onLayoutRootView = useCallback(() => {
+  const onAnimationLoaded = useCallback(() => {
     NativeSplashScreen.hideAsync().catch(() => {})
   }, [])
 
@@ -68,7 +68,6 @@ export const SplashScreen = (): JSX.Element | null => {
     <>
       <MotiView
         exiting={FadeOut}
-        onLayout={onLayoutRootView}
         from={{
           backgroundColor: colors.background.DEFAULT
         }}
@@ -83,6 +82,7 @@ export const SplashScreen = (): JSX.Element | null => {
       >
         {colorScheme === ColorScheme.Light ? (
           <LottieView
+            onLayout={onAnimationLoaded}
             autoPlay
             style={{
               width: 450,
@@ -96,6 +96,7 @@ export const SplashScreen = (): JSX.Element | null => {
           />
         ) : (
           <LottieView
+            onLayout={onAnimationLoaded}
             autoPlay
             style={{
               width: 450,

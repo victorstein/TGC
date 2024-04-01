@@ -6,7 +6,7 @@ import { ScrollView, type ScrollViewProps } from 'react-native'
 
 export interface IScrollRefreshViewProps<T> extends ScrollViewProps {
   children: React.ReactNode
-  refetch: Array<() => Promise<ApolloQueryResult<T>>>
+  refetch: Array<() => Promise<ApolloQueryResult<T>> | Promise<void>>
 }
 
 export function ScrollRefreshView<T>({

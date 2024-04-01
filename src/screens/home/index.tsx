@@ -6,6 +6,8 @@ import { CategoryEnum } from './types/home-types'
 import { usePosts } from './hooks/use-posts'
 import { HomeTabsComponent } from './components/home-tabs/home-tabs'
 import { ScrollRefreshView } from '@shared/components/scroll-refresh-view'
+import RecentArticles from './components/recent-articles'
+import usePaginatedPost from './hooks/use-paginated-posts'
 
 export const HomeScreen = (): JSX.Element => {
   const { refetch: refetchCodeBanner } = usePosts({
@@ -20,9 +22,16 @@ export const HomeScreen = (): JSX.Element => {
     categoryName: CategoryEnum.TECH
   })
 
+  const { refetch: refetchLatesArticles } = usePaginatedPost()
+
   return (
     <ScrollRefreshView
-      refetch={[refetchCodeBanner, refetchGamingBanner, refetchTechBanner]}
+      refetch={[
+        refetchCodeBanner,
+        refetchGamingBanner,
+        refetchTechBanner,
+        refetchLatesArticles
+      ]}
     >
       <Header />
       <View className='px-4 mb-4'>
@@ -30,6 +39,7 @@ export const HomeScreen = (): JSX.Element => {
       </View>
       <View className='mb-4 flex-1'>
         <HomeTabsComponent />
+        <RecentArticles />
       </View>
     </ScrollRefreshView>
   )

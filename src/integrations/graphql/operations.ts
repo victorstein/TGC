@@ -8,6 +8,8 @@ export type GetArticleByIdVariables = Types.Exact<{
 
 export type GetArticleById = { post?: { title?: string | null, featuredImage?: { node: { mediaItemUrl?: string | null } } | null, categories?: { nodes: Array<{ slug?: string | null, name?: string | null, databaseId: number }> } | null, blocks?: Array<{ name: string } | { name: string, attributes?: { src?: string | null, caption?: string | null } | {} | null } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string, attributes?: { content: string } | {} | null } | { name: string } | { name: string } | { name: string, attributes?: { url?: string | null } | {} | null } | { name: string } | { name: string } | { name: string } | { name: string, innerBlocks?: Array<{ originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null } | { originalContent?: string | null }> | null } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string, attributes?: { content: string, anchor?: string | null } | {} | null } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string } | { name: string }> | null } | null };
 
+export type SimplifiedPost = { id: string, excerpt?: string | null, title?: string | null, date?: string | null, featuredImage?: { node: { mediaItemUrl?: string | null } } | null };
+
 export type GetPostsVariables = Types.Exact<{
   input: Types.RootQueryToPostConnectionWhereArgs;
   first: Types.Scalars['Int']['input'];
@@ -16,10 +18,13 @@ export type GetPostsVariables = Types.Exact<{
 
 export type GetPosts = { posts?: { nodes: Array<{ id: string, excerpt?: string | null, title?: string | null, date?: string | null, featuredImage?: { node: { mediaItemUrl?: string | null } } | null }> } | null };
 
-export type NotificationsVariables = Types.Exact<{ [key: string]: never; }>;
+export type LastPostsVariables = Types.Exact<{
+  after?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  first?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+}>;
 
 
-export type Notifications = { notificationCenter?: Array<{ id?: string | null, title?: string | null, excerpt?: string | null, date?: string | null, image?: string | null } | null> | null };
+export type LastPosts = { posts?: { pageInfo: { endCursor?: string | null, hasNextPage: boolean }, nodes: Array<{ id: string, excerpt?: string | null, title?: string | null, date?: string | null, categories?: { nodes: Array<{ name?: string | null }> } | null, featuredImage?: { node: { mediaItemUrl?: string | null } } | null }> } | null };
 
 type BlockFragment_CoreArchivesBlock = { name: string };
 
@@ -209,6 +214,19 @@ type BlockFragment_CoreWidgetGroupBlock = { name: string };
 
 export type BlockFragment = BlockFragment_CoreArchivesBlock | BlockFragment_CoreAudioBlock | BlockFragment_CoreAvatarBlock | BlockFragment_CoreBlock | BlockFragment_CoreButtonBlock | BlockFragment_CoreButtonsBlock | BlockFragment_CoreCalendarBlock | BlockFragment_CoreCategoriesBlock | BlockFragment_CoreCodeBlock | BlockFragment_CoreColumnBlock | BlockFragment_CoreColumnsBlock | BlockFragment_CoreCommentAuthorNameBlock | BlockFragment_CoreCommentContentBlock | BlockFragment_CoreCommentDateBlock | BlockFragment_CoreCommentEditLinkBlock | BlockFragment_CoreCommentReplyLinkBlock | BlockFragment_CoreCommentTemplateBlock | BlockFragment_CoreCommentsBlock | BlockFragment_CoreCommentsPaginationBlock | BlockFragment_CoreCommentsPaginationNextBlock | BlockFragment_CoreCommentsPaginationNumbersBlock | BlockFragment_CoreCommentsPaginationPreviousBlock | BlockFragment_CoreCommentsTitleBlock | BlockFragment_CoreCoverBlock | BlockFragment_CoreDetailsBlock | BlockFragment_CoreEmbedBlock | BlockFragment_CoreFileBlock | BlockFragment_CoreFootnotesBlock | BlockFragment_CoreFreeformBlock | BlockFragment_CoreGalleryBlock | BlockFragment_CoreGroupBlock | BlockFragment_CoreHeadingBlock | BlockFragment_CoreHomeLinkBlock | BlockFragment_CoreHtmlBlock | BlockFragment_CoreImageBlock | BlockFragment_CoreLatestCommentsBlock | BlockFragment_CoreLatestPostsBlock | BlockFragment_CoreLegacyWidgetBlock | BlockFragment_CoreListBlock | BlockFragment_CoreListItemBlock | BlockFragment_CoreLoginoutBlock | BlockFragment_CoreMediaTextBlock | BlockFragment_CoreMissingBlock | BlockFragment_CoreMoreBlock | BlockFragment_CoreNavigationBlock | BlockFragment_CoreNavigationLinkBlock | BlockFragment_CoreNavigationSubmenuBlock | BlockFragment_CoreNextpageBlock | BlockFragment_CorePageListBlock | BlockFragment_CorePageListItemBlock | BlockFragment_CoreParagraphBlock | BlockFragment_CorePatternBlock | BlockFragment_CorePostAuthorBiographyBlock | BlockFragment_CorePostAuthorBlock | BlockFragment_CorePostAuthorNameBlock | BlockFragment_CorePostCommentsFormBlock | BlockFragment_CorePostContentBlock | BlockFragment_CorePostDateBlock | BlockFragment_CorePostExcerptBlock | BlockFragment_CorePostFeaturedImageBlock | BlockFragment_CorePostNavigationLinkBlock | BlockFragment_CorePostTemplateBlock | BlockFragment_CorePostTermsBlock | BlockFragment_CorePostTitleBlock | BlockFragment_CorePreformattedBlock | BlockFragment_CorePullquoteBlock | BlockFragment_CoreQueryBlock | BlockFragment_CoreQueryNoResultsBlock | BlockFragment_CoreQueryPaginationBlock | BlockFragment_CoreQueryPaginationNextBlock | BlockFragment_CoreQueryPaginationNumbersBlock | BlockFragment_CoreQueryPaginationPreviousBlock | BlockFragment_CoreQueryTitleBlock | BlockFragment_CoreQuoteBlock | BlockFragment_CoreReadMoreBlock | BlockFragment_CoreRssBlock | BlockFragment_CoreSearchBlock | BlockFragment_CoreSeparatorBlock | BlockFragment_CoreShortcodeBlock | BlockFragment_CoreSiteLogoBlock | BlockFragment_CoreSiteTaglineBlock | BlockFragment_CoreSiteTitleBlock | BlockFragment_CoreSocialLinkBlock | BlockFragment_CoreSocialLinksBlock | BlockFragment_CoreSpacerBlock | BlockFragment_CoreTableBlock | BlockFragment_CoreTagCloudBlock | BlockFragment_CoreTemplatePartBlock | BlockFragment_CoreTermDescriptionBlock | BlockFragment_CoreTextColumnsBlock | BlockFragment_CoreVerseBlock | BlockFragment_CoreVideoBlock | BlockFragment_CoreWidgetGroupBlock;
 
+export const SimplifiedPost = gql`
+    fragment simplifiedPost on Post {
+  id
+  excerpt
+  title
+  date
+  featuredImage {
+    node {
+      mediaItemUrl
+    }
+  }
+}
+    `;
 export const BlockFragment = gql`
     fragment BlockFragment on Block {
   name
@@ -275,27 +293,26 @@ export const GetPosts = gql`
     query getPosts($input: RootQueryToPostConnectionWhereArgs!, $first: Int!) {
   posts(where: $input, first: $first) {
     nodes {
-      id
-      excerpt
-      title
-      date
-      featuredImage {
-        node {
-          mediaItemUrl
+      ...simplifiedPost
+    }
+  }
+}
+    ${SimplifiedPost}`;
+export const LastPosts = gql`
+    query lastPosts($after: String, $first: Int) {
+  posts(first: $first, after: $after, where: {orderby: {field: DATE, order: ASC}}) {
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    nodes {
+      ...simplifiedPost
+      categories {
+        nodes {
+          name
         }
       }
     }
   }
 }
-    `;
-export const Notifications = gql`
-    query notifications {
-  notificationCenter {
-    id
-    title
-    excerpt
-    date
-    image
-  }
-}
-    `;
+    ${SimplifiedPost}`;
