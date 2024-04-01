@@ -8,6 +8,7 @@ import { HomeTabsComponent } from './components/home-tabs/home-tabs'
 import { ScrollRefreshView } from '@shared/components/scroll-refresh-view'
 import RecentArticles from './components/recent-articles'
 import usePaginatedPost from './hooks/use-paginated-posts'
+import { useNotifications } from '@screens/notification/hooks/use-notifications'
 
 export const HomeScreen = (): JSX.Element => {
   const { refetch: refetchCodeBanner } = usePosts({
@@ -24,9 +25,12 @@ export const HomeScreen = (): JSX.Element => {
 
   const { refetch: refetchLatesArticles } = usePaginatedPost()
 
+  const { refetch: refetchNotifications } = useNotifications()
+
   return (
     <ScrollRefreshView
       refetch={[
+        refetchNotifications,
         refetchCodeBanner,
         refetchGamingBanner,
         refetchTechBanner,

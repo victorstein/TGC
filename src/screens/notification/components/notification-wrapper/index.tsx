@@ -6,11 +6,14 @@ import { useNotifications } from '@screens/notification/hooks/use-notifications'
 import { ScrollRefreshView } from '@shared/components/scroll-refresh-view'
 import { AnimatePresence, View } from 'moti'
 import { Dimensions } from 'react-native'
+import { useHasUnDismissedNotifications } from '@screens/notification/hooks/use-has-un-dismissed-notifications'
+import NoNotification from '../no-notification'
 
 const { height } = Dimensions.get('window')
 const elementHeight = 103
 export const NotificationWrapper: FC = () => {
   const { notifications, loading, refetch } = useNotifications()
+  const hasUnDismissedNotifications = useHasUnDismissedNotifications()
 
   const Skeleton = useMemo(
     () => (
@@ -29,17 +32,21 @@ export const NotificationWrapper: FC = () => {
     <ScrollRefreshView refetch={[refetch]}>
       <LoadingWrapper loading={loading} skeleton={Skeleton}>
         <AnimatePresence>
-          {Object.entries(notifications).map(([key, notification], index) => (
-            <NotificationCard
-              delay={index * 100}
-              key={key}
-              date={notification.date ?? ''}
-              photoURL={notification.image ?? ''}
-              title={notification.title ?? ''}
-              isRead={notification.read}
-              redirectId={key}
-            />
-          ))}
+          {hasUnDismissedNotifications ? (
+            Object.entries(notifications).map(([key, notification], index) => (
+              <NotificationCard
+                delay={index * 100}
+                key={key}
+                date={notification.date ?? ''}
+                photoURL={notification.image ?? ''}
+                title={notification.title ?? ''}
+                isRead={notification.read}
+                redirectId={key}
+              />
+            ))
+          ) : (
+            <NoNotification />
+          )}
         </AnimatePresence>
       </LoadingWrapper>
     </ScrollRefreshView>
