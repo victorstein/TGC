@@ -1,25 +1,31 @@
-import { type FC } from 'react'
+import { useCallback, type FC } from 'react'
 import { View, Text } from 'react-native'
 import ItemArticle from './item-article'
 import ItemArticleSkeleton from './item-article-skeleton'
 import { FlashList } from '@shopify/flash-list'
-import usePaginatedPost from '@screens/home/hooks/use-paginated-posts'
+import usePaginatedPost, {
+  type PaginatedPost
+} from '@screens/home/hooks/use-paginated-posts'
 import { LoadingWrapper } from '@shared/components/loading-wrapper/loading-wrapper'
 import { homeStore } from '@screens/home/store/home-store'
 
 const ListArticles: FC = () => {
   const homeLoading = homeStore.use.isRefreshing()
-  const { posts, getNextPage, hasNextPage, loading, isFirtsLoad } =
+  const { posts, getNextPage, hasNextPage, loading, isFirstLoad } =
     usePaginatedPost()
+  const keyExtractor = useCallback(
+    (item: PaginatedPost, i: number) => `${i}-${item.id}`,
+    []
+  )
 
   return (
     <View className='flex flex-col'>
       <LoadingWrapper
-        loading={(loading && isFirtsLoad) || homeLoading}
+        loading={(loading && isFirstLoad) || homeLoading}
         skeleton={<ItemArticleSkeleton />}
       >
         <FlashList
-          keyExtractor={(item) => item.id}
+          keyExtractor={keyExtractor}
           data={posts}
           renderItem={({ item }) => (
             <ItemArticle
@@ -31,7 +37,7 @@ const ListArticles: FC = () => {
             />
           )}
           onEndReached={getNextPage}
-          estimatedItemSize={115}
+          estimatedItemSize={133}
           ListFooterComponent={() => {
             if (hasNextPage) {
               return <ItemArticleSkeleton />
