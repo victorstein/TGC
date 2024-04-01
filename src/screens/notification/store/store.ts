@@ -20,7 +20,7 @@ const NotificationStore = create<INotificationStore>()(
         set((state) => {
           const notifications = get().notifications
           apiNotifications
-            .filter(({ id }) => id ?? '' in notificationStore)
+            .filter(({ id }) => notifications[id ?? ''] === undefined)
             .forEach(({ id, ...notification }) => {
               const newId = id ?? ''
               notifications[newId] = {
@@ -38,19 +38,25 @@ const NotificationStore = create<INotificationStore>()(
       },
       setRead: (notificationId) => {
         set((state) => ({
-          ...state.notifications,
-          [notificationId]: {
-            ...state.notifications[notificationId],
-            read: true
+          ...state,
+          notifications: {
+            ...state.notifications,
+            [notificationId]: {
+              ...state.notifications[notificationId],
+              read: true
+            }
           }
         }))
       },
       setDismissed: (notificationId: string) => {
         set((state) => ({
-          ...state.notifications,
-          [notificationId]: {
-            ...state.notifications[notificationId],
-            dismissed: true
+          ...state,
+          notifications: {
+            ...state.notifications,
+            [notificationId]: {
+              ...state.notifications[notificationId],
+              dismissed: true
+            }
           }
         }))
       },
