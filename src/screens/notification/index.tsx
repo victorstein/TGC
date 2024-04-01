@@ -22,16 +22,16 @@ const NotificationScreenComponent: FC = () => {
   }, [navigation])
 
   return (
-    <ApolloWrapper>
-      <View className='bg-background dark:bg-background-dark flex-1'>
-        {hasUnDismissedNotifications ? (
-          <NotificationWrapper />
-        ) : (
-          <NoNotification />
-        )}
-      </View>
-    </ApolloWrapper>
+    <View className='bg-background dark:bg-background-dark flex-1'>
+      <NotificationWrapper />
+    </View>
   )
 }
 
-export default NotificationScreen
+const NotificationsScreen: FC = () => (
+  <ApolloWrapper>
+    <NotificationScreenComponent />
+  </ApolloWrapper>
+)
+
+export default NotificationsScreen

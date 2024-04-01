@@ -32,17 +32,21 @@ export const NotificationWrapper: FC = () => {
     <ScrollRefreshView refetch={[refetch]}>
       <LoadingWrapper loading={loading} skeleton={Skeleton}>
         <AnimatePresence>
-          {Object.entries(notifications).map(([key, notification], index) => (
-            <NotificationCard
-              delay={index * 100}
-              key={key}
-              date={notification.date ?? ''}
-              photoURL={notification.image ?? ''}
-              title={notification.title ?? ''}
-              isRead={notification.read}
-              redirectId={key}
-            />
-          ))}
+          {hasUnDismissedNotifications ? (
+            Object.entries(notifications).map(([key, notification], index) => (
+              <NotificationCard
+                delay={index * 100}
+                key={key}
+                date={notification.date ?? ''}
+                photoURL={notification.image ?? ''}
+                title={notification.title ?? ''}
+                isRead={notification.read}
+                redirectId={key}
+              />
+            ))
+          ) : (
+            <NoNotification />
+          )}
         </AnimatePresence>
       </LoadingWrapper>
     </ScrollRefreshView>
