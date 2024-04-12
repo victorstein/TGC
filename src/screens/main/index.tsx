@@ -14,6 +14,7 @@ import { useNetwork } from '@shared/hooks/use-network'
 import ApolloWrapper from '@integrations/components/apollo-wrapper'
 import { HomeNavigator } from '@screens/home/navigation/home-stack'
 import { useArticleDeepLinking } from '@shared/hooks/use-article-deep-linking'
+import MainGradient from '@shared/components/main-gradient'
 
 const Tab = createBottomTabNavigator<NavigatorOverride>()
 
@@ -52,6 +53,7 @@ const MainScreen = (): JSX.Element => {
             />
             <Tab.Screen name={NavigationRoutes.PLAY} component={PlayScreen} />
           </Tab.Navigator>
+          <MainGradient />
         </ApolloWrapper>
       </View>
     </View>
