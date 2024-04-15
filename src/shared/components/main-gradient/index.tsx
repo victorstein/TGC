@@ -17,10 +17,9 @@ const MainGradient: FC = () => {
           'rgba(255,255,255,0.16010154061624648)',
           'rgba(216,54,54,0.30575980392156865)'
         ]
-
   return (
-    <View className={`absolute bottom-[70] h-[${dinamicHeight}] w-screen`}>
-      <LinearGradient colors={colors} className={'h-full w-full'} />
+    <View className={`absolute bottom-[70] h-[${dinamicHeight}] w-full`}>
+      <LinearGradient colors={colors} className={`h-[${dinamicHeight}px]`} />
     </View>
   )
 }
