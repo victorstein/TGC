@@ -19,6 +19,13 @@ concurrency:
 
 jobs:
   lint-title:
+    # release-please's PRs are authored by github-actions[bot], and GitHub starts
+    # no jobs for bot-authored PRs: the run is created with zero jobs and recorded
+    # as a failure. Skipping the job makes the whole run conclude as "skipped"
+    # instead. No coverage lost — the title is machine-generated and conventional
+    # by construction. `github.head_ref` is empty outside pull_request events, so
+    # the guard never skips anything else.
+    if: ${{ !startsWith(github.head_ref, 'release-please--') }}
     runs-on: ubuntu-latest
     steps:
       - uses: amannn/action-semantic-pull-request@v5
