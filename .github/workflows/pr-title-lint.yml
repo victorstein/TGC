@@ -3,8 +3,13 @@ name: PR Title Lint
 # Managed by stein-infra (tofu/pr-title-lint.tf). Do NOT edit here — this file is
 # overwritten on the next apply. Change the template in stein-infra instead.
 
+# pull_request_target, not pull_request: a pull_request run loads this file from
+# the PR's merge commit, and release-please's PRs self-merge within ~5s, before
+# that commit exists, so every run died as a zero-job "workflow file issue"
+# failure. pull_request_target loads it from the base branch instead. Safe here
+# because nothing checks out or executes PR code; only the title is read.
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, edited, synchronize, reopened]
 
 # Explicit block elevates over a repo's read-only default token — enough to post
@@ -19,12 +24,7 @@ concurrency:
 
 jobs:
   lint-title:
-    # release-please's PRs are authored by github-actions[bot], and GitHub starts
-    # no jobs for bot-authored PRs: the run is created with zero jobs and recorded
-    # as a failure. Skipping the job makes the whole run conclude as "skipped"
-    # instead. No coverage lost — the title is machine-generated and conventional
-    # by construction. `github.head_ref` is empty outside pull_request events, so
-    # the guard never skips anything else.
+    # Release PR titles are machine-generated and conventional by construction.
     if: ${{ !startsWith(github.head_ref, 'release-please--') }}
     runs-on: ubuntu-latest
     steps:
