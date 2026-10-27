@@ -18,9 +18,10 @@ on:
 permissions:
   pull-requests: write
 
-concurrency:
-  group: pr-title-lint-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+# No concurrency group: a push followed by a PR edit fires two runs a second apart, and
+# cancel-in-progress left the cancelled one attached to the head sha as a failing check, which
+# merge gates and the hpipe pipeline read as red CI. The lint is idempotent; overlapping runs only
+# race on the sticky comment.
 
 jobs:
   lint-title:
